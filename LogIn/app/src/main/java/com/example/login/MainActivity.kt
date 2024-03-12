@@ -11,16 +11,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val btn1 = findViewById<Button>(R.id.btnLogIn)
-        var loginStatus = "Succesful LogIn"
+        var loginStatus = "Log in succesfull"
         btn1.setOnClickListener { onClickBtnLogIn(loginStatus) }
     }
 
     fun onClickBtnLogIn(logInStatus: String)
     {
-        Toast.makeText(this, "Here 1", Toast.LENGTH_LONG).show()
+       // pr("here 1")
         val nextPg = Intent(this, SuccessLogIn::class.java)
         nextPg.putExtra("LogInStatusMsg", logInStatus)
         startActivity(nextPg)
-
+    }
+    fun pr(msg : String)
+    {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 }
