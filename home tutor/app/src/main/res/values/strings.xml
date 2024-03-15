@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">login_page1</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="your_best_tutor_for_a_better_tomorrow">Your best tutor for a better tomorrow</string>
+    <string name="already_having_an_account_clickhere">Already having an account? Clickhere</string>
+    <string name="welcome">WELCOME</string>
+    <string name="todo">TODO</string>
+    <string name="enter_user_name">Enter user name</string>
+    <string name="enter_password">Enter password</string>
+</resources>
