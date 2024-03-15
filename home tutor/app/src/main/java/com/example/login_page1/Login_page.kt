@@ -103,6 +103,10 @@ class Login_page : AppCompatActivity() {
                 startActivity(nextPg)
                 binding.btnSignin.isEnabled = false
             }
+            else
+            {
+                pr("Log in Failure XXX!")
+            }
         }
     }
     fun pr(msg: String) {
