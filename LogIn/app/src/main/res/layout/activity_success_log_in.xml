@@ -8,10 +8,10 @@
 
     <TextView
         android:id="@+id/logInStatusMsg"
-        android:layout_width="183dp"
-        android:layout_height="42dp"
+        android:layout_width="372dp"
+        android:layout_height="37dp"
         android:paddingTop="10sp"
-        android:text="Log in success!"
+        android:text="Log in status"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
