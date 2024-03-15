@@ -1,8 +1,11 @@
 package com.example.login_page1
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivityLoginPageBinding
 
 class Login_page : AppCompatActivity() {
@@ -10,30 +13,99 @@ class Login_page : AppCompatActivity() {
     private lateinit var binding: ActivityLoginPageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //binding = ActivityLoginPageBinding.inflate(layoutInflater)
         binding = ActivityLoginPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        binding.btnSignin.isEnabled = false
         //initalize UI
         initUI()
     }
-    private fun initUI(){
-        binding.FabBack.setOnClickListener{
+
+    private fun initUI() {
+
+        binding.email.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                // Do something before text changed
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                // Do something when text is changing
+                val usernameInput = s.toString()
+                if (!usernameInput.isEmpty()) {
+                    binding.Password.isEnabled = true
+                } else {
+                    binding.Password.isEnabled = false
+                    binding.btnSignin.isEnabled = false
+                }
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                // Do something after text changed
+            }
+        })
+
+        binding.Password.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                // Do something before text changed
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                // Do something when text is changing
+                val passwordInput = s.toString()
+                if (!passwordInput.isEmpty() && !binding.email.text.toString().isEmpty()) {
+                    binding.btnSignin.isEnabled = true
+                    binding.btnSignin.setOnClickListener { onClickBtnLogIn() }
+                } else {
+                    binding.btnSignin.isEnabled = false
+                }
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                // Do something after text changed
+            }
+        })
+
+        binding.FabBack.setOnClickListener {
             val intent = Intent(this, page1::class.java)
             startActivity(intent)
         }
 
-        binding.btnSignin.setOnClickListener{
-
-        }
-
-        binding.tvSignup.setOnClickListener{
+        binding.tvSignup.setOnClickListener {
             val intent = Intent(this, signup::class.java)
             startActivity(intent)
         }
 
-        binding.forgotPassword.setOnClickListener{
+        binding.forgotPassword.setOnClickListener {
 
         }
+    }
+
+    fun verified(uName: String, pwd: String): Boolean {
+        //  pr("here 1")
+        val userName = "tvp"
+        val passwd = "tvp"
+        return (userName == uName && passwd == pwd)
+    }
+
+    //fun onClickBtnLogIn(btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
+    fun onClickBtnLogIn() //btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
+    {   // pr("onClickBtnLogIn : here 1")
+        //val userName = edtTxtUserName.text.toString()
+        // val passwd = edtTxtPasswd.text.toString()
+        //  val btn1 = findViewById<Button>(R.id.btnLogin)
+        if (binding.email.text.toString().isNotBlank() && binding.Password.text.toString()
+                .isNotBlank()
+        ) {
+            if (verified(binding.email.text.toString(), binding.Password.text.toString())) {
+                   pr("Log in Success!")
+                //  val logInStatus = "Log in Success!"
+                val nextPg = Intent(this, page1::class.java)
+                // nextPg.putExtra("LogInStatusMsg", logInStatus)
+                startActivity(nextPg)
+                binding.btnSignin.isEnabled = false
+            }
+        }
+    }
+    fun pr(msg: String) {
+        Toast.makeText(this, "Login Page : " + msg, Toast.LENGTH_LONG).show()
     }
 }

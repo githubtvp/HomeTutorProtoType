@@ -9,17 +9,24 @@ import android.widget.TextView
 import android.widget.Toast
 import android.text.TextWatcher
 import android.text.Editable
+import com.example.login.databinding.ActivityHomePageBinding
+
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityHomePageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val loginBtn = findViewById<Button>(R.id.btnLogin)
+        binding = ActivityHomePageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+      //  setContentView(R.layout.activity_main)
+//        val loginBtn = findViewById<Button>(R.id.btnLogin)
+        //val loginBtn = findViewById<Button>(R.id.btnLogin)
+
         val edtTxtUserName = findViewById<EditText>(R.id.editTextUserName)
         val edtTxtPasswd = findViewById<EditText>(R.id.editTextPasswd)
         val userName = edtTxtUserName.text.toString()
         val passwd = edtTxtPasswd.text.toString()
         edtTxtPasswd.isEnabled = false
-        loginBtn.isEnabled = false
+        binding.btnLogin  .isEnabled = false
 
 
         edtTxtUserName.addTextChangedListener(object : TextWatcher {
