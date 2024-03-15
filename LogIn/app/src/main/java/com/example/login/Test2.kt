@@ -12,6 +12,6 @@ class Test2 : AppCompatActivity() {
         binding = ActivityTest2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btn1.setOnClickListener()
+     //   binding.btn1.setOnClickListener()
     }
 }
