@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/grey"
     android:gravity="center">
 
     <!-- Icon and Title containers -->
@@ -21,16 +22,17 @@
             android:layout_marginRight="20dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="#CCCCCC"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                app:srcCompat="@drawable/rounded_add_box_24" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Title 1"
-                android:textSize="16sp"/>
+                android:text="Create profile"
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <!-- Second icon and title -->
@@ -42,16 +44,16 @@
             android:layout_marginRight="20dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="#CCCCCC"
                 android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Title 2"
-                android:textSize="16sp"/>
+                android:text="Edit profile"
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <!-- Third icon and title -->
@@ -63,16 +65,16 @@
             android:layout_marginRight="20dp">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="#CCCCCC"
                 android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Title 3"
-                android:textSize="16sp"/>
+                android:text="Tutor Dashboard"
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <!-- Fourth icon and title -->
@@ -83,16 +85,16 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="#CCCCCC"
                 android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Title 4"
-                android:textSize="16sp"/>
+                android:text="StudentDboard"
+                android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
 
