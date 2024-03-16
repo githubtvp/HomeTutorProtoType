@@ -16,7 +16,6 @@ class Login_page : AppCompatActivity() {
         binding = ActivityLoginPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnSignin.isEnabled = false
-        //initalize UI
         initUI()
     }
 
@@ -80,7 +79,6 @@ class Login_page : AppCompatActivity() {
     }
 
     fun verified(uName: String, pwd: String): Boolean {
-        //  pr("here 1")
         val userName = "tvp"
         val passwd = "tvp"
         return (userName == uName && passwd == pwd)
@@ -89,17 +87,12 @@ class Login_page : AppCompatActivity() {
     //fun onClickBtnLogIn(btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
     fun onClickBtnLogIn() //btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
     {   // pr("onClickBtnLogIn : here 1")
-        //val userName = edtTxtUserName.text.toString()
-        // val passwd = edtTxtPasswd.text.toString()
-        //  val btn1 = findViewById<Button>(R.id.btnLogin)
         if (binding.email.text.toString().isNotBlank() && binding.Password.text.toString()
                 .isNotBlank()
         ) {
             if (verified(binding.email.text.toString(), binding.Password.text.toString())) {
                    pr("Log in Success!")
-                //  val logInStatus = "Log in Success!"
                 val nextPg = Intent(this, page1::class.java)
-                // nextPg.putExtra("LogInStatusMsg", logInStatus)
                 startActivity(nextPg)
                 binding.btnSignin.isEnabled = false
             }
