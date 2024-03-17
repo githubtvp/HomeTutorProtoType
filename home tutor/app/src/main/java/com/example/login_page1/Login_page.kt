@@ -11,6 +11,7 @@ import com.example.login_page1.databinding.ActivityLoginPageBinding
 class Login_page : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginPageBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginPageBinding.inflate(layoutInflater)
