@@ -11,7 +11,7 @@ import com.example.login_page1.databinding.ActivityLoginPageBinding
 class Login_page : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginPageBinding
-
+    private var nextPage: Class<*> = CreateProfile::class.java
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginPageBinding.inflate(layoutInflater)
@@ -80,8 +80,8 @@ class Login_page : AppCompatActivity() {
     }
 
     fun verified(uName: String, pwd: String): Boolean {
-        val userName = "tvp"
-        val passwd = "tvp"
+        val userName = "t"
+        val passwd = "t"
         return (userName == uName && passwd == pwd)
     }
 
@@ -92,8 +92,8 @@ class Login_page : AppCompatActivity() {
                 .isNotBlank()
         ) {
             if (verified(binding.email.text.toString(), binding.Password.text.toString())) {
-                   pr("Log in Success!")
-                val nextPg = Intent(this, page1::class.java)
+                pr("Log in Success! " + nextPage.name.toString())
+                val nextPg = Intent(this, nextPage)
                 startActivity(nextPg)
                 binding.btnSignin.isEnabled = false
             }
