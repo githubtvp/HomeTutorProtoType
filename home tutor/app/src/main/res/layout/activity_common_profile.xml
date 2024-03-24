@@ -49,6 +49,9 @@
                 android:hint="City" />
 
             <!-- Email -->
+
+            <!-- Forward Arrow -->
+
             <EditText
                 android:id="@+id/editTxtEmail"
                 android:layout_width="match_parent"
@@ -56,10 +59,9 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress" />
 
-            <!-- Forward Arrow -->
             <ImageView
                 android:id="@+id/fwdArr"
-                android:layout_width="wrap_content"
+                android:layout_width="225dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"

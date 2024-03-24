@@ -40,22 +40,22 @@ class CreateProfile : AppCompatActivity() {
             userType = "1"
             navigateToNextPage()
         }
-        binding.textView1.setOnClickListener {
-            // Handle click event
-            userType = "1"
-            pr("before next Text 1")
-            navigateToNextPage()
-        }
+//        binding.textView1.setOnClickListener {
+//            // Handle click event
+//            userType = "1"
+//            pr("before next Text 1")
+//            navigateToNextPage()
+//        }
         binding.imageView2.setOnClickListener {
             // Handle click event
             userType = "2"
-            //   navigateToNextPage()
-        }
-        binding.textView2.setOnClickListener {
-            // Handle click event
-            userType = "2"
             navigateToNextPage()
         }
+//        binding.textView2.setOnClickListener {
+//            // Handle click event
+//            userType = "2"
+//            navigateToNextPage()
+//        }
     }
 
 
