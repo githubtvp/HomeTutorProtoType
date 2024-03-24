@@ -13,8 +13,8 @@ class CommonProfile : AppCompatActivity() {
 
     private lateinit var binding: ActivityCommonProfileBinding
     private lateinit var nextPage: Class<*>
-  //  private var nextPage1: Class<*> = StudProfile::class.java
-  //  private var nextPage2: Class<*> = TutorProfile::class.java
+    private var nextPage1: Class<*> = StudProfile::class.java
+    private var nextPage2: Class<*> = TutorProfile::class.java
     private var userTypeVal = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,6 @@ class CommonProfile : AppCompatActivity() {
         val uType = intent.getStringExtra("userTypeVal").toString()
         if (uType != null) {
             val userTypeVal: Int = uType.toInt()
-            // Use userTypeVal here
         } else {
             // Handle the case where "userTypeVal" is not set in the intent extras
         }
@@ -101,11 +100,11 @@ class CommonProfile : AppCompatActivity() {
 
         if (1 == userTypeVal) {
             pr("Student user!")
-            var nextPage1: Class<*> = StudProfile::class.java
+          //var nextPage1: Class<*> = StudProfile::class.java
             nextPage = nextPage1
         } else if (2 == userTypeVal) {
             pr("Tutor user!")
-            var nextPage2: Class<*> = TutorProfile::class.java
+         //   var nextPage2: Class<*> = TutorProfile::class.java
             nextPage = nextPage2
         }
         pr("All text boxes validated!")
