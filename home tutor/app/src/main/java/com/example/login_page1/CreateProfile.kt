@@ -37,6 +37,7 @@ class CreateProfile : AppCompatActivity() {
     {
        // var nextPg : Intent  //(this, nextPage)
         binding.imageView1.setOnClickListener {
+<<<<<<< HEAD
             userType = "1"
             navigateToNextPage()
         }
@@ -55,6 +56,18 @@ class CreateProfile : AppCompatActivity() {
             // Handle click event
             userType = "2"
             navigateToNextPage()
+=======
+            try {
+                userType = "1"
+                val nextPg = Intent(this, CommonProfile::class.java)
+                nextPg.putExtra("userTypeVal", userType)
+                startActivity(nextPg)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Handle the exception appropriately, such as logging or displaying an error message
+            }
+
+>>>>>>> 786bed812b3e68aa3b48b794aa6fdb2a227ddb3c
         }
     }
 
