@@ -15,8 +15,9 @@ import com.google.android.material.navigation.NavigationView
 class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityHomePageBinding
-  //  private lateinit var nextPage: Class<*>
-  //  private var nextPageCreateProfile: Class<*> = CreateProfile::class.java
+    private lateinit var nextPage: Class<*>
+    private var nextPageCreateProfile: Class<*> = CreateProfile::class.java
+    private var nextPageEditProfile: Class<*> = EditProfile::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,22 +50,38 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
     }
 
     private fun initUI() {
-        var nextPg : Intent  //(this, nextPage)
         binding.createProfile.setOnClickListener {
-           // val intent = Intent(this, page1::class.java)
-            nextPg = Intent(this, CreateProfile::class.java)
-            startActivity(nextPg)
+            nextPage = nextPageCreateProfile
+            startNextPage()
         }
+        binding.iconTvCreate.setOnClickListener {
+            nextPage = nextPageCreateProfile
+            startNextPage()
+        }
+
         binding.editProfile.setOnClickListener {
-          //  nextPg = Intent(this, nextPage)
+            nextPage = nextPageEditProfile
+            startNextPage()
+        }
+        binding.iconTvEdit.setOnClickListener {
+            nextPage = nextPageEditProfile
+            startNextPage()
         }
         binding.stuDashboard.setOnClickListener {
           //  nextPg = Intent(this, nextPage)
+            startNextPage()
         }
         binding.teachDashboard.setOnClickListener {
           //  nextPg = Intent(this, nextPage)
+            startNextPage()
         }
 
+    }
+
+    private fun startNextPage()
+    {
+        var nextPg = Intent(this, nextPage)
+        startActivity(nextPg)
     }
 
     private fun replaceFragment(fragment: Fragment) {

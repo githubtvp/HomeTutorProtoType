@@ -11,9 +11,9 @@ import com.example.login_page1.databinding.ActivityLoginPageBinding
 class Login_page : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginPageBinding
-  //  private lateinit var nextPage: Class<*>
-  //  private var nextPageSuc: Class<*> = Home_page::class.java
- //   private var nextPageFail: Class<*> = Login_page::class.java
+    private lateinit var nextPage: Class<*>
+    private var nextPageSuc: Class<*> = Home_page::class.java
+    private var nextPageFail: Class<*> = Login_page::class.java
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginPageBinding.inflate(layoutInflater)
@@ -95,18 +95,15 @@ class Login_page : AppCompatActivity() {
                 .isNotBlank()
         ) {
             if (verified(binding.email.text.toString(), binding.Password.text.toString())) {
-                pr("Log in Success!")
-                nextPg = Intent(this, Home_page::class.java)
-             //   pr("Log in Success! " + nextPage.name.toString())
-             //   nextPg = Intent(this, nextPage)
-                startActivity(nextPg)
-                binding.btnSignin.isEnabled = false
+              //  pr("Log in Success!")
+                nextPage = nextPageSuc //(this, Home_page::class.java)
+               // binding.btnSignin.isEnabled = false
             }
             else
-            {
-                pr("Log in Failure!")
-                nextPg = Intent(this, Login_page::class.java)
+            {//  pr("Log in Failure!")
+                nextPage = nextPageFail
             }
+            nextPg = Intent(this, nextPage)
             binding.btnSignin.isEnabled = false
         }
         startActivity(nextPg)

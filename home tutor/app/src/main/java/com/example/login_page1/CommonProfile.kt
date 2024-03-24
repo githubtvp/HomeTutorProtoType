@@ -20,24 +20,16 @@ class CommonProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCommonProfileBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
         enableEdgeToEdge()
-     //   val x:String = intent.getStringExtra("a1").toString()
-      //  val v1:Int = x.toInt()
         val uType = intent.getStringExtra("userTypeVal").toString()
         if (uType != null) {
-            val userTypeVal: Int = uType.toInt()
+            userTypeVal = uType.toInt()
         } else {
             // Handle the case where "userTypeVal" is not set in the intent extras
         }
-
        // val userTypeVal : Int = uType.toInt()
         setUpListenerWatchers()
-     //   pr("here user Tvp  : " + userTypeVal)
-        //  val x:String = intent.getStringExtra("userTypeVal").toString()
-        //  val v1:Int = x.toInt()
-
     }
 
     private fun setUpListenerWatchers() {
@@ -49,11 +41,6 @@ class CommonProfile : AppCompatActivity() {
         binding.editTxtEmail.addTextChangedListener(textWatcher)
         // Disable forward arrow button initially
         binding.fwdArr.isEnabled = false
-
-//        binding.fwdArr.setOnClickListener {
-//            // Proceed to the next step
-//            // You can add your logic here to handle the click event
-//        }
     }
 
 
@@ -100,11 +87,9 @@ class CommonProfile : AppCompatActivity() {
 
         if (1 == userTypeVal) {
             pr("Student user!")
-          //var nextPage1: Class<*> = StudProfile::class.java
             nextPage = nextPage1
         } else if (2 == userTypeVal) {
             pr("Tutor user!")
-         //   var nextPage2: Class<*> = TutorProfile::class.java
             nextPage = nextPage2
         }
         pr("All text boxes validated!")
@@ -113,7 +98,7 @@ class CommonProfile : AppCompatActivity() {
     }
 
     fun pr(msg: String) {
-        Toast.makeText(this, "Login Page : " + msg, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "" + msg, Toast.LENGTH_LONG).show()
     }
 
 }//End- class CommonProfile : AppCompatActivity()
