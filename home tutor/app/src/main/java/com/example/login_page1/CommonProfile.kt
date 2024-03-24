@@ -13,8 +13,8 @@ class CommonProfile : AppCompatActivity() {
 
     private lateinit var binding: ActivityCommonProfileBinding
     private lateinit var nextPage: Class<*>
-    private var nextPage1: Class<*> = StudProfile::class.java
-    private var nextPage2: Class<*> = TutorProfile::class.java
+  //  private var nextPage1: Class<*> = StudProfile::class.java
+  //  private var nextPage2: Class<*> = TutorProfile::class.java
     private var userTypeVal = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,11 +22,20 @@ class CommonProfile : AppCompatActivity() {
         binding = ActivityCommonProfileBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-      //  enableEdgeToEdge()
+        enableEdgeToEdge()
+     //   val x:String = intent.getStringExtra("a1").toString()
+      //  val v1:Int = x.toInt()
+//        val uType = intent.getStringExtra("userTypeVal").toString()
+//        if (uType != null) {
+//            val userTypeVal: Int = uType.toInt()
+//            // Use userTypeVal here
+//        } else {
+//            // Handle the case where "userTypeVal" is not set in the intent extras
+//        }
 
-        userTypeVal = intent.getStringExtra("userTypeVal").toString().toInt()
+       // val userTypeVal : Int = uType.toInt()
         setUpListenerWatchers()
-        pr("here user! : " + userTypeVal)
+     //   pr("here user Tvp  : " + userTypeVal)
         //  val x:String = intent.getStringExtra("userTypeVal").toString()
         //  val v1:Int = x.toInt()
 
@@ -89,11 +98,14 @@ class CommonProfile : AppCompatActivity() {
     }
 
     private fun onFwdArrClickNextPage() {
+
         if (1 == userTypeVal) {
             pr("Student user!")
+            var nextPage1: Class<*> = StudProfile::class.java
             nextPage = nextPage1
         } else if (2 == userTypeVal) {
             pr("Tutor user!")
+            var nextPage2: Class<*> = TutorProfile::class.java
             nextPage = nextPage2
         }
         pr("All text boxes validated!")

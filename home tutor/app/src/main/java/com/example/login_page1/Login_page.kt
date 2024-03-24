@@ -11,7 +11,9 @@ import com.example.login_page1.databinding.ActivityLoginPageBinding
 class Login_page : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginPageBinding
-    private var nextPage: Class<*> = CreateProfile::class.java
+  //  private lateinit var nextPage: Class<*>
+  //  private var nextPageSuc: Class<*> = Home_page::class.java
+ //   private var nextPageFail: Class<*> = Login_page::class.java
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginPageBinding.inflate(layoutInflater)
@@ -88,20 +90,21 @@ class Login_page : AppCompatActivity() {
     //fun onClickBtnLogIn(btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
     fun onClickBtnLogIn() //btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
     {   // pr("onClickBtnLogIn : here 1")
+        var nextPg = Intent(this, Home_page::class.java)
         if (binding.email.text.toString().isNotBlank() && binding.Password.text.toString()
                 .isNotBlank()
         ) {
             if (verified(binding.email.text.toString(), binding.Password.text.toString())) {
-                pr("Log in Success! " + nextPage.name.toString())
-                val nextPg = Intent(this, nextPage)
-                startActivity(nextPg)
-                binding.btnSignin.isEnabled = false
+                nextPg = Intent(this, Home_page::class.java)
             }
             else
             {
-                pr("Log in Failure XXX!")
+                pr("Log in Failure!")
+                nextPg = Intent(this, Login_page::class.java)
             }
+            binding.btnSignin.isEnabled = false
         }
+        startActivity(nextPg)
     }
     fun pr(msg: String) {
         Toast.makeText(this, "Login Page : " + msg, Toast.LENGTH_LONG).show()

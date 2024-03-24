@@ -19,10 +19,13 @@
             android:name=".StudProfile"
             android:exported="false" />
         <activity
+            android:name=".CommonProfile"
+            android:exported="false" />
+        <activity
             android:name=".CreateProfile"
             android:exported="false" />
         <activity
-            android:name=".CommonProfile"
+            android:name=".Home_page"
             android:exported="false" />
         <activity
             android:name=".Login_page"

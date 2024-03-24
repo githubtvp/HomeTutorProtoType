@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_acc"
+            android:icon="@drawable/baseline_account_circle_24"
+            android:title="Account"/>
+        <item
+            android:id="@+id/nav_bookmark"
+            android:icon="@drawable/baseline_bookmark_24"
+            android:title="Saved"/>
+        <item
+            android:id="@+id/nav_Setting"
+            android:icon="@drawable/baseline_settings_24"
+            android:title="Settings"/>
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/baseline_motion_photos_auto_24"
+            android:title="About"/>
+
+    </group>
+
+
+</menu>
