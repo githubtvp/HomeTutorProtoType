@@ -25,13 +25,13 @@ class CommonProfile : AppCompatActivity() {
         enableEdgeToEdge()
      //   val x:String = intent.getStringExtra("a1").toString()
       //  val v1:Int = x.toInt()
-//        val uType = intent.getStringExtra("userTypeVal").toString()
-//        if (uType != null) {
-//            val userTypeVal: Int = uType.toInt()
-//            // Use userTypeVal here
-//        } else {
-//            // Handle the case where "userTypeVal" is not set in the intent extras
-//        }
+        val uType = intent.getStringExtra("userTypeVal").toString()
+        if (uType != null) {
+            val userTypeVal: Int = uType.toInt()
+            // Use userTypeVal here
+        } else {
+            // Handle the case where "userTypeVal" is not set in the intent extras
+        }
 
        // val userTypeVal : Int = uType.toInt()
         setUpListenerWatchers()

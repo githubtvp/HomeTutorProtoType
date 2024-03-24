@@ -24,7 +24,7 @@ class CreateProfile : AppCompatActivity() {
 //        null
 //    }
 
-    private var userType: Int = 0 // Initialize to some default value
+    private var userType: String = "0" // Initialize to some default value
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateProfileBinding.inflate(layoutInflater)
@@ -38,6 +38,7 @@ class CreateProfile : AppCompatActivity() {
         var nextPg : Intent  //(this, nextPage)
         binding.imageView1.setOnClickListener {
             try {
+                userType = "1"
                 val nextPg = Intent(this, CommonProfile::class.java)
                 nextPg.putExtra("userTypeVal", userType)
                 startActivity(nextPg)
