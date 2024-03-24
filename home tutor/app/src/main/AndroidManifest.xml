@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Login_page1"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".TutorProfile"
             android:exported="false" />
         <activity
@@ -23,6 +24,9 @@
             android:exported="false" />
         <activity
             android:name=".CommonProfile"
+=======
+            android:name=".Home_page"
+>>>>>>> f2c77db349dc47c3631d7b6a69f5d95691799670
             android:exported="false" />
         <activity
             android:name=".Login_page"

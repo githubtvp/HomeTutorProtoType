@@ -92,8 +92,19 @@ class Login_page : AppCompatActivity() {
                 .isNotBlank()
         ) {
             if (verified(binding.email.text.toString(), binding.Password.text.toString())) {
+<<<<<<< HEAD
                 pr("Log in Success! " + nextPage.name.toString())
                 val nextPg = Intent(this, nextPage)
+=======
+                   pr("Log in Success!")
+<<<<<<< HEAD
+                //  val logInStatus = "Log in Success!"
+                val nextPg = Intent(this, Home_page::class.java)
+                // nextPg.putExtra("LogInStatusMsg", logInStatus)
+=======
+                val nextPg = Intent(this, page1::class.java)
+>>>>>>> 47e14517a302ed962e00f772d288f77fbd0f0c95
+>>>>>>> f2c77db349dc47c3631d7b6a69f5d95691799670
                 startActivity(nextPg)
                 binding.btnSignin.isEnabled = false
             }
