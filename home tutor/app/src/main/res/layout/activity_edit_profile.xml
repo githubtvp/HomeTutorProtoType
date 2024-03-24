@@ -11,7 +11,7 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Student Profile"
+        android:text="Edit Profile"
         android:textSize="36dp"
         android:textColor="@color/blue"
         android:gravity="center"/>

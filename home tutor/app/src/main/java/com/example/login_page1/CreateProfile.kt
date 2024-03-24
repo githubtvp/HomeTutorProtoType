@@ -14,16 +14,7 @@ import com.example.login_page1.databinding.ActivityCreateProfileBinding
 class CreateProfile : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateProfileBinding
-   // private var nextPage: Class<*> = CommonProfile::class.java
-
-//    private var nextPage: Class<*>? = try {
-//        CommonProfile::class.java
-//    } catch (e: ClassNotFoundException) {
-//        pr(e.toString())
-//        // Handle the exception appropriately
-//        null
-//    }
-
+    private var nextPage: Class<*> = CommonProfile::class.java
     private var userType: String = "0" // Initialize to some default value
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +34,13 @@ class CreateProfile : AppCompatActivity() {
         binding.textView1.setOnClickListener {
             // Handle click event
             userType = "1"
-            pr("before next Text 1")
+          //  pr("before next Text 1")
             navigateToNextPage()
         }
         binding.imageView2.setOnClickListener {
             // Handle click event
             userType = "2"
-            //   navigateToNextPage()
+            navigateToNextPage()
         }
         binding.textView2.setOnClickListener {
             // Handle click event
@@ -58,23 +49,9 @@ class CreateProfile : AppCompatActivity() {
         }
     }
 
-
-
-//    private fun navigateToNextPage() {
-//        // You can start the next activity here
-//     //   pr("H" + nextPage.name.toString())
-//      //  val nextPg = Intent(this, nextPage)
-//      //  nextPg.putExtra("userTypeVal", userType)
-//        pr("here 1")
-//        var nextPg = Intent(this,CommonProfile::class.java )
-//        startActivity(nextPg)
-//        // Optionally, you can finish the current activity if you don't want to keep it in the back stack
-//        // finish()
-//    }
-
     private fun navigateToNextPage() {
         try {
-            val nextPg = Intent(this, CommonProfile::class.java)
+            val nextPg = Intent(this, nextPage)
             nextPg.putExtra("userTypeVal", userType)
             startActivity(nextPg)
         } catch (e: Exception) {
