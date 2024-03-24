@@ -35,35 +35,27 @@ class CreateProfile : AppCompatActivity() {
 
     private fun  init()
     {
-        var nextPg : Intent  //(this, nextPage)
+       // var nextPg : Intent  //(this, nextPage)
         binding.imageView1.setOnClickListener {
-            try {
-                userType = "1"
-                val nextPg = Intent(this, CommonProfile::class.java)
-                nextPg.putExtra("userTypeVal", userType)
-                startActivity(nextPg)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                // Handle the exception appropriately, such as logging or displaying an error message
-            }
-
+            userType = "1"
+            navigateToNextPage()
         }
-//        binding.textView1.setOnClickListener {
-//            // Handle click event
-//            userType = 1
-//            pr("before next Text 1")
-//            navigateToNextPage()
-//        }
-//        binding.imageView2.setOnClickListener {
-//            // Handle click event
-//            userType = 2
-//            //   navigateToNextPage()
-//        }
-//        binding.textView2.setOnClickListener {
-//            // Handle click event
-//            userType = 2
-//            navigateToNextPage()
-//        }
+        binding.textView1.setOnClickListener {
+            // Handle click event
+            userType = "1"
+            pr("before next Text 1")
+            navigateToNextPage()
+        }
+        binding.imageView2.setOnClickListener {
+            // Handle click event
+            userType = "2"
+            //   navigateToNextPage()
+        }
+        binding.textView2.setOnClickListener {
+            // Handle click event
+            userType = "2"
+            navigateToNextPage()
+        }
     }
 
 
@@ -82,8 +74,9 @@ class CreateProfile : AppCompatActivity() {
 
     private fun navigateToNextPage() {
         try {
-            pr("here 2")
-            val nextPg = Intent(this, CommonProfile::class.java)     // Intent(this@CreateProfile, CommonProfile::class.java)
+           // userType = "1"
+            val nextPg = Intent(this, CommonProfile::class.java)
+            nextPg.putExtra("userTypeVal", userType)
             startActivity(nextPg)
         } catch (e: Exception) {
             e.printStackTrace()
