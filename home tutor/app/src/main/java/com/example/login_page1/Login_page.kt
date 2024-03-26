@@ -52,6 +52,17 @@ class Login_page : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 // Do something when text is changing
+//                val passwordInput = s.toString()
+//                if (!passwordInput.isEmpty() && !binding.email.text.toString().isEmpty()) {
+//                    binding.btnSignin.isEnabled = true
+//                    binding.btnSignin.setOnClickListener { onClickBtnLogIn() }
+//                } else {
+//                    binding.btnSignin.isEnabled = false
+//                }
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                // Do something after text changed
                 val passwordInput = s.toString()
                 if (!passwordInput.isEmpty() && !binding.email.text.toString().isEmpty()) {
                     binding.btnSignin.isEnabled = true
@@ -59,20 +70,17 @@ class Login_page : AppCompatActivity() {
                 } else {
                     binding.btnSignin.isEnabled = false
                 }
-            }
 
-            override fun afterTextChanged(s: Editable) {
-                // Do something after text changed
             }
         })
 
         binding.FabBack.setOnClickListener {
-            val intent = Intent(this, page1::class.java)
+            val intent = Intent(this, Page1::class.java)
             startActivity(intent)
         }
 
         binding.tvSignup.setOnClickListener {
-            val intent = Intent(this, signup::class.java)
+            val intent = Intent(this, Signup::class.java)
             startActivity(intent)
         }
 

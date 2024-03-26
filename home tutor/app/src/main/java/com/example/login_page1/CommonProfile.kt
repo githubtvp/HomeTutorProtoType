@@ -34,18 +34,18 @@ class CommonProfile : AppCompatActivity() {
 
     private fun setUpListenerWatchers() {
         // Add text change listeners to all EditText fields
-        binding.editTxtName.addTextChangedListener(textWatcher)
-        binding.editTxtAge.addTextChangedListener(textWatcher)
-        binding.editTxtAdd.addTextChangedListener(textWatcher)
-        binding.editTxtCity.addTextChangedListener(textWatcher)
-        binding.editTxtEmail.addTextChangedListener(textWatcher)
+        binding.editTxtName.addTextChangedListener(getTextWatcher)
+        binding.editTxtAge.addTextChangedListener(getTextWatcher)
+        binding.editTxtAdd.addTextChangedListener(getTextWatcher)
+        binding.editTxtCity.addTextChangedListener(getTextWatcher)
+        binding.editTxtEmail.addTextChangedListener(getTextWatcher)
         // Disable forward arrow button initially
         binding.fwdArr.isEnabled = false
     }
 
 
     //create a TextWatcher object to attach to each EditText object
-    private val textWatcher = object : TextWatcher {
+    private val getTextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             // No implementation needed
         }

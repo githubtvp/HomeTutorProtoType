@@ -1,93 +1,201 @@
 package com.example.login_page1
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import com.example.login_page1.databinding.ActivityLoginPageBinding
+import android.util.Patterns
+import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivitySignBinding
+
+const val MIN_USERNAME_LEN = 3
+const val MAX_USERNAME_LEN = 20
+const val USERNAME_ALLOWED_CHAR = "[a-zA-Z0-9_]+"
+const val PWD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$"
 
 class Signup : AppCompatActivity() {
     private lateinit var binding: ActivitySignBinding
     private lateinit var nextPage: Class<*>
     private var nextPageCreateProfile: Class<*> = CreateProfile::class.java
     private var nextPageLoginpage: Class<*> = Login_page::class.java
+    private var nextPagePage1: Class<*> = Page1::class.java
+    private lateinit var SignUpValidator: SignUpValidator
+
+    private var isUsernameValid = false
+    private var isEmailValid = false
+    private var isPasswordValid = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //initalize UI
+
         initUI()
     }
 
-    private fun initUI()
-    {
-        binding.FabBack.setOnClickListener{
-            val intent = Intent(this, page1::class.java)
-            startActivity(intent)
-        }
-
-        binding.btnSignup.setOnClickListener{
-            nextPage = nextPageCreateProfile
+    private fun initUI() {
+        binding.FabBack.setOnClickListener {
+            nextPage = nextPagePage1
             var nextPg = Intent(this, nextPage)
             startActivity(nextPg)
         }
 
-        binding.txtsignin.setOnClickListener{
+        binding.txtSignin.setOnClickListener {
             nextPage = nextPageLoginpage
             var nextPg = Intent(this, nextPage)
             startActivity(nextPg)
         }
+        //  setUpListenerWatchers()
+        setFocusLost()
+    }
+
+    private fun setFocusLost() {
+        binding.btnSignup.isEnabled = false
+        // Assuming editTexts is a list of EditText instances
+        val messages = listOf(
+            "Invalid UserName",
+            "Invalid Email",
+            "Invalid Password",
+            "Reentry Password mismatch"
+            // Add more messages for each EditText as needed
+        )
+        // Initialize the list of EditTexts
+        val editTexts =
+            listOf(binding.username, binding.email, binding.password, binding.reenterPwd)
+        for ((index, editText) in editTexts.withIndex()) {
+            val message = messages.getOrNull(index) ?: "Default message"
+            editText.setOnFocusChangeListener { view, hasFocus ->
+                if (!hasFocus) {
+                    // This block will be executed when the EditText loses focus
+                    val text = editText.text.toString()
+                    // Perform validation based on the type of EditText
+                    val isValid = when (editText) {
+                        // Add cases for each EditText requiring different validation
+                        // Example: Email validation
+                        binding.email -> isValidEmail(text)
+                        // Example: Username validation
+                        binding.username -> isValidUsername(text)
+                        binding.password -> isValidPassword(text)
+                        binding.reenterPwd -> isValidReenterPassword(text)
+
+                        // Add more cases as needed
+                        else -> true // Default to true if no specific validation is needed
+                    }
+                    // Perform action based on validation result
+                    if (!isValid) {
+                        // Show a toast message or perform any other action to notify the user
+                        pr(message)
+                        editText.requestFocus()
+                        // Toast.makeText(this, "Invalid input", Toast.LENGTH_SHORT).show()
+                    }
+                    binding.btnSignup.isEnabled = isValid
+                    if (isValid) {
+                        binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
+                    }
+                }
+            }
+        }
+
+    }
+
+    private fun setUpListenerWatchers() {
+        // Add text change listeners to all EditText fields
+        binding.username.addTextChangedListener(getTextWatcher)
+        binding.email.addTextChangedListener(getTextWatcher)
+        binding.password.addTextChangedListener(getTextWatcher)
+        binding.reenterPwd.addTextChangedListener(getTextWatcher)
+        binding.btnSignup.isEnabled = false
     }
 
     //create a TextWatcher object to attach to each EditText object
-    private val textWatcher = object : TextWatcher {
+    private val getTextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             // No implementation needed
         }
+
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             // No implementation needed
         }
-        override fun afterTextChanged(s: Editable?) {
+
+        override fun afterTextChanged(s: Editable) {
             // Validate all EditText fields
             val isValid = validateEditTexts()
             // Enable or disable the forward arrow button based on validation result
-            binding.fwdArr.isEnabled = isValid
+            binding.btnSignup.isEnabled = isValid
             if (isValid) {
-                binding.fwdArr.setOnClickListener { onFwdArrClickNextPage() }
+                binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
             }
         }
     }
 
     private fun validateEditTexts(): Boolean {
-        val text1 = binding.editTxtName.text.toString().trim()
-        val text2 = binding.editTxtAge.text.toString().trim()
-        val text3 = binding.editTxtAdd.text.toString().trim()
-        val text4 = binding.editTxtCity.text.toString().trim()
-        val text5 = binding.editTxtEmail.text.toString().trim()
+        val text1 = binding.username.text.toString().trim()
+        val text2 = binding.email.text.toString().trim()
+        val text3 = binding.password.text.toString().trim()
+        val text4 = binding.reenterPwd.text.toString().trim()
 
         // Perform validation for each EditText field
-        val isValidText1 = text1.isNotEmpty() // Example validation logic
-        val isValidText2 = text2.isNotEmpty() // Example validation logic
-        val isValidText3 = text3.isNotEmpty() // Example validation logic
-        val isValidText4 = text4.isNotEmpty() // Example validation logic
-        val isValidText5 = text5.isNotEmpty() // Example validation logic
-
+        val isValidText1 = text1.isNotEmpty() && isValidUsername(text1)// Example validation logic
+        val isValidText2 = text2.isNotEmpty() && isValidEmail(text2)// Example validation logic
+        val isValidText3 = text3.isNotEmpty() && isValidPassword(text3)// Example validation logic
+        val isValidText4 =
+            text4.isNotEmpty() && isValidReenterPassword(text4)// Example validation logic
         // Return true if all EditText fields are valid, otherwise false
-        return isValidText1 && isValidText2 && isValidText3 && isValidText4 && isValidText5
+        return isValidText1 && isValidText2 && isValidText3 && isValidText4 //&& isValidText5
     }
 
-
-    fun isValidUsername(username: String): Boolean {
+    private fun isValidUsername(username: String): Boolean {
         // Define your criteria for a valid username
-        val minLength = 3
-        val maxLength = 20
-        val allowedCharacters = "[a-zA-Z0-9_]+"
+        val minLength = MIN_USERNAME_LEN
+        val maxLength = MAX_USERNAME_LEN
+        val allowedCharacters = USERNAME_ALLOWED_CHAR   //"[a-zA-Z0-9_]+"
+        val userNameChk: Boolean =
+            (username.length in minLength..maxLength && username.matches(allowedCharacters.toRegex()))
+
+        if (!userNameChk) {
+            pr("Invalid Username entry!")
+            binding.username.requestFocus() // Keep focus on this EditText
+        }
+        return userNameChk
 
         // Check if the username meets the criteria
-        return username.length in minLength..maxLength && username.matches(allowedCharacters.toRegex())
+        //   return username.length in minLength..maxLength && username.matches(allowedCharacters.toRegex())
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        val pattern = Patterns.EMAIL_ADDRESS
+        val emailChk = pattern.matcher(email).matches()
+        if (!emailChk) {
+            pr("Invalid Email!")
+            binding.email.requestFocus() // Keep focus on this EditText
+        }
+        return emailChk
+    }
+
+    private fun isValidPassword(pwd: String): Boolean {
+        val passwordRegex =
+            PWD_REGEX //  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$"
+        val pwdChk = pwd.matches(Regex(passwordRegex))
+        if (!pwdChk) {
+            pr("Invalid Password entry!")
+            binding.password.requestFocus() // Keep focus on this EditText
+        }
+        return pwdChk
+    }
+
+    private fun isValidReenterPassword(pwd: String): Boolean {
+        val reentPwd: Boolean = (binding.password.text.toString() == pwd)
+        if (reentPwd) {
+            pr("Password reentry mismatch!")
+            binding.reenterPwd.requestFocus() // Keep focus on this EditText
+        }
+        return reentPwd
+    }
+
+    private fun onBtnSignUpClick() {
+        nextPage = nextPageCreateProfile
+        var nextPg = Intent(this, nextPage)
+        startActivity(nextPg)
     }
 
 }

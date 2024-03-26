@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 
-class page1 : AppCompatActivity() {
+class Page1 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.page1)
@@ -25,7 +25,7 @@ class page1 : AppCompatActivity() {
     }
     fun OnClicktxtLogin() {
         // pr("succes")
-        val intent = Intent(this, signup::class.java)
+        val intent = Intent(this, Signup::class.java)
         startActivity(intent)
     }
     fun pr(msg : String)

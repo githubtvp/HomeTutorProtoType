@@ -34,10 +34,10 @@
             android:name=".Login_page"
             android:exported="false" />
         <activity
-            android:name=".signup"
+            android:name=".Signup"
             android:exported="false" />
         <activity
-            android:name=".page1"
+            android:name=".Page1"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
