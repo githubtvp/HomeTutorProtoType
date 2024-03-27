@@ -35,15 +35,11 @@ class Signup : AppCompatActivity() {
 
     private fun initUI() {
         binding.FabBack.setOnClickListener {
-            nextPage = nextPagePage1
-            var nextPg = Intent(this, nextPage)
-            startActivity(nextPg)
+            newPg(nextPagePage1)
         }
 
         binding.txtSignin.setOnClickListener {
-            nextPage = nextPageLoginpage
-            var nextPg = Intent(this, nextPage)
-            startActivity(nextPg)
+              newPg(nextPageLoginpage)
         }
         //  setUpListenerWatchers()
         setFocusLost()
@@ -124,6 +120,7 @@ class Signup : AppCompatActivity() {
             binding.btnSignup.isEnabled = isValid
             if (isValid) {
                 binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
+              // binding.btnSignup.onClick(binding.btnSignup, nextPageCreateProfile)
             }
         }
     }
@@ -193,9 +190,7 @@ class Signup : AppCompatActivity() {
     }
 
     private fun onBtnSignUpClick() {
-        nextPage = nextPageCreateProfile
-        var nextPg = Intent(this, nextPage)
-        startActivity(nextPg)
+        newPg(nextPageCreateProfile)
     }
 
 }
