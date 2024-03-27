@@ -1,35 +1,20 @@
 package com.example.login_page1
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.login_page1.databinding.Page1Binding
 
 class Page1 : AppCompatActivity() {
+
+    private lateinit var binding:Page1Binding
+    private var nextPageLogin: Class<*> = Login_page::class.java
+    private var nextPageSignup: Class<*> = Signup::class.java
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.page1)
-
-        val sign = findViewById<Button>(R.id.sign)
-        val log_in = findViewById<TextView>(R.id.page2)
-       // var log="hello"
-        sign.setOnClickListener{OnClickBtnLogin()}
-        log_in.setOnClickListener { OnClicktxtLogin() }
-    }
-    fun OnClickBtnLogin() {
-          // pr("succes")
-            val intent = Intent(this,Login_page::class.java)
-           startActivity(intent)
-    }
-    fun OnClicktxtLogin() {
-        // pr("succes")
-        val intent = Intent(this, Signup::class.java)
-        startActivity(intent)
-    }
-    fun pr(msg : String)
-    {
-        Toast.makeText(this,msg,Toast.LENGTH_LONG).show()
+        binding = Page1Binding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.signin.onClick(this@Page1, nextPageLogin)
+        binding.signup.onClick(this@Page1, nextPageSignup)
     }
 }

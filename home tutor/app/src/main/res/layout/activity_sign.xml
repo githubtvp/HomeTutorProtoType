@@ -15,7 +15,7 @@
         app:layout_constraintGuide_percent="0.25" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/Fab_back"
+        android:id="@+id/prevPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"

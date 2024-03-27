@@ -1,6 +1,5 @@
 package com.example.login_page1
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,38 +7,26 @@ import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivitySignBinding
 
-const val MIN_USERNAME_LEN = 3
-const val MAX_USERNAME_LEN = 20
-const val USERNAME_ALLOWED_CHAR = "[a-zA-Z0-9_]+"
-const val PWD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$"
-
 class Signup : AppCompatActivity() {
     private lateinit var binding: ActivitySignBinding
-    private lateinit var nextPage: Class<*>
     private var nextPageCreateProfile: Class<*> = CreateProfile::class.java
     private var nextPageLoginpage: Class<*> = Login_page::class.java
-    private var nextPagePage1: Class<*> = Page1::class.java
-    private lateinit var SignUpValidator: SignUpValidator
-
-    private var isUsernameValid = false
-    private var isEmailValid = false
-    private var isPasswordValid = false
+    private var prevPagePage1: Class<*> = Page1::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         initUI()
     }
 
     private fun initUI() {
-        binding.FabBack.setOnClickListener {
-            newPg(nextPagePage1)
+        binding.prevPage.setOnClickListener {
+            nextPg(prevPagePage1)
         }
 
         binding.txtSignin.setOnClickListener {
-              newPg(nextPageLoginpage)
+              nextPg(nextPageLoginpage)
         }
         //  setUpListenerWatchers()
         setFocusLost()
@@ -86,7 +73,8 @@ class Signup : AppCompatActivity() {
                     }
                     binding.btnSignup.isEnabled = isValid
                     if (isValid) {
-                        binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
+                       // binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
+                        binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
                     }
                 }
             }
@@ -119,8 +107,8 @@ class Signup : AppCompatActivity() {
             // Enable or disable the forward arrow button based on validation result
             binding.btnSignup.isEnabled = isValid
             if (isValid) {
-                binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
-              // binding.btnSignup.onClick(binding.btnSignup, nextPageCreateProfile)
+              //  binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
+               binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
             }
         }
     }
@@ -142,21 +130,12 @@ class Signup : AppCompatActivity() {
     }
 
     private fun isValidUsername(username: String): Boolean {
-        // Define your criteria for a valid username
-        val minLength = MIN_USERNAME_LEN
-        val maxLength = MAX_USERNAME_LEN
-        val allowedCharacters = USERNAME_ALLOWED_CHAR   //"[a-zA-Z0-9_]+"
-        val userNameChk: Boolean =
-            (username.length in minLength..maxLength && username.matches(allowedCharacters.toRegex()))
-
+        val userNameChk: Boolean = chkUserName(username)
         if (!userNameChk) {
             pr("Invalid Username entry!")
             binding.username.requestFocus() // Keep focus on this EditText
         }
         return userNameChk
-
-        // Check if the username meets the criteria
-        //   return username.length in minLength..maxLength && username.matches(allowedCharacters.toRegex())
     }
 
     private fun isValidEmail(email: String): Boolean {
@@ -170,9 +149,7 @@ class Signup : AppCompatActivity() {
     }
 
     private fun isValidPassword(pwd: String): Boolean {
-        val passwordRegex =
-            PWD_REGEX //  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$"
-        val pwdChk = pwd.matches(Regex(passwordRegex))
+        val pwdChk = chkPassword(pwd)
         if (!pwdChk) {
             pr("Invalid Password entry!")
             binding.password.requestFocus() // Keep focus on this EditText
@@ -190,7 +167,7 @@ class Signup : AppCompatActivity() {
     }
 
     private fun onBtnSignUpClick() {
-        newPg(nextPageCreateProfile)
+        nextPg(nextPageCreateProfile)
     }
 
 }
