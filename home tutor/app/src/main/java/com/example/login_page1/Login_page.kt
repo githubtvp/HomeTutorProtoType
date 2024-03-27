@@ -1,6 +1,5 @@
 package com.example.login_page1
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,6 +12,9 @@ class Login_page : AppCompatActivity() {
     private lateinit var nextPage: Class<*>
     private var nextPageSuc: Class<*> = Home_page::class.java
     private var nextPageFail: Class<*> = Login_page::class.java
+    private var nextPageSignup: Class<*> = Signup::class.java
+    private var prevPagePage1: Class<*> = Page1::class.java
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginPageBinding.inflate(layoutInflater)
@@ -65,15 +67,8 @@ class Login_page : AppCompatActivity() {
             }
         })
 
-        binding.FabBack.setOnClickListener {
-            val intent = Intent(this, Page1::class.java)
-            startActivity(intent)
-        }
-
-        binding.tvSignup.setOnClickListener {
-            val intent = Intent(this, Signup::class.java)
-            startActivity(intent)
-        }
+        binding.prevPage.onClick(this@Login_page, prevPagePage1)
+        binding.signup.onClick(this@Login_page, nextPageSignup)
 
         binding.forgotPassword.setOnClickListener {
 

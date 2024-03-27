@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 const val MIN_USERNAME_LEN = 3
 const val MAX_USERNAME_LEN = 20
@@ -25,7 +26,7 @@ fun Context.nextPg(nextPage: Class<*>) {
 
 fun View.onClick(context: Context, nextPage: Class<*>) {
     this.setOnClickListener {
-        if (this is Button || this is TextView) {
+        if (this is Button || this is FloatingActionButton || this is TextView) {
             context.nextPg(nextPage)
         }
     }

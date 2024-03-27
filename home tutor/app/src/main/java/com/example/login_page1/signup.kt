@@ -21,13 +21,8 @@ class Signup : AppCompatActivity() {
     }
 
     private fun initUI() {
-        binding.prevPage.setOnClickListener {
-            nextPg(prevPagePage1)
-        }
-
-        binding.txtSignin.setOnClickListener {
-              nextPg(nextPageLoginpage)
-        }
+        binding.prevPage.onClick(this@Signup, prevPagePage1)
+        binding.txtSignin.onClick(this@Signup, nextPageLoginpage)
         //  setUpListenerWatchers()
         setFocusLost()
     }
