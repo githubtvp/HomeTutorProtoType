@@ -59,7 +59,7 @@
             android:backgroundTint="@color/app_theme_light">
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="32dp"
@@ -68,7 +68,7 @@
                 android:drawablePadding="8dp"
                 android:drawableTint="@color/app_theme"
                 android:ems="10"
-                android:hint="Username"
+                android:hint="EmailId"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="@color/black"
@@ -94,7 +94,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/username" />
+                app:layout_constraintTop_toBottomOf="@+id/email" />
 
             <TextView
                 android:id="@+id/forgot_password"

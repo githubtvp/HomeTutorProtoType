@@ -1,8 +1,6 @@
 package com.example.login_page1
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivitySignBinding
@@ -49,12 +47,12 @@ class Signup : AppCompatActivity() {
                     // Perform validation based on the type of EditText
                     val isValid = when (editText) {
                         // Add cases for each EditText requiring different validation
-                        // Example: Email validation
-                        binding.email -> isValidEmail(text)
                         // Example: Username validation
                         binding.username -> isValidUsername(text)
+                        // Example: Email validation
+                        binding.email -> isValidEmail(text)
                         binding.password -> isValidPassword(text)
-                        binding.reenterPwd -> isValidReenterPassword(text)
+                        //  binding.reenterPwd -> isValidReenterPassword(text)
 
                         // Add more cases as needed
                         else -> true // Default to true if no specific validation is needed
@@ -68,8 +66,9 @@ class Signup : AppCompatActivity() {
                     }
                     binding.btnSignup.isEnabled = isValid
                     if (isValid) {
-                       // binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
-                        binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
+                        // binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
+                        binding.btnSignup.setOnClickListener { createNewUser() }
+                        // binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
                     }
                 }
             }
@@ -77,52 +76,70 @@ class Signup : AppCompatActivity() {
 
     }
 
-    private fun setUpListenerWatchers() {
-        // Add text change listeners to all EditText fields
-        binding.username.addTextChangedListener(getTextWatcher)
-        binding.email.addTextChangedListener(getTextWatcher)
-        binding.password.addTextChangedListener(getTextWatcher)
-        binding.reenterPwd.addTextChangedListener(getTextWatcher)
-        binding.btnSignup.isEnabled = false
-    }
-
-    //create a TextWatcher object to attach to each EditText object
-    private val getTextWatcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            // No implementation needed
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            // No implementation needed
-        }
-
-        override fun afterTextChanged(s: Editable) {
-            // Validate all EditText fields
-            val isValid = validateEditTexts()
-            // Enable or disable the forward arrow button based on validation result
-            binding.btnSignup.isEnabled = isValid
-            if (isValid) {
-              //  binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
-               binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
+    private fun createNewUser() {
+        val username = binding.username.text.toString()
+        val email = binding.email.text.toString()
+        val pwd = binding.password.text.toString()
+        Page1.auth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                pr("New User created successfully")
+                //binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
+                nextPg(nextPageCreateProfile)
+                finish()
+            } else {
+                pr("New User creation failed XXX")
             }
         }
     }
 
-    private fun validateEditTexts(): Boolean {
-        val text1 = binding.username.text.toString().trim()
-        val text2 = binding.email.text.toString().trim()
-        val text3 = binding.password.text.toString().trim()
-        val text4 = binding.reenterPwd.text.toString().trim()
 
-        // Perform validation for each EditText field
-        val isValidText1 = text1.isNotEmpty() && isValidUsername(text1)// Example validation logic
-        val isValidText2 = text2.isNotEmpty() && isValidEmail(text2)// Example validation logic
-        val isValidText3 = text3.isNotEmpty() && isValidPassword(text3)// Example validation logic
-        val isValidText4 =
-            text4.isNotEmpty() && isValidReenterPassword(text4)// Example validation logic
-        // Return true if all EditText fields are valid, otherwise false
-        return isValidText1 && isValidText2 && isValidText3 && isValidText4 //&& isValidText5
-    }
+//
+//    private fun setUpListenerWatchers() {
+//        // Add text change listeners to all EditText fields
+//        binding.username.addTextChangedListener(getTextWatcher)
+//        binding.email.addTextChangedListener(getTextWatcher)
+//        binding.password.addTextChangedListener(getTextWatcher)
+//        binding.reenterPwd.addTextChangedListener(getTextWatcher)
+//        binding.btnSignup.isEnabled = false
+//    }
+//
+//    //create a TextWatcher object to attach to each EditText object
+//    private val getTextWatcher = object : TextWatcher {
+//        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            // No implementation needed
+//        }
+//
+//        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//            // No implementation needed
+//        }
+//
+//        override fun afterTextChanged(s: Editable) {
+//            // Validate all EditText fields
+//            val isValid = validateEditTexts()
+//            // Enable or disable the forward arrow button based on validation result
+//            binding.btnSignup.isEnabled = isValid
+//            if (isValid) {
+//              //  binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
+//            //   binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
+//             //   binding.btnSignup.setOnClickListener { createNewUser() }
+//            }
+//        }
+//    }
+//
+//    private fun validateEditTexts(): Boolean {
+//        val text1 = binding.username.text.toString().trim()
+//        val text2 = binding.email.text.toString().trim()
+//        val text3 = binding.password.text.toString().trim()
+//        val text4 = binding.reenterPwd.text.toString().trim()
+//
+//        // Perform validation for each EditText field
+//        val isValidText1 = text1.isNotEmpty() && isValidUsername(text1)// Example validation logic
+//        val isValidText2 = text2.isNotEmpty() && isValidEmail(text2)// Example validation logic
+//        val isValidText3 = text3.isNotEmpty() && isValidPassword(text3)// Example validation logic
+//      //  val isValidText4 = text4.isNotEmpty() && isValidReenterPassword(text4)// Example validation logic
+//        // Return true if all EditText fields are valid, otherwise false
+//        return isValidText1 && isValidText2 && isValidText3 //&& isValidText4 //&& isValidText5
+//    }
 
     private fun isValidUsername(username: String): Boolean {
         val userNameChk: Boolean = chkUserName(username)

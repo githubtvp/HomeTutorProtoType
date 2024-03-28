@@ -1,7 +1,5 @@
 package com.example.login_page1
 import android.content.Context
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText

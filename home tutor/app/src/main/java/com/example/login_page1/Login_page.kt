@@ -3,8 +3,12 @@ package com.example.login_page1
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivityLoginPageBinding
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthResult
+
 
 class Login_page : AppCompatActivity() {
 
@@ -25,7 +29,7 @@ class Login_page : AppCompatActivity() {
 
     private fun initUI() {
 
-        binding.username.addTextChangedListener(object : TextWatcher {
+        binding.email.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 // Do something before text changed
             }
@@ -35,8 +39,8 @@ class Login_page : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable) {
                 // Do something after text changed
-                val usernameInput = s.toString()
-                if (!usernameInput.isEmpty()) {
+                val emailInput = s.toString()
+                if (emailInput.isNotEmpty()) {
                     binding.password.isEnabled = true
                 } else {
                     binding.password.isEnabled = false
@@ -57,7 +61,7 @@ class Login_page : AppCompatActivity() {
             override fun afterTextChanged(s: Editable) {
                 // Do something after text changed
                 val passwordInput = s.toString()
-                if (!passwordInput.isEmpty() && !binding.username.text.toString().isEmpty()) {
+                if (passwordInput.isNotEmpty() && binding.email.text.toString().isNotEmpty()) {
                     binding.btnSignin.isEnabled = true
                     binding.btnSignin.setOnClickListener { onClickBtnLogIn() }
                 } else {
@@ -86,7 +90,7 @@ class Login_page : AppCompatActivity() {
         )
         // Initialize the list of EditTexts
         val editTexts =
-            listOf(binding.username, binding.password)
+            listOf(binding.email, binding.password)
         for ((index, editText) in editTexts.withIndex()) {
             val message = messages.getOrNull(index) ?: "Default message"
             editText.setOnFocusChangeListener { view, hasFocus ->
@@ -97,7 +101,7 @@ class Login_page : AppCompatActivity() {
                     val isValid = when (editText) {
                         // Add cases for each EditText requiring different validation
                         // Example: Username validation
-                        binding.username -> isValidUsername(text)
+                        binding.email -> isValidEmail(text)
                         binding.password -> isValidPassword(text)
                         // Add more cases as needed
                         else -> true // Default to true if no specific validation is needed
@@ -121,9 +125,19 @@ class Login_page : AppCompatActivity() {
         val userNameChk = chkUserName(username)
         if (!userNameChk) {
             pr("Invalid Username entry!")
-            binding.username.requestFocus() // Keep focus on this EditText
+            binding.email.requestFocus() // Keep focus on this EditText
         }
         return userNameChk
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        val pattern = Patterns.EMAIL_ADDRESS
+        val emailChk = pattern.matcher(email).matches()
+        if (!emailChk) {
+            pr("Invalid Email!")
+            binding.email.requestFocus() // Keep focus on this EditText
+        }
+        return emailChk
     }
 
     private fun isValidPassword(pwd: String): Boolean {
@@ -144,17 +158,36 @@ class Login_page : AppCompatActivity() {
     //fun onClickBtnLogIn(btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
     fun onClickBtnLogIn() //btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
     {
-        if (binding.username.text.toString().isNotBlank() && binding.password.text.toString()
-                .isNotBlank()
-        ) {
-            if (verified(binding.username.text.toString(), binding.password.text.toString())) {
-                nextPage = nextPageSuc
-            }
-            else {
-                nextPage = nextPageFail
-            }
-            binding.btnSignin.isEnabled = false
-        }
-        nextPg(nextPage)
+      //  pr("here 1111 ")
+        val email = binding.email.text.toString()
+        val pwd = binding.password.text.toString()
+        Page1.auth.signInWithEmailAndPassword(email, pwd)
+            .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
+                // on below line we are checking if the task is success or not.
+                if (task.isSuccessful) {
+                    pr("Login Successful..")
+                  //  nextPage = nextPageSuc
+                    nextPg(nextPageSuc)
+                    finish()
+                } else {
+                    pr("Please enter valid user credentials..")
+                   // nextPage = nextPageFail
+                    nextPg(nextPageFail)
+                    finish()
+                }
+            })
+        binding.btnSignin.isEnabled = false
     }
 }
+
+/*
+ Page1.auth.createUserWithEmailAndPassword(email,pwd).addOnCompleteListener {
+            if(it.isSuccessful)
+            {
+                pr("User created successfully")
+                //binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
+                nextPg(nextPageCreateProfile)
+                finish()
+            }
+        }.addOnFailureListener { pr(it.localizedMessage) }
+ */

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Login_page1" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.home_tutor" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryVariant">@color/blue</item>
@@ -10,7 +10,7 @@
     </style>
 
 
-    <style name="Theme.Login_page1" parent="Base.Theme.Login_page1" />
+    <style name="Theme.home_tutor" parent="Base.Theme.home_tutor" />
 
     <style name="custom_card_view_style" parent="Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/Custom_card_view</item>

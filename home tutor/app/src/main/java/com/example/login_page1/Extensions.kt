@@ -12,8 +12,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 const val MIN_USERNAME_LEN = 3
 const val MAX_USERNAME_LEN = 20
 const val USERNAME_ALLOWED_CHAR = "[a-zA-Z0-9_]+"
-const val PWD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$"
-
+//const val PWD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$"
+const val PWD_REGEX = "^\\d{6}$"
 
 fun Context.pr(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()

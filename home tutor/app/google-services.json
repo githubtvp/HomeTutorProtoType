@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "237841314995",
+    "project_id": "tutors-c7ea9",
+    "storage_bucket": "tutors-c7ea9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237841314995:android:90505a00c6035a062a6cc6",
+        "android_client_info": {
+          "package_name": "com.example.login_page1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLOBGDuv2nTl35FOsVeoH82hG4lg76yF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
