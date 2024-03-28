@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/hope">
 
     <!-- Title Banner -->
     <TextView
@@ -13,7 +14,6 @@
         android:textSize="30sp"
         android:textStyle="bold"
         android:textAlignment="center"
-        android:background="@color/mild_blue"
         android:padding="8dp"
         android:layout_marginBottom="32dp"/>
 

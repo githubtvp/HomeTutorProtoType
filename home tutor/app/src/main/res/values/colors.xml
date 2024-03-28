@@ -18,5 +18,7 @@
 
     <color name="mild_blue">#add8e6</color>
 
+    <color name="transparent">#00FFFFFF</color>
+
 
 </resources>
