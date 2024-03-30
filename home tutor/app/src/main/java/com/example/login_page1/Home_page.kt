@@ -50,31 +50,31 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
     }
 
     private fun initUI() {
-        binding.createProfile.setOnClickListener {
-            nextPage = nextPageCreateProfile
-            startNextPage()
-        }
-        binding.iconTvCreate.setOnClickListener {
-            nextPage = nextPageCreateProfile
-            startNextPage()
-        }
+//        binding.createProfile.setOnClickListener {
+//            nextPage = nextPageCreateProfile
+//            startNextPage()
+//        }
+//        binding.iconTvCreate.setOnClickListener {
+//            nextPage = nextPageCreateProfile
+//            startNextPage()
+//        }
 
         binding.editProfile.setOnClickListener {
             nextPage = nextPageEditProfile
             startNextPage()
         }
-        binding.iconTvEdit.setOnClickListener {
-            nextPage = nextPageEditProfile
-            startNextPage()
-        }
-        binding.stuDashboard.setOnClickListener {
-          //  nextPg = Intent(this, nextPage)
-            startNextPage()
-        }
-        binding.teachDashboard.setOnClickListener {
-          //  nextPg = Intent(this, nextPage)
-            startNextPage()
-        }
+//        binding.iconTvEdit.setOnClickListener {
+//            nextPage = nextPageEditProfile
+//            startNextPage()
+//        }
+//        binding.stuDashboard.setOnClickListener {
+//          //  nextPg = Intent(this, nextPage)
+//            startNextPage()
+//        }
+//        binding.teachDashboard.setOnClickListener {
+//          //  nextPg = Intent(this, nextPage)
+//            startNextPage()
+//        }
 
     }
 
