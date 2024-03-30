@@ -60,7 +60,7 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
 //        }
 
         binding.editProfile.setOnClickListener {
-            nextPage = nextPageEditProfile
+            nextPage = nextPageCreateProfile
             startNextPage()
         }
 //        binding.iconTvEdit.setOnClickListener {

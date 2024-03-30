@@ -30,17 +30,26 @@ class CommonProfile : AppCompatActivity() {
         }
        // val userTypeVal : Int = uType.toInt()
         setUpListenerWatchers()
+        Ininui()
+    }
+
+    private fun Ininui()
+    {
+        binding.profBack.setOnClickListener{
+            val intent = Intent(this, CreateProfile::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setUpListenerWatchers() {
         // Add text change listeners to all EditText fields
-        binding.editTxtName.addTextChangedListener(textWatcher)
-        binding.editTxtAge.addTextChangedListener(textWatcher)
-        binding.editTxtAdd.addTextChangedListener(textWatcher)
-        binding.editTxtCity.addTextChangedListener(textWatcher)
-        binding.editTxtEmail.addTextChangedListener(textWatcher)
+        binding.firstname.addTextChangedListener(textWatcher)
+        binding.lastname.addTextChangedListener(textWatcher)
+        binding.age.addTextChangedListener(textWatcher)
+        binding.city.addTextChangedListener(textWatcher)
+        binding.Address.addTextChangedListener(textWatcher)
         // Disable forward arrow button initially
-        binding.fwdArr.isEnabled = false
+        binding.btnNext.isEnabled = false
     }
 
 
@@ -58,19 +67,19 @@ class CommonProfile : AppCompatActivity() {
             // Validate all EditText fields
             val isValid = validateEditTexts()
             // Enable or disable the forward arrow button based on validation result
-            binding.fwdArr.isEnabled = isValid
+            binding.btnNext.isEnabled = isValid
             if (isValid) {
-                binding.fwdArr.setOnClickListener { onFwdArrClickNextPage() }
+                binding.btnNext.setOnClickListener { onFwdArrClickNextPage() }
             }
         }
     }
 
     private fun validateEditTexts(): Boolean {
-        val text1 = binding.editTxtName.text.toString().trim()
-        val text2 = binding.editTxtAge.text.toString().trim()
-        val text3 = binding.editTxtAdd.text.toString().trim()
-        val text4 = binding.editTxtCity.text.toString().trim()
-        val text5 = binding.editTxtEmail.text.toString().trim()
+        val text1 = binding.firstname.text.toString().trim()
+        val text2 = binding.lastname.text.toString().trim()
+        val text3 = binding.age.text.toString().trim()
+        val text4 = binding.city.text.toString().trim()
+        val text5 = binding.Address.text.toString().trim()
 
         // Perform validation for each EditText field
         val isValidText1 = text1.isNotEmpty() // Example validation logic
