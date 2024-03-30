@@ -62,4 +62,12 @@ dependencies {
     implementation ("com.google.firebase:firebase-firestore")
     // Declare the KTX module instead (which automatically has a dependency on the main module)
     implementation ("com.google.firebase:firebase-analytics-ktx")
+    implementation ("com.google.firebase:firebase-database:19.7.0")
+    implementation ("com.firebaseui:firebase-ui-database:8.0.2")
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation ("com.github.bumptech.glide:glide:4.14.2")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
 }
