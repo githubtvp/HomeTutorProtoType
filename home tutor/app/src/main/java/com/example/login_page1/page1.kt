@@ -25,7 +25,7 @@ class page1 : AppCompatActivity() {
     }
     fun OnClicktxtLogin() {
         // pr("succes")
-        val intent = Intent(this, signup::class.java)
+       // val intent = Intent(this, signup::class.java)
         startActivity(intent)
     }
     fun pr(msg : String)

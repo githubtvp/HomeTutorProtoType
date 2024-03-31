@@ -24,7 +24,8 @@ class signup : AppCompatActivity() {
         }
 
         binding.btnSignup.setOnClickListener{
-
+            val intent = Intent(this, Login_phno::class.java)
+            startActivity(intent)
         }
 
         binding.txtsignin.setOnClickListener{
