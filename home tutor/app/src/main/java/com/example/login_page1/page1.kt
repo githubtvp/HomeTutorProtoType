@@ -1,6 +1,9 @@
 package com.example.login_page1
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.Page1Binding
 import com.google.firebase.Firebase
@@ -13,6 +16,7 @@ class Page1 : AppCompatActivity() {
     private lateinit var binding:Page1Binding
     private var nextPageLogin: Class<*> = Login_page::class.java
     private var nextPageSignup: Class<*> = Signup::class.java
+    private var nextPageTest: Class<*> = FbCrud::class.java
 
     //private lateinit var auth : FirebaseAuth
     companion object{
@@ -25,11 +29,16 @@ class Page1 : AppCompatActivity() {
         FirebaseApp.initializeApp(this);
        // auth = FirebaseAuth.getInstance()
         auth = Firebase.auth
-        binding.signin.onClick(this@Page1, nextPageLogin)
+        binding.signin.onClick2(this@Page1, nextPageTest)
+     //   binding.signin.onClick(this@Page1, nextPageLogin)
         binding.signup.onClick(this@Page1, nextPageSignup)
     }
 
-//    companion object {
-//        val auth: Any
-//    }
+    fun View.onClick2(activity: Activity, destination: Class<*>) {
+        pr("here 1")
+        setOnClickListener {
+            val intent = Intent(activity, destination)
+            activity.startActivity(intent)
+        }
+    }
 }
