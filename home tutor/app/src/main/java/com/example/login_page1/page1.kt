@@ -29,8 +29,8 @@ class Page1 : AppCompatActivity() {
         FirebaseApp.initializeApp(this);
        // auth = FirebaseAuth.getInstance()
         auth = Firebase.auth
-        binding.signin.onClick2(this@Page1, nextPageTest)
-     //   binding.signin.onClick(this@Page1, nextPageLogin)
+    //    binding.signin.onClick2(this@Page1, nextPageTest)
+        binding.signin.onClick(this@Page1, nextPageLogin)
         binding.signup.onClick(this@Page1, nextPageSignup)
     }
 
