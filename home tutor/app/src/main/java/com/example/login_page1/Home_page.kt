@@ -144,4 +144,3 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
     }
 
 }
-

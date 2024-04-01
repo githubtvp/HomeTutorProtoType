@@ -53,6 +53,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
 //added by tvp
     testImplementation("junit:junit:4.13.2")
