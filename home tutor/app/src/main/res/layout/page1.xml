@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".page1">
+    tools:context=".Page1">
 
     <ImageView
         android:id="@+id/imageView"
@@ -58,7 +58,7 @@
         app:layout_constraintVertical_bias="0.653" />
 
     <Button
-        android:id="@+id/sign"
+        android:id="@+id/signin"
         android:layout_width="140dp"
         android:layout_height="52dp"
         android:text="SIGN IN"
@@ -69,14 +69,14 @@
         app:layout_constraintVertical_bias="0.855" />
 
     <TextView
-        android:id="@+id/page2"
+        android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:text="Not Resgistered Yet? Clickhere"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign"
+        app:layout_constraintTop_toBottomOf="@+id/signin"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView

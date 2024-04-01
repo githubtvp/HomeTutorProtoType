@@ -15,7 +15,7 @@
         app:layout_constraintGuide_percent="0.35" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/Fab_back"
+        android:id="@+id/prevPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Fab_back"
+        app:layout_constraintTop_toBottomOf="@+id/prevPage"
         app:layout_constraintVertical_bias="0.508" />
 
     <com.google.android.material.card.MaterialCardView
@@ -68,7 +68,7 @@
                 android:drawablePadding="8dp"
                 android:drawableTint="@color/app_theme"
                 android:ems="10"
-                android:hint="Email or Username"
+                android:hint="EmailId"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="@color/black"
@@ -78,7 +78,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/Password"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="32dp"
@@ -108,10 +108,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.929"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Password" />
+                app:layout_constraintTop_toBottomOf="@+id/password" />
 
             <Button
-                android:id="@+id/btn_signin"
+                android:id="@+id/btnSignin"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
@@ -122,7 +122,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Password" />
+                app:layout_constraintTop_toBottomOf="@+id/password" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -141,7 +141,7 @@
                     android:text="Don't have an account?" />
 
                 <TextView
-                    android:id="@+id/tv_signup"
+                    android:id="@+id/signup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"

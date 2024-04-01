@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_theme"
-    tools:context=".signup">
+    tools:context=".Signup">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.25"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/Fab_back"
+        android:id="@+id/prevPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Fab_back"
+        app:layout_constraintTop_toBottomOf="@+id/prevPage"
         app:layout_constraintVertical_bias="0.508" />
 
     <com.google.android.material.card.MaterialCardView
@@ -58,7 +58,7 @@
             android:backgroundTint="@color/app_theme_light">
 
             <EditText
-                android:id="@+id/reenter_Password"
+                android:id="@+id/reenterPwd"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="32dp"
@@ -75,10 +75,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Password" />
+                app:layout_constraintTop_toBottomOf="@+id/password" />
 
             <EditText
-                android:id="@+id/Username"
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="32dp"
@@ -118,7 +118,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/Password"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="32dp"
@@ -138,7 +138,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/email" />
 
             <Button
-                android:id="@+id/btn_signup"
+                android:id="@+id/btnSignup"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
@@ -150,7 +150,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Password"
+                app:layout_constraintTop_toBottomOf="@+id/password"
                 app:layout_constraintVertical_bias="0.667" />
 
             <LinearLayout
@@ -170,9 +170,9 @@
                     android:text="Already have an account?" />
 
                 <TextView
-                    android:id="@+id/txtsignin"
+                    android:id="@+id/txtSignin"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="0"
                     android:text="Sign in."
                     android:textColor="@color/app_theme"

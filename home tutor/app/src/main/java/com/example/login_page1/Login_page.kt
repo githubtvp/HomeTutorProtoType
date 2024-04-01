@@ -1,12 +1,14 @@
 package com.example.login_page1
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
+import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivityLoginPageBinding
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthResult
+
 
 class Login_page : AppCompatActivity() {
 
@@ -14,6 +16,9 @@ class Login_page : AppCompatActivity() {
     private lateinit var nextPage: Class<*>
     private var nextPageSuc: Class<*> = Home_page::class.java
     private var nextPageFail: Class<*> = Login_page::class.java
+    private var nextPageSignup: Class<*> = Signup::class.java
+    private var prevPagePage1: Class<*> = Page1::class.java
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginPageBinding.inflate(layoutInflater)
@@ -28,60 +33,123 @@ class Login_page : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 // Do something before text changed
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 // Do something when text is changing
-                val usernameInput = s.toString()
-                if (!usernameInput.isEmpty()) {
-                    binding.Password.isEnabled = true
-                } else {
-                    binding.Password.isEnabled = false
-                    binding.btnSignin.isEnabled = false
-                }
             }
 
             override fun afterTextChanged(s: Editable) {
                 // Do something after text changed
+                val emailInput = s.toString()
+                if (emailInput.isNotEmpty()) {
+                    binding.password.isEnabled = true
+                } else {
+                    binding.password.isEnabled = false
+                    binding.btnSignin.isEnabled = false
+                }
             }
         })
 
-        binding.Password.addTextChangedListener(object : TextWatcher {
+        binding.password.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 // Do something before text changed
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 // Do something when text is changing
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                // Do something after text changed
                 val passwordInput = s.toString()
-                if (!passwordInput.isEmpty() && !binding.email.text.toString().isEmpty()) {
+                if (passwordInput.isNotEmpty() && binding.email.text.toString().isNotEmpty()) {
                     binding.btnSignin.isEnabled = true
                     binding.btnSignin.setOnClickListener { onClickBtnLogIn() }
                 } else {
                     binding.btnSignin.isEnabled = false
                 }
-            }
 
-            override fun afterTextChanged(s: Editable) {
-                // Do something after text changed
             }
         })
 
-        binding.FabBack.setOnClickListener {
-            val intent = Intent(this, page1::class.java)
-            startActivity(intent)
-        }
-
-        binding.tvSignup.setOnClickListener {
-            val intent = Intent(this, signup::class.java)
-            startActivity(intent)
-        }
+        binding.prevPage.onClick(this@Login_page, prevPagePage1)
+        binding.signup.onClick(this@Login_page, nextPageSignup)
 
         binding.forgotPassword.setOnClickListener {
 
         }
+        setFocusLost()
     }
 
-    fun verified(uName: String, pwd: String): Boolean {
+    private fun setFocusLost() {
+        binding.btnSignin.isEnabled = false
+        // Assuming editTexts is a list of EditText instances
+        val messages = listOf(
+            "Invalid UserName",
+            "Invalid Password"
+            // Add more messages for each EditText as needed
+        )
+        // Initialize the list of EditTexts
+        val editTexts =
+            listOf(binding.email, binding.password)
+        for ((index, editText) in editTexts.withIndex()) {
+            val message = messages.getOrNull(index) ?: "Default message"
+            editText.setOnFocusChangeListener { view, hasFocus ->
+                if (!hasFocus) {
+                    // This block will be executed when the EditText loses focus
+                    val text = editText.text.toString()
+                    // Perform validation based on the type of EditText
+                    val isValid = when (editText) {
+                        // Add cases for each EditText requiring different validation
+                        // Example: Username validation
+                        binding.email -> isValidEmail(text)
+                        binding.password -> isValidPassword(text)
+                        // Add more cases as needed
+                        else -> true // Default to true if no specific validation is needed
+                    }
+                    // Perform action based on validation result
+                    if (!isValid) {
+                        // Show a toast message or perform any other action to notify the user
+                        pr(message)
+                      //  editText.requestFocus()
+                    }
+                    binding.btnSignin.isEnabled = isValid
+                    if (isValid) {
+                        binding.btnSignin.setOnClickListener { onClickBtnLogIn() }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun isValidUsername(username: String): Boolean {
+        val userNameChk = chkUserName(username)
+        if (!userNameChk) {
+            pr("Invalid Username entry!")
+            binding.email.requestFocus() // Keep focus on this EditText
+        }
+        return userNameChk
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        val pattern = Patterns.EMAIL_ADDRESS
+        val emailChk = pattern.matcher(email).matches()
+        if (!emailChk) {
+            pr("Invalid Email!")
+            binding.email.requestFocus() // Keep focus on this EditText
+        }
+        return emailChk
+    }
+
+    private fun isValidPassword(pwd: String): Boolean {
+        val pwdChk = chkPassword(pwd)
+        if (!pwdChk) {
+            pr("Invalid Password entry!")
+            binding.password.requestFocus() // Keep focus on this EditText
+        }
+        return pwdChk
+    }
+
+    private fun verified(uName: String, pwd: String): Boolean {
         val userName = "t"
         val passwd = "t"
         return (userName == uName && passwd == pwd)
@@ -89,26 +157,37 @@ class Login_page : AppCompatActivity() {
 
     //fun onClickBtnLogIn(btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
     fun onClickBtnLogIn() //btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
-    {   // pr("onClickBtnLogIn : here 1")
-        var nextPg = Intent(this, Home_page::class.java)
-        if (binding.email.text.toString().isNotBlank() && binding.Password.text.toString()
-                .isNotBlank()
-        ) {
-            if (verified(binding.email.text.toString(), binding.Password.text.toString())) {
-              //  pr("Log in Success!")
-                nextPage = nextPageSuc //(this, Home_page::class.java)
-               // binding.btnSignin.isEnabled = false
-            }
-            else
-            {//  pr("Log in Failure!")
-                nextPage = nextPageFail
-            }
-            nextPg = Intent(this, nextPage)
-            binding.btnSignin.isEnabled = false
-        }
-        startActivity(nextPg)
-    }
-    fun pr(msg: String) {
-        Toast.makeText(this, "Login Page : " + msg, Toast.LENGTH_LONG).show()
+    {
+      //  pr("here 1111 ")
+        val email = binding.email.text.toString()
+        val pwd = binding.password.text.toString()
+        Page1.auth.signInWithEmailAndPassword(email, pwd)
+            .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
+                // on below line we are checking if the task is success or not.
+                if (task.isSuccessful) {
+                    pr("Login Successful..")
+                  //  nextPage = nextPageSuc
+                    nextPg(nextPageSuc)
+                    finish()
+                } else {
+                    pr("Please enter valid user credentials..")
+                   // nextPage = nextPageFail
+                    nextPg(nextPageFail)
+                    finish()
+                }
+            })
+        binding.btnSignin.isEnabled = false
     }
 }
+
+/*
+ Page1.auth.createUserWithEmailAndPassword(email,pwd).addOnCompleteListener {
+            if(it.isSuccessful)
+            {
+                pr("User created successfully")
+                //binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
+                nextPg(nextPageCreateProfile)
+                finish()
+            }
+        }.addOnFailureListener { pr(it.localizedMessage) }
+ */

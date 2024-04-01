@@ -48,6 +48,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.activity:activity:1.8.0")
     implementation("androidx.cardview:cardview:1.0.0")
+<<<<<<< HEAD
     implementation ("com.hbb20:ccp:2.5.0")
     implementation("com.google.firebase:firebase-firestore:24.11.0")
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
@@ -55,8 +56,28 @@ dependencies {
     implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
+=======
+    implementation("com.google.firebase:firebase-auth:22.3.1")
+>>>>>>> c6154a0d1402a8e05ffd9d95259ef4379db03851
 //added by tvp
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    // Declare the dependencies for the desired Firebase products without specifying versions
+    // For example, declare the dependencies for Firebase Authentication and Cloud Firestore
+    implementation ("com.google.firebase:firebase-auth")
+    implementation ("com.google.firebase:firebase-firestore")
+    // Declare the KTX module instead (which automatically has a dependency on the main module)
+    implementation ("com.google.firebase:firebase-analytics-ktx")
+    implementation ("com.google.firebase:firebase-database:19.7.0")
+    implementation ("com.firebaseui:firebase-ui-database:8.0.2")
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation ("com.github.bumptech.glide:glide:4.14.2")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
 }

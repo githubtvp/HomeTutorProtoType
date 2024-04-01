@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/hope">
+
+    <!-- Title Banner -->
+    <TextView
+        android:id="@+id/textViewTitleBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Categories"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:padding="8dp"
+        android:layout_marginBottom="32dp"/>
+
+    <!-- Subjects Section -->
+    <TextView
+        android:id="@+id/textViewSubjects"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Subjects"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@id/textViewTitleBanner"/>
+
+    <LinearLayout
+        android:id="@+id/subjectsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/textViewSubjects"
+        android:layout_marginTop="8dp">
+
+        <!-- First column of subjects -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkBoxMath"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Math"/>
+
+            <CheckBox
+                android:id="@+id/checkBoxPhysics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Physics"/>
+
+            <CheckBox
+                android:id="@+id/checkBoxChemistry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chemistry"/>
+
+        </LinearLayout>
+
+        <!-- Second column of subjects -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="32dp">
+
+            <CheckBox
+                android:id="@+id/checkBoxBiology"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Biology"/>
+            <CheckBox
+                android:id="@+id/checkBoxIT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IT"/>
+
+            <!-- Add more CheckBoxes for other subjects -->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Classes Section -->
+    <TextView
+        android:id="@+id/textViewClasses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Classes"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@id/subjectsContainer"
+        android:layout_marginTop="32dp"/>
+
+    <LinearLayout
+        android:id="@+id/classesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/textViewClasses"
+        android:layout_marginTop="8dp">
+
+        <!-- First column of classes -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/checkBox5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Class 5"/>
+
+            <CheckBox
+                android:id="@+id/checkBox6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Class 6"/>
+
+            <CheckBox
+                android:id="@+id/checkBox7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Class 7"/>
+
+        </LinearLayout>
+
+        <!-- Second column of classes -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="32dp">
+
+            <CheckBox
+                android:id="@+id/checkBox8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Class 8"/>
+            <CheckBox
+                android:id="@+id/checkBox9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Class 9"/>
+
+            <!-- Add more CheckBoxes for other classes -->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Next Button -->
+    <Button
+        android:id="@+id/buttonNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:layout_below="@id/classesContainer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"/>
+
+</RelativeLayout>

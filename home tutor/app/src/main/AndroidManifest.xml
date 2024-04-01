@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -10,9 +12,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Login_page1"
+        android:theme="@style/Theme.home_tutor"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".SearchUser_Activity"
             android:exported="false" />
         <activity
@@ -34,6 +37,14 @@
             </intent-filter>
         </activity>
         <activity
+=======
+            android:name=".FbCrud"
+            android:exported="false" />
+        <activity
+            android:name=".Category"
+            android:exported="false" />
+        <activity
+>>>>>>> c6154a0d1402a8e05ffd9d95259ef4379db03851
             android:name=".EditProfile"
             android:exported="false" />
         <activity
@@ -55,11 +66,22 @@
             android:name=".Login_page"
             android:exported="false" />
         <activity
-            android:name=".signup"
+            android:name=".Signup"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
             android:name=".page1"
             android:exported="false" />
+=======
+            android:name=".Page1"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+>>>>>>> c6154a0d1402a8e05ffd9d95259ef4379db03851
     </application>
 
 </manifest>
