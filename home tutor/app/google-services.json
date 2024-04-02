@@ -1,23 +1,14 @@
 {
   "project_info": {
-<<<<<<< HEAD
-    "project_number": "527983763984",
-    "project_id": "home-tutor-backend",
-    "storage_bucket": "home-tutor-backend.appspot.com"
-=======
     "project_number": "237841314995",
+    "firebase_url": "https://tutors-c7ea9-default-rtdb.firebaseio.com",
     "project_id": "tutors-c7ea9",
     "storage_bucket": "tutors-c7ea9.appspot.com"
->>>>>>> c6154a0d1402a8e05ffd9d95259ef4379db03851
   },
   "client": [
     {
       "client_info": {
-<<<<<<< HEAD
-        "mobilesdk_app_id": "1:527983763984:android:02c9f0aeddbbbca88ba095",
-=======
         "mobilesdk_app_id": "1:237841314995:android:90505a00c6035a062a6cc6",
->>>>>>> c6154a0d1402a8e05ffd9d95259ef4379db03851
         "android_client_info": {
           "package_name": "com.example.login_page1"
         }
@@ -25,11 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-<<<<<<< HEAD
-          "current_key": "AIzaSyBxSYLRCiagwztZjXbjrS-o_lGEwvYwNNU"
-=======
           "current_key": "AIzaSyDLOBGDuv2nTl35FOsVeoH82hG4lg76yF8"
->>>>>>> c6154a0d1402a8e05ffd9d95259ef4379db03851
         }
       ],
       "services": {

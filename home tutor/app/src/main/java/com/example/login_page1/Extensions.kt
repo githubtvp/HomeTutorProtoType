@@ -45,3 +45,4 @@ fun chkPassword(pwd: String): Boolean {
         PWD_REGEX //  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$"
     return (pwd.matches(Regex(passwordRegex)))
 }
+

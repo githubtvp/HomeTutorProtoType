@@ -23,6 +23,10 @@ public class Login_phno extends AppCompatActivity {
     Button sendOtpbtn;
     ProgressBar progressBar;
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
+
+    private Class<?> nextPageLoginOTP = loginotp.class;
+    private Class<?> nextPage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,10 @@ public class Login_phno extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+
+            //get the userid, passwd and email from the previous extras sent
+
+
         });
 
         countryCodePicker = findViewById(R.id.login_countrycode);
@@ -47,6 +55,8 @@ public class Login_phno extends AppCompatActivity {
                 phoneInput.setError("phone is invalid");
                 return;
             }
+
+            //send to next page userid, pwd, email, phoneno
             Intent intent=new Intent(Login_phno.this, loginotp.class);
             intent.putExtra("phone",countryCodePicker.getFullNumberWithPlus());
             startActivity(intent);

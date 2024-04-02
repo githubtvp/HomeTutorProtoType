@@ -17,7 +17,7 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
     private lateinit var binding: ActivityHomePageBinding
     private lateinit var nextPage: Class<*>
     private var nextPageCreateProfile: Class<*> = CreateProfile::class.java
-    private var nextPageEditProfile: Class<*> = EditProfile::class.java
+    private var nextPageCategory: Class<*> = Category::class.java
     private var nextPageTest: Class<*> = FbCrud::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,44 +51,25 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
     }
 
     private fun initUI() {
-<<<<<<< HEAD
-        binding.createProfile.setOnClickListener {
-          //  nextPage = nextPageCreateProfile
-            nextPage = nextPageTest
+
+        binding.searchActivity.setOnClickListener {
+            nextPage = nextPageCategory
             startNextPage()
         }
-        binding.iconTvCreate.setOnClickListener {
+
+        binding.search.setOnClickListener {
+            nextPage = nextPageCategory
+            startNextPage()
+    }
+
+        binding.profile.setOnClickListener {
             nextPage = nextPageCreateProfile
             startNextPage()
         }
-=======
-//        binding.createProfile.setOnClickListener {
-//            nextPage = nextPageCreateProfile
-//            startNextPage()
-//        }
-//        binding.iconTvCreate.setOnClickListener {
-//            nextPage = nextPageCreateProfile
-//            startNextPage()
-//        }
->>>>>>> f0b6897b769df43382bf98c400c99349a5b75a8b
-
         binding.editProfile.setOnClickListener {
             nextPage = nextPageCreateProfile
             startNextPage()
         }
-//        binding.iconTvEdit.setOnClickListener {
-//            nextPage = nextPageEditProfile
-//            startNextPage()
-//        }
-//        binding.stuDashboard.setOnClickListener {
-//          //  nextPg = Intent(this, nextPage)
-//            startNextPage()
-//        }
-//        binding.teachDashboard.setOnClickListener {
-//          //  nextPg = Intent(this, nextPage)
-//            startNextPage()
-//        }
-
     }
 
     private fun startNextPage()

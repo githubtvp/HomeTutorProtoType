@@ -1,5 +1,7 @@
 package com.example.login_page1;
 
+import static com.example.login_page1.ExtensionsKt.nextPg;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +43,8 @@ public class loginotp extends AppCompatActivity {
     TextView resendOtptextview;
 
     FirebaseAuth mauth=FirebaseAuth.getInstance();
+    private Class<?> nextPageCreateProfile = CreateProfile.class;
+    private Class<?> nextPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,8 @@ public class loginotp extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+            //  gets the email, userid and pwd, phoneno
+
         });
         otpinput=findViewById(R.id.login_otp);
         Nextbtn=findViewById(R.id.verfiy);
@@ -137,9 +143,14 @@ public class loginotp extends AppCompatActivity {
                 setInprogress(false);
                 if(task.isSuccessful())
                 {
-                    Intent intent =new Intent(loginotp.this,Home_page.class);
-                    intent.putExtra("phone",phoneNumber);
-                    startActivity(intent);
+//                    Intent intent =new Intent(loginotp.this,Home_page.class);
+//                    intent.putExtra("phone",phoneNumber);
+//                    startActivity(intent);
+                    //otp is verified
+                    //create user
+
+                    nextPage = nextPageCreateProfile;
+                    startNextPage();
                 }else {
                     AndroidUtil.showToast(getApplicationContext(),"OTP verification failed");
                 }
@@ -166,5 +177,29 @@ public class loginotp extends AppCompatActivity {
             }
         },0,1000);
     }
+    private void startNextPage() {
+        Intent nextPg = new Intent(this, nextPage);
+        startActivity(nextPg);
+    }
+
+
+
+//    private fun createNewUser() {
+//        val username = binding.username.text.toString()
+//        val email = binding.email.text.toString()
+//        val pwd = binding.password.text.toString()
+//        Page1.auth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//                pr("New User created successfully")
+//                //binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
+//
+//                nextPg(nextPageCreateProfile)
+//                finish()
+//            } else {
+//                pr("New User creation failed XXX")
+//            }
+//        }
+//    }
+
 
 }

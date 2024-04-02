@@ -9,6 +9,7 @@ class Signup : AppCompatActivity() {
     private lateinit var binding: ActivitySignBinding
     private var nextPageCreateProfile: Class<*> = CreateProfile::class.java
     private var nextPageLoginpage: Class<*> = Login_page::class.java
+    private var nextPageLoginPhNo: Class<*> = Login_phno::class.java
     private var prevPagePage1: Class<*> = Page1::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,28 +68,27 @@ class Signup : AppCompatActivity() {
                     binding.btnSignup.isEnabled = isValid
                     if (isValid) {
                         // binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
-                        binding.btnSignup.setOnClickListener { createNewUser() }
-                        // binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
+                       // binding.btnSignup.setOnClickListener { createNewUser() }
+
+                        //Pass the email, userid and pwd
+                         binding.btnSignup.onClick(this@Signup, nextPageLoginPhNo)
                     }
                 }
             }
         }
+        binding.txtSignin.onClick(this@Signup, nextPageLoginpage);
 
-<<<<<<< HEAD
-        binding.btnSignup.setOnClickListener{
-            val intent = Intent(this, Login_phno::class.java)
-            startActivity(intent)
-        }
+//        binding.btnSignup.setOnClickListener{
+//            val intent = Intent(this, Login_phno::class.java)
+//            startActivity(intent)
+//        }
 
-        binding.txtsignin.setOnClickListener{
-            val intent = Intent(this, Login_page::class.java)
-            startActivity(intent)
-        }
-
-
-=======
->>>>>>> c6154a0d1402a8e05ffd9d95259ef4379db03851
+//        binding.txtsignin.setOnClickListener{
+//            val intent = Intent(this, Login_page::class.java)
+//            startActivity(intent)
+//        }
     }
+
 
     private fun createNewUser() {
         val username = binding.username.text.toString()
