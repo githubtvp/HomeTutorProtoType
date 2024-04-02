@@ -48,7 +48,17 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.activity:activity:1.8.0")
     implementation("androidx.cardview:cardview:1.0.0")
+<<<<<<< HEAD
+    implementation ("com.hbb20:ccp:2.5.0")
+    implementation("com.google.firebase:firebase-firestore:24.11.0")
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+
+=======
     implementation("com.google.firebase:firebase-auth:22.3.1")
+>>>>>>> c6154a0d1402a8e05ffd9d95259ef4379db03851
 //added by tvp
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

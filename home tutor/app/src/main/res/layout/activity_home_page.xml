@@ -54,6 +54,7 @@
 
         <!-- Fragment Container -->
         <FrameLayout
+
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -66,6 +67,7 @@
             android:layout_marginTop="571dp"
             android:layout_marginEnd="0dp"
             android:gravity="center_horizontal" />
+
 
 
         <!-- Bottom App Bar -->
@@ -97,42 +99,15 @@
             android:layout_height="600dp">
 
             <TextView
-                android:id="@+id/tv_tutordashboard"
-                android:layout_width="184dp"
-                android:layout_height="26dp"
-                android:layout_marginTop="116dp"
-                android:layout_marginBottom="24dp"
-                android:text="TEACHEAR DASHBOARD"
+                android:id="@+id/icon_tv_Profile"
+                android:layout_width="87dp"
+                android:layout_height="28dp"
+                android:layout_marginBottom="148dp"
+                android:text="PROFIE"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.929"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.058" />
-
-            <TextView
-                android:id="@+id/icon_tv_dash"
-                android:layout_width="184dp"
-                android:layout_height="26dp"
-                android:layout_marginTop="116dp"
-                android:text="STUDENT DASHBOARD"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.18"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.943" />
-
-            <TextView
-                android:id="@+id/icon_tv_create"
-                android:layout_width="127dp"
-                android:layout_height="27dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="152dp"
-                android:text="CREATE PROFIE"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.186"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintHorizontal_bias="0.299"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/edit_profile"
@@ -140,59 +115,81 @@
                 android:layout_height="54dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.794"
+                app:layout_constraintHorizontal_bias="0.271"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.65"
+                app:layout_constraintVertical_bias="0.677"
                 app:srcCompat="@drawable/baseline_edit_note_24" />
 
+            <ImageView
+                android:id="@+id/searchActivity"
+                android:layout_width="52dp"
+                android:layout_height="59dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.724"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.683"
+                app:srcCompat="@drawable/baseline_search_24" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="51dp"
+                android:layout_height="49dp"
+                android:layout_marginBottom="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.297"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/baseline_speaker_notes_24" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="61dp"
+                android:layout_height="43dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.742"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.881"
+                app:srcCompat="@drawable/baseline_notifications_24" />
+
             <TextView
-                android:id="@+id/icon_tv_edit"
+                android:id="@+id/textView3"
+                android:layout_width="95dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="36dp"
+                android:text="FEEDBACK"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.306"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="65dp"
+                android:layout_height="23dp"
+                android:layout_marginBottom="148dp"
+                android:text="SEARCH"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.745"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="160dp"
-                android:text="EDIT PROFIE"
+                android:text="NOTIFICATION"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.795"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <ImageView
-                android:id="@+id/create_profile"
-                android:layout_width="73dp"
-                android:layout_height="54dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.233"
+                app:layout_constraintHorizontal_bias="0.745"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.65"
-                app:srcCompat="@drawable/baseline_add_24" />
+                app:layout_constraintVertical_bias="0.938" />
 
-            <ImageView
-                android:id="@+id/stu_dashboard"
-                android:layout_width="50dp"
-                android:layout_height="56dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.257"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.867"
-                app:srcCompat="@drawable/baseline_dashboard_24" />
-
-            <ImageView
-                android:id="@+id/teach_dashboard"
-                android:layout_width="64dp"
-                android:layout_height="50dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.76"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.858"
-                app:srcCompat="@drawable/baseline_dashboard_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </RelativeLayout>

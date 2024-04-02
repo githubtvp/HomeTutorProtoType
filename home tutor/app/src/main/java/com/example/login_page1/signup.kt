@@ -74,6 +74,20 @@ class Signup : AppCompatActivity() {
             }
         }
 
+<<<<<<< HEAD
+        binding.btnSignup.setOnClickListener{
+            val intent = Intent(this, Login_phno::class.java)
+            startActivity(intent)
+        }
+
+        binding.txtsignin.setOnClickListener{
+            val intent = Intent(this, Login_page::class.java)
+            startActivity(intent)
+        }
+
+
+=======
+>>>>>>> c6154a0d1402a8e05ffd9d95259ef4379db03851
     }
 
     private fun createNewUser() {

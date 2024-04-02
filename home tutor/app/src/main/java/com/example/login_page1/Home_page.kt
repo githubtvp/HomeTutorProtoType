@@ -51,6 +51,7 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
     }
 
     private fun initUI() {
+<<<<<<< HEAD
         binding.createProfile.setOnClickListener {
           //  nextPage = nextPageCreateProfile
             nextPage = nextPageTest
@@ -60,23 +61,33 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
             nextPage = nextPageCreateProfile
             startNextPage()
         }
+=======
+//        binding.createProfile.setOnClickListener {
+//            nextPage = nextPageCreateProfile
+//            startNextPage()
+//        }
+//        binding.iconTvCreate.setOnClickListener {
+//            nextPage = nextPageCreateProfile
+//            startNextPage()
+//        }
+>>>>>>> f0b6897b769df43382bf98c400c99349a5b75a8b
 
         binding.editProfile.setOnClickListener {
-            nextPage = nextPageEditProfile
+            nextPage = nextPageCreateProfile
             startNextPage()
         }
-        binding.iconTvEdit.setOnClickListener {
-            nextPage = nextPageEditProfile
-            startNextPage()
-        }
-        binding.stuDashboard.setOnClickListener {
-          //  nextPg = Intent(this, nextPage)
-            startNextPage()
-        }
-        binding.teachDashboard.setOnClickListener {
-          //  nextPg = Intent(this, nextPage)
-            startNextPage()
-        }
+//        binding.iconTvEdit.setOnClickListener {
+//            nextPage = nextPageEditProfile
+//            startNextPage()
+//        }
+//        binding.stuDashboard.setOnClickListener {
+//          //  nextPg = Intent(this, nextPage)
+//            startNextPage()
+//        }
+//        binding.teachDashboard.setOnClickListener {
+//          //  nextPg = Intent(this, nextPage)
+//            startNextPage()
+//        }
 
     }
 
@@ -146,4 +157,3 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
     }
 
 }
-

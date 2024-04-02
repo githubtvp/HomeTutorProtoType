@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".loginotp"
+    android:gravity="center"
+    android:layout_margin="20dp"
+    android:weightSum="80"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/baseline_person_pin_24"
+        app:tint="@color/blue"
+        android:layout_weight="20"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:letterSpacing="0.08"
+        android:text="Enter OTP sent to your number"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:layout_weight="5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="5">
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:hint="OTP"
+            android:id="@+id/login_otp"
+            android:textStyle="bold"
+            android:inputType="number"
+            android:maxLength="6"
+            android:textColor="@color/black"
+            android:layout_margin="10dp"
+            android:background="@color/edit_text_background"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_weight="10"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="verify"
+            android:id="@+id/verfiy"
+            android:backgroundTint="@color/blue"/>
+        <ProgressBar
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/blue"
+            android:layout_gravity="center"
+            android:id="@id/login_pcbar">
+
+        </ProgressBar>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/resend_otp_tv"
+        android:gravity="center"
+        android:layout_weight="10"
+        android:text="Resend OTP in 30 sec"/>
+
+</LinearLayout>

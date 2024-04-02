@@ -15,12 +15,36 @@
         android:theme="@style/Theme.home_tutor"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
+            android:name=".SearchUser_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".homepage2"
+            android:exported="false" />
+        <activity
+            android:name=".loginotp"
+            android:exported="false" />
+        <activity
+            android:name=".Login_phno"
+            android:exported="false" />
+        <activity
+            android:name=".splashactivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+=======
             android:name=".FbCrud"
             android:exported="false" />
         <activity
             android:name=".Category"
             android:exported="false" />
         <activity
+>>>>>>> c6154a0d1402a8e05ffd9d95259ef4379db03851
             android:name=".EditProfile"
             android:exported="false" />
         <activity
@@ -45,6 +69,10 @@
             android:name=".Signup"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
+            android:name=".page1"
+            android:exported="false" />
+=======
             android:name=".Page1"
             android:exported="true">
             <intent-filter>
@@ -53,6 +81,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+>>>>>>> c6154a0d1402a8e05ffd9d95259ef4379db03851
     </application>
 
 </manifest>

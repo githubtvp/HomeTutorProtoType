@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login_phno"
+    android:gravity="center"
+    android:layout_margin="20dp"
+    android:weightSum="80"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/baseline_phone_android_24"
+        app:tint="@color/blue"
+        android:layout_weight="20"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:letterSpacing="0.08"
+        android:text="Enter mobile number"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:layout_weight="5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="5">
+
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/login_countrycode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ccp_showFlag="false"
+            android:background="@color/white"
+            app:ccpDialog_background="@color/white"
+            app:ccp_showNameCode="false"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_mobilenumber"
+        android:padding="10dp"
+        android:hint="mobile"
+        android:textStyle="bold"
+        android:inputType="phone"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"
+        android:background="@color/edit_text_background"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_weight="20"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send OTP"
+            android:id="@+id/login_sendotp"
+            android:backgroundTint="@color/blue"/>
+        <ProgressBar
+            android:layout_width="32dp"
+            android:id="@+id/login_pcbar"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/blue"
+            android:layout_gravity="center">
+
+        </ProgressBar>
+    </LinearLayout>
+
+</LinearLayout>
