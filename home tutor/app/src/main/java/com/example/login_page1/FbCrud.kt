@@ -38,3 +38,29 @@ class FbCrud : AppCompatActivity() {
         ua.stopListening()
     }
 }
+/*
+val database = FirebaseDatabase.getInstance()
+val usersRef = database.getReference("users")
+
+
+// Read data from the "users" collection
+usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+    override fun onDataChange(dataSnapshot: DataSnapshot) {
+        for (snapshot in dataSnapshot.children) {
+            val user = snapshot.getValue(User::class.java)
+            // Handle the retrieved user data
+        }
+    }
+
+    override fun onCancelled(databaseError: DatabaseError) {
+        // Handle error
+    }
+})
+
+// Write data to the "users" collection
+val newUserRef = usersRef.push()
+val newUser = User("New User", 20)
+newUserRef.setValue(newUser)
+
+
+ */
