@@ -34,13 +34,13 @@ public class UserAdapter extends FirebaseRecyclerAdapter<UserModel, UserAdapter.
     @NonNull
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.name_item, parent,false);
+       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_rv_itemholder, parent,false);
         return new myViewHolder(view);
     }
 
     class myViewHolder extends RecyclerView.ViewHolder{
         CircleImageView img;
-        TextView userid, email, imgUrl, password;
+        TextView userid, email, password;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);

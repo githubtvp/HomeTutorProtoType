@@ -18,6 +18,7 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
     private lateinit var nextPage: Class<*>
     private var nextPageCreateProfile: Class<*> = CreateProfile::class.java
     private var nextPageEditProfile: Class<*> = EditProfile::class.java
+    private var nextPageTest: Class<*> = FbCrud::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +52,8 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
 
     private fun initUI() {
         binding.createProfile.setOnClickListener {
-            nextPage = nextPageCreateProfile
+          //  nextPage = nextPageCreateProfile
+            nextPage = nextPageTest
             startNextPage()
         }
         binding.iconTvCreate.setOnClickListener {

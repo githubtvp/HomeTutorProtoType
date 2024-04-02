@@ -16,7 +16,6 @@ class Page1 : AppCompatActivity() {
     private lateinit var binding:Page1Binding
     private var nextPageLogin: Class<*> = Login_page::class.java
     private var nextPageSignup: Class<*> = Signup::class.java
-    private var nextPageTest: Class<*> = FbCrud::class.java
 
     //private lateinit var auth : FirebaseAuth
     companion object{
@@ -35,7 +34,6 @@ class Page1 : AppCompatActivity() {
     }
 
     fun View.onClick2(activity: Activity, destination: Class<*>) {
-        pr("here 1")
         setOnClickListener {
             val intent = Intent(activity, destination)
             activity.startActivity(intent)
