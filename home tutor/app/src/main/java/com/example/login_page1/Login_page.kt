@@ -161,6 +161,7 @@ class Login_page : AppCompatActivity() {
       //  pr("here 1111 ")
         val email = binding.email.text.toString()
         val pwd = binding.password.text.toString()
+
         Page1.auth.signInWithEmailAndPassword(email, pwd)
             .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
                 // on below line we are checking if the task is success or not.
