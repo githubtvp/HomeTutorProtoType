@@ -1,7 +1,5 @@
 package com.example.login_page1;
 
-import static com.example.login_page1.ExtensionsKt.nextPg;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,20 +29,23 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-public class loginotp extends AppCompatActivity {
+public class Loginotp extends AppCompatActivity {
 
-    String phoneNumber;
+    String phoneNo;
     Long timeoutseconnds=60L;
     String verficationCode;
     PhoneAuthProvider.ForceResendingToken ResendingToken;
     EditText otpinput;
-    Button Nextbtn;
+    Button verifyBtn;
     ProgressBar progressBar;
     TextView resendOtptextview;
 
     FirebaseAuth mauth=FirebaseAuth.getInstance();
     private Class<?> nextPageCreateProfile = CreateProfile.class;
+
+    private Class<?> prevPage = login_phno.class;
     private Class<?> nextPage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,35 +56,42 @@ public class loginotp extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-            //  gets the email, userid and pwd, phoneno
-
         });
+
+        String username; // = binding.username.text.toString()
+        String email; // = binding.email.text.toString()
+        String password; // = binding.password.text.toString()
+        Intent prevIntent = getIntent();
+        username = prevIntent.getStringExtra("username");
+        email = prevIntent.getStringExtra("email");
+        password = prevIntent.getStringExtra("password");
+        phoneNo =prevIntent.getStringExtra("phoneno");
+
         otpinput=findViewById(R.id.login_otp);
-        Nextbtn=findViewById(R.id.verfiy);
+        verifyBtn=findViewById(R.id.verfiy);
         progressBar=findViewById(R.id.login_pcbar);
         resendOtptextview=findViewById(R.id.resend_otp_tv);
-
-
-
-        phoneNumber =getIntent().getExtras().getString("phone");
         //Toast.makeText(getApplicationContext(), phoneNumber, Toast.LENGTH_LONG).show();
-        sendotp(phoneNumber,false);
+        sendotp(phoneNo,false);
 
-        Nextbtn.setOnClickListener(v ->
+        verifyBtn.setOnClickListener(v ->
         {
-            String enterOtp = otpinput.getText().toString();
-            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verficationCode,enterOtp);
-            Signin(credential);
+            ExtensionsKt.pr(this,"Here in verify");
+//            String enterOtp = otpinput.getText().toString();
+//            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verficationCode,enterOtp);
+//            Signin(credential);
+
             //setInprogress(true);
         });
+
         resendOtptextview.setOnClickListener((v -> {
-            sendotp(phoneNumber,true);
+            sendotp(phoneNo,true);
         }));
 
     }
 
    void  sendotp(String phoneNumber,boolean isResend){
-        startResendTimer();
+     //   startResendTimer();
         setInprogress(true);
         PhoneAuthOptions.Builder builder =
                 PhoneAuthOptions.newBuilder(mauth)
@@ -126,11 +134,11 @@ public class loginotp extends AppCompatActivity {
     void setInprogress(boolean inprogress){
         if(inprogress){
             progressBar.setVisibility(View.VISIBLE);
-            Nextbtn.setVisibility(View.GONE);
+            verifyBtn.setVisibility(View.GONE);
         }
         else {
             progressBar.setVisibility(View.GONE);
-            Nextbtn.setVisibility(View.VISIBLE);
+            verifyBtn.setVisibility(View.VISIBLE);
         }
     }
 
@@ -148,8 +156,8 @@ public class loginotp extends AppCompatActivity {
 //                    startActivity(intent);
                     //otp is verified
                     //create user
-
                     nextPage = nextPageCreateProfile;
+                   // ExtensionsKt.nextPg(this, nextPage);
                     startNextPage();
                 }else {
                     AndroidUtil.showToast(getApplicationContext(),"OTP verification failed");

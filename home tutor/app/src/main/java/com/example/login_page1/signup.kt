@@ -1,5 +1,6 @@
 package com.example.login_page1
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
@@ -7,9 +8,10 @@ import com.example.login_page1.databinding.ActivitySignBinding
 
 class Signup : AppCompatActivity() {
     private lateinit var binding: ActivitySignBinding
+    private lateinit var nextPage: Class<*>
     private var nextPageCreateProfile: Class<*> = CreateProfile::class.java
     private var nextPageLoginpage: Class<*> = Login_page::class.java
-    private var nextPageLoginPhNo: Class<*> = Login_phno::class.java
+    private var nextPageLoginPhNo: Class<*> = login_phno::class.java
     private var prevPagePage1: Class<*> = Page1::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,29 +69,44 @@ class Signup : AppCompatActivity() {
                     }
                     binding.btnSignup.isEnabled = isValid
                     if (isValid) {
-                        // binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
+                        binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
                        // binding.btnSignup.setOnClickListener { createNewUser() }
+//                        var username = binding.username.text.toString()
+//                        pr("SignUp : $username")
+//                        var email = binding.email.text.toString()
+//                        var password = binding.password.text.toString()
+//                        nextPage = nextPageLoginPhNo
+//                        passStrtoNextPg("username", username, nextPage)
+//                        passStrtoNextPg("email", email, nextPage)
+//                        passStrtoNextPg("password", password, nextPage)
 
                         //Pass the email, userid and pwd
-                         binding.btnSignup.onClick(this@Signup, nextPageLoginPhNo)
+                       //  binding.btnSignup.onClick(this@Signup, nextPage)
                     }
                 }
             }
         }
         binding.txtSignin.onClick(this@Signup, nextPageLoginpage);
 
-//        binding.btnSignup.setOnClickListener{
-//            val intent = Intent(this, Login_phno::class.java)
-//            startActivity(intent)
-//        }
-
-//        binding.txtsignin.setOnClickListener{
+//        binding.txtSignin.setOnClickListener{
 //            val intent = Intent(this, Login_page::class.java)
 //            startActivity(intent)
 //        }
     }
 
-
+    private fun onBtnSignUpClick() {
+        nextPage = nextPageLoginPhNo
+        var username = binding.username.text.toString()
+        //pr("SignUp : $nextPageLoginPhNo")
+        var email = binding.email.text.toString()
+        var password = binding.password.text.toString()
+        //nextPageLoginPhNo: Class<*> = Login_phno::class.java
+        var nextPg = Intent(this, nextPage)
+        nextPg.putExtra("username", username)
+        nextPg.putExtra("password", password)
+        nextPg.putExtra("email", email)
+        startActivity(nextPg)
+    }
     private fun createNewUser() {
         val username = binding.username.text.toString()
         val email = binding.email.text.toString()
@@ -192,8 +209,6 @@ class Signup : AppCompatActivity() {
         return reentPwd
     }
 
-    private fun onBtnSignUpClick() {
-        nextPg(nextPageCreateProfile)
-    }
+
 
 }

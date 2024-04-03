@@ -19,6 +19,19 @@ fun Context.pr(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
+fun Context.passStrtoNextPg(name: String, str : String, nextPage: Class<*>)
+{
+    pr("Recd : $name $str")
+    val nextPg = Intent(this, nextPage)
+    nextPg.putExtra(name, str)
+}
+
+fun Context.getStrFmPrevPg(name: String, prevPage: Class<*>) : String
+{
+    val prevPg = Intent(this, prevPage)
+    return prevPg.getStringExtra(name).toString()
+}
+
 fun Context.nextPg(nextPage: Class<*>) {
     val intent = Intent(this, nextPage)
     startActivity(intent)
