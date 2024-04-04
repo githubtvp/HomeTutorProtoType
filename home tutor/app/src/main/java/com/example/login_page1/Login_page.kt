@@ -100,7 +100,6 @@ class Login_page : AppCompatActivity() {
                     // Perform validation based on the type of EditText
                     val isValid = when (editText) {
                         // Add cases for each EditText requiring different validation
-                        // Example: Username validation
                         binding.email -> isValidEmail(text)
                         binding.password -> isValidPassword(text)
                         // Add more cases as needed
@@ -124,7 +123,7 @@ class Login_page : AppCompatActivity() {
     private fun isValidUsername(username: String): Boolean {
         val userNameChk = chkUserName(username)
         if (!userNameChk) {
-            pr("Invalid Username entry!")
+         //   pr("Invalid Username entry!")
             binding.email.requestFocus() // Keep focus on this EditText
         }
         return userNameChk
@@ -134,7 +133,7 @@ class Login_page : AppCompatActivity() {
         val pattern = Patterns.EMAIL_ADDRESS
         val emailChk = pattern.matcher(email).matches()
         if (!emailChk) {
-            pr("Invalid Email!")
+          //  pr("Invalid Email!")
             binding.email.requestFocus() // Keep focus on this EditText
         }
         return emailChk
@@ -143,22 +142,14 @@ class Login_page : AppCompatActivity() {
     private fun isValidPassword(pwd: String): Boolean {
         val pwdChk = chkPassword(pwd)
         if (!pwdChk) {
-            pr("Invalid Password entry!")
+         //   pr("Invalid Password entry!")
             binding.password.requestFocus() // Keep focus on this EditText
         }
         return pwdChk
     }
 
-    private fun verified(uName: String, pwd: String): Boolean {
-        val userName = "t"
-        val passwd = "t"
-        return (userName == uName && passwd == pwd)
-    }
-
-    //fun onClickBtnLogIn(btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
-    fun onClickBtnLogIn() //btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
+   fun onClickBtnLogIn() //btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
     {
-      //  pr("here 1111 ")
         val email = binding.email.text.toString()
         val pwd = binding.password.text.toString()
 
@@ -166,13 +157,9 @@ class Login_page : AppCompatActivity() {
             .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
                 // on below line we are checking if the task is success or not.
                 if (task.isSuccessful) {
-                    pr("Login Successful..")
-                  //  nextPage = nextPageSuc
                     nextPg(nextPageSuc)
                     finish()
                 } else {
-                    pr("Please enter valid user credentials..")
-                   // nextPage = nextPageFail
                     nextPg(nextPageFail)
                     finish()
                 }
@@ -180,15 +167,3 @@ class Login_page : AppCompatActivity() {
         binding.btnSignin.isEnabled = false
     }
 }
-
-/*
- Page1.auth.createUserWithEmailAndPassword(email,pwd).addOnCompleteListener {
-            if(it.isSuccessful)
-            {
-                pr("User created successfully")
-                //binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
-                nextPg(nextPageCreateProfile)
-                finish()
-            }
-        }.addOnFailureListener { pr(it.localizedMessage) }
- */

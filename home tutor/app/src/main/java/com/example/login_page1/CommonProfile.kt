@@ -48,11 +48,9 @@ class CommonProfile : AppCompatActivity() {
         binding.age.addTextChangedListener(getTextWatcher)
         binding.city.addTextChangedListener(getTextWatcher)
         binding.Address.addTextChangedListener(getTextWatcher)
-
         // Disable forward arrow button initially
         binding.btnNext.isEnabled = false
     }
-
 
     //create a TextWatcher object to attach to each EditText object
     private val getTextWatcher = object : TextWatcher {

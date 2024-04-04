@@ -31,6 +31,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Loginotp extends AppCompatActivity {
 
+    String username; // = binding.username.text.toString()
+    String email; // = binding.email.text.toString()
+    String password; // = binding.password.text.toString()
     String phoneNo;
     Long timeoutseconnds=60L;
     String verficationCode;
@@ -40,10 +43,10 @@ public class Loginotp extends AppCompatActivity {
     ProgressBar progressBar;
     TextView resendOtptextview;
 
-    FirebaseAuth mauth=FirebaseAuth.getInstance();
-    private Class<?> nextPageCreateProfile = CreateProfile.class;
+    FirebaseAuth mauth = FirebaseAuth.getInstance();
+    private Class<?> nextPageLogin = Login_page.class;
 
-    private Class<?> prevPage = login_phno.class;
+    private Class<?> prevPage = Login_phno.class;
     private Class<?> nextPage;
 
 
@@ -58,9 +61,6 @@ public class Loginotp extends AppCompatActivity {
             return insets;
         });
 
-        String username; // = binding.username.text.toString()
-        String email; // = binding.email.text.toString()
-        String password; // = binding.password.text.toString()
         Intent prevIntent = getIntent();
         username = prevIntent.getStringExtra("username");
         email = prevIntent.getStringExtra("email");
@@ -71,16 +71,13 @@ public class Loginotp extends AppCompatActivity {
         verifyBtn=findViewById(R.id.verfiy);
         progressBar=findViewById(R.id.login_pcbar);
         resendOtptextview=findViewById(R.id.resend_otp_tv);
-        //Toast.makeText(getApplicationContext(), phoneNumber, Toast.LENGTH_LONG).show();
         sendotp(phoneNo,false);
 
         verifyBtn.setOnClickListener(v ->
         {
-            ExtensionsKt.pr(this,"Here in verify");
-//            String enterOtp = otpinput.getText().toString();
-//            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verficationCode,enterOtp);
-//            Signin(credential);
-
+            String enterOtp = otpinput.getText().toString();
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verficationCode,enterOtp);
+            Signin(credential);
             //setInprogress(true);
         });
 
@@ -88,10 +85,10 @@ public class Loginotp extends AppCompatActivity {
             sendotp(phoneNo,true);
         }));
 
-    }
+    }//End - onCreate
 
    void  sendotp(String phoneNumber,boolean isResend){
-     //   startResendTimer();
+        startResendTimer();
         setInprogress(true);
         PhoneAuthOptions.Builder builder =
                 PhoneAuthOptions.newBuilder(mauth)
@@ -109,7 +106,6 @@ public class Loginotp extends AppCompatActivity {
                             public void onVerificationFailed(@NonNull FirebaseException e) {
                                 AndroidUtil.showToast(getApplicationContext(),"OTP verification failed");
                                 setInprogress(false);
-
                             }
 
                             @Override
@@ -119,7 +115,6 @@ public class Loginotp extends AppCompatActivity {
                                 forceResendingToken=ResendingToken;
                                 AndroidUtil.showToast(getApplicationContext(),"OTP Sent successfully");
                                 setInprogress(false);
-
                             }
                         });
         if(isResend) {
@@ -151,14 +146,7 @@ public class Loginotp extends AppCompatActivity {
                 setInprogress(false);
                 if(task.isSuccessful())
                 {
-//                    Intent intent =new Intent(loginotp.this,Home_page.class);
-//                    intent.putExtra("phone",phoneNumber);
-//                    startActivity(intent);
-                    //otp is verified
-                    //create user
-                    nextPage = nextPageCreateProfile;
-                   // ExtensionsKt.nextPg(this, nextPage);
-                    startNextPage();
+                   createNewUser();
                 }else {
                     AndroidUtil.showToast(getApplicationContext(),"OTP verification failed");
                 }
@@ -185,18 +173,16 @@ public class Loginotp extends AppCompatActivity {
             }
         },0,1000);
     }
-    private void startNextPage() {
-        Intent nextPg = new Intent(this, nextPage);
-        startActivity(nextPg);
-    }
-
-
+//    private void startNextPage() {
+//        Intent nextPg = new Intent(this, nextPage);
+//        startActivity(nextPg);
+//    }
 
 //    private fun createNewUser() {
-//        val username = binding.username.text.toString()
-//        val email = binding.email.text.toString()
-//        val pwd = binding.password.text.toString()
-//        Page1.auth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener { task ->
+//      //  val username = binding.username.text.toString()
+//     //   val email = binding.email.text.toString()
+//      //  val pwd = binding.password.text.toString()
+//        mauth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
 //            if (task.isSuccessful) {
 //                pr("New User created successfully")
 //                //binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
@@ -209,5 +195,25 @@ public class Loginotp extends AppCompatActivity {
 //        }
 //    }
 
+    private void createNewUser() {
+       mauth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            ExtensionsKt.pr(Loginotp.this, "New User created successfully");
+                            goToLoginPage();
+                        } else {
+                            ExtensionsKt.pr(Loginotp.this,"User cr failed XXX\n" + task.getException().getMessage());
+                        }
+                    }
+                });
+    }
 
+    private void goToLoginPage()
+    {
+        Intent nextIntent = new Intent(this,Login_page.class);
+        startActivity(nextIntent);
+        finish();
+    }
 }

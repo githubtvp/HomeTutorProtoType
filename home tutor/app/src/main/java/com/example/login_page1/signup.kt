@@ -11,7 +11,7 @@ class Signup : AppCompatActivity() {
     private lateinit var nextPage: Class<*>
     private var nextPageCreateProfile: Class<*> = CreateProfile::class.java
     private var nextPageLoginpage: Class<*> = Login_page::class.java
-    private var nextPageLoginPhNo: Class<*> = login_phno::class.java
+    private var nextPageLoginPhNo: Class<*> = Login_phno::class.java
     private var prevPagePage1: Class<*> = Page1::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,12 +50,10 @@ class Signup : AppCompatActivity() {
                     // Perform validation based on the type of EditText
                     val isValid = when (editText) {
                         // Add cases for each EditText requiring different validation
-                        // Example: Username validation
                         binding.username -> isValidUsername(text)
-                        // Example: Email validation
                         binding.email -> isValidEmail(text)
                         binding.password -> isValidPassword(text)
-                        //  binding.reenterPwd -> isValidReenterPassword(text)
+                        binding.reenterPwd -> isValidReenterPassword(text)
 
                         // Add more cases as needed
                         else -> true // Default to true if no specific validation is needed
@@ -70,59 +68,39 @@ class Signup : AppCompatActivity() {
                     binding.btnSignup.isEnabled = isValid
                     if (isValid) {
                         binding.btnSignup.setOnClickListener { onBtnSignUpClick() }
-                       // binding.btnSignup.setOnClickListener { createNewUser() }
-//                        var username = binding.username.text.toString()
-//                        pr("SignUp : $username")
-//                        var email = binding.email.text.toString()
-//                        var password = binding.password.text.toString()
-//                        nextPage = nextPageLoginPhNo
-//                        passStrtoNextPg("username", username, nextPage)
-//                        passStrtoNextPg("email", email, nextPage)
-//                        passStrtoNextPg("password", password, nextPage)
-
-                        //Pass the email, userid and pwd
-                       //  binding.btnSignup.onClick(this@Signup, nextPage)
                     }
                 }
             }
         }
         binding.txtSignin.onClick(this@Signup, nextPageLoginpage);
-
-//        binding.txtSignin.setOnClickListener{
-//            val intent = Intent(this, Login_page::class.java)
-//            startActivity(intent)
-//        }
     }
 
     private fun onBtnSignUpClick() {
         nextPage = nextPageLoginPhNo
         var username = binding.username.text.toString()
-        //pr("SignUp : $nextPageLoginPhNo")
         var email = binding.email.text.toString()
         var password = binding.password.text.toString()
-        //nextPageLoginPhNo: Class<*> = Login_phno::class.java
         var nextPg = Intent(this, nextPage)
         nextPg.putExtra("username", username)
         nextPg.putExtra("password", password)
         nextPg.putExtra("email", email)
         startActivity(nextPg)
     }
-    private fun createNewUser() {
-        val username = binding.username.text.toString()
-        val email = binding.email.text.toString()
-        val pwd = binding.password.text.toString()
-        Page1.auth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                pr("New User created successfully")
-                //binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
-                nextPg(nextPageCreateProfile)
-                finish()
-            } else {
-                pr("New User creation failed XXX")
-            }
-        }
-    }
-
+//    private fun createNewUser() {
+//        val username = binding.username.text.toString()
+//        val email = binding.email.text.toString()
+//        val pwd = binding.password.text.toString()
+//        Page1.auth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//              //  pr("New User created successfully")
+//                //binding.btnSignup.onClick(this@Signup, nextPageCreateProfile)
+//                nextPg(nextPageCreateProfile)
+//                finish()
+//            } else {
+//                pr("New User creation failed XXX")
+//            }
+//        }
+//    }
 
 //
 //    private fun setUpListenerWatchers() {
@@ -175,7 +153,7 @@ class Signup : AppCompatActivity() {
     private fun isValidUsername(username: String): Boolean {
         val userNameChk: Boolean = chkUserName(username)
         if (!userNameChk) {
-            pr("Invalid Username entry!")
+          //  pr("Invalid Username entry!")
             binding.username.requestFocus() // Keep focus on this EditText
         }
         return userNameChk
@@ -185,7 +163,7 @@ class Signup : AppCompatActivity() {
         val pattern = Patterns.EMAIL_ADDRESS
         val emailChk = pattern.matcher(email).matches()
         if (!emailChk) {
-            pr("Invalid Email!")
+          //  pr("Invalid Email!")
             binding.email.requestFocus() // Keep focus on this EditText
         }
         return emailChk
@@ -194,7 +172,7 @@ class Signup : AppCompatActivity() {
     private fun isValidPassword(pwd: String): Boolean {
         val pwdChk = chkPassword(pwd)
         if (!pwdChk) {
-            pr("Invalid Password entry!")
+        //    pr("Invalid Password entry!")
             binding.password.requestFocus() // Keep focus on this EditText
         }
         return pwdChk
@@ -203,12 +181,9 @@ class Signup : AppCompatActivity() {
     private fun isValidReenterPassword(pwd: String): Boolean {
         val reentPwd: Boolean = (binding.password.text.toString() == pwd)
         if (reentPwd) {
-            pr("Password reentry mismatch!")
+           // pr("Password reentry mismatch!")
             binding.reenterPwd.requestFocus() // Keep focus on this EditText
         }
         return reentPwd
     }
-
-
-
 }

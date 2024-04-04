@@ -16,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.hbb20.CountryCodePicker;
 
-public class login_phno extends AppCompatActivity {
+public class Login_phno extends AppCompatActivity {
 
     CountryCodePicker countryCodePicker;
     EditText phoneInput;
@@ -38,24 +38,13 @@ public class login_phno extends AppCompatActivity {
             return insets;
         });
 
-//        //get the userid, passwd and email from the previous extras sent
-       // thePage = prevPage;
-        String username; // = binding.username.text.toString()
-        String email; // = binding.email.text.toString()
-        String password; // = binding.password.text.toString()
-      //  Intent prevPg = new Intent(this, Signup.class);
-       // String uname = prevPg.getStringExtra("username").toString() ;
-     //   ExtensionsKt.pr(this, "User name :  " + uname);
-     //   val value1 = intent.getStringExtra("VALUE1")
-      //  username = ExtensionsKt.getStrFmPrevPg(login_phno.this, "username", thePage);
-       // ExtensionsKt.pr(this, prevPg.getComponent().getClassName());
-
+        String username;
+        String email;
+        String password;
         Intent prevIntent = getIntent();
         username = prevIntent.getStringExtra("username");
         email = prevIntent.getStringExtra("email");
         password = prevIntent.getStringExtra("password");
-      //  ExtensionsKt.pr(login_phno.this,"Login : User name : " + username);
-      //  ExtensionsKt.pr(login_phno.this,"Login : email : " + email);
         ExtensionsKt.pr(this,"Login : password : " + password);
 
         countryCodePicker = findViewById(R.id.login_countrycode);
@@ -71,27 +60,13 @@ public class login_phno extends AppCompatActivity {
                 phoneInput.setError("phone is invalid");
                 return;
             }
-           // goToSendOTPPage();
-            //send to next page userid, pwd, email, phoneno
-//            Intent intent=new Intent(Login_phno.this, Loginotp.class);
-//            intent.putExtra("phone",countryCodePicker.getFullNumberWithPlus());
-//            ExtensionsKt.pr(this,"Here 11");
-//            startActivity(intent);
-//            ExtensionsKt.pr(this,"Here 2222");
             nextPage = nextPageLoginOTP;
-          //  ExtensionsKt.passStrtoNextPg(this,"username", username, nextPage);
-//            ExtensionsKt.passStrtoNextPg(this, "email", email, nextPage);
-//            ExtensionsKt.passStrtoNextPg(this, "password", password, nextPage);
-//            ExtensionsKt.passStrtoNextPg(this, "phone", countryCodePicker.getFullNumberWithPlus(), nextPage);
-//            ExtensionsKt.nextPg(this, nextPage);
-
             Intent nextIntent = new Intent(this, nextPage);
             nextIntent.putExtra("username", username);
             nextIntent.putExtra("password", password);
             nextIntent.putExtra("email", email);
             nextIntent.putExtra("phoneno", countryCodePicker.getFullNumberWithPlus());
             startActivity(nextIntent);
-
         } );
     }
 

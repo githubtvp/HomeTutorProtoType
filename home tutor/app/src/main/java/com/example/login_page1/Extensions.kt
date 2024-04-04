@@ -21,7 +21,6 @@ fun Context.pr(message: String) {
 
 fun Context.passStrtoNextPg(name: String, str : String, nextPage: Class<*>)
 {
-    pr("Recd : $name $str")
     val nextPg = Intent(this, nextPage)
     nextPg.putExtra(name, str)
 }

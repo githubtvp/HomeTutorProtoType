@@ -17,7 +17,6 @@ class Page1 : AppCompatActivity() {
     private var nextPageLogin: Class<*> = Login_page::class.java
     private var nextPageSignup: Class<*> = Signup::class.java
 
-    //private lateinit var auth : FirebaseAuth
     companion object{
         lateinit var auth: FirebaseAuth
     }
@@ -26,9 +25,7 @@ class Page1 : AppCompatActivity() {
         binding = Page1Binding.inflate(layoutInflater)
         setContentView(binding.root)
         FirebaseApp.initializeApp(this);
-       // auth = FirebaseAuth.getInstance()
         auth = Firebase.auth
-    //    binding.signin.onClick2(this@Page1, nextPageTest)
         binding.signin.onClick(this@Page1, nextPageLogin)
         binding.signup.onClick(this@Page1, nextPageSignup)
     }
