@@ -11,9 +11,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 const val MIN_USERNAME_LEN = 3
 const val MAX_USERNAME_LEN = 20
+const val MIN_STUD_AGE = 10
+const val MAX_STUD_AGE = 30
+const val MIN_TUTOR_AGE = 25
+const val MAX_TUTOR_AGE = 65
 const val USERNAME_ALLOWED_CHAR = "[a-zA-Z0-9_]+"
 //const val PWD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$"
 const val PWD_REGEX = "^\\d{6}$"
+const val NAME_REGEX = "^[a-zA-Z]+$"
+
 
 fun Context.pr(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
@@ -58,3 +64,18 @@ fun chkPassword(pwd: String): Boolean {
     return (pwd.matches(Regex(passwordRegex)))
 }
 
+fun chkName(theName : String) : Boolean
+{
+   val nameRegEx = NAME_REGEX
+    return (theName.matches((Regex(nameRegEx))))
+}
+
+fun isValidStudentAge(age: Int): Boolean {
+    // You can define your validation rules here
+    return age in MIN_STUD_AGE..MAX_STUD_AGE // Assuming a reasonable age range
+}
+
+fun isValidTutorAge(age: Int): Boolean {
+    // You can define your validation rules here
+    return age in MIN_TUTOR_AGE..MAX_TUTOR_AGE // Assuming a reasonable age range
+}
