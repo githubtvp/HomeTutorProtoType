@@ -9,8 +9,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivityCommonProfileBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
-
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
+import java.io.Serializable
 class CommonProfile : AppCompatActivity() {
 
     private lateinit var binding: ActivityCommonProfileBinding
@@ -46,8 +49,6 @@ class CommonProfile : AppCompatActivity() {
 
     private fun setUpListenerWatchers() {
         // Add text change listeners to all EditText fields
-
-        pr("Here 12")
         binding.firstname.addTextChangedListener(getTextWatcher)
         binding.lastname.addTextChangedListener(getTextWatcher)
         binding.age.addTextChangedListener(getTextWatcher)
@@ -74,7 +75,7 @@ class CommonProfile : AppCompatActivity() {
             // Enable or disable the forward arrow button based on validation result
             binding.btnnext.isEnabled = isValid
             if (isValid) {
-                pr("Valid chked")
+                //pr("Valid chked")
                 binding.btnnext.isEnabled = true
                 binding.btnnext.setOnClickListener { onFwdArrClickNextPage() }
             }
@@ -112,6 +113,9 @@ class CommonProfile : AppCompatActivity() {
             pr("Student user!")
             nextPage = nextPage1
             addStudUser()
+            var intent = Intent(this, nextPage)
+            intent.putExtra("user", user)
+            startActivity(intent)
         } else if (2 == userTypeVal) {
             pr("Tutor user!")
             nextPage = nextPage2
@@ -130,7 +134,7 @@ class CommonProfile : AppCompatActivity() {
         // Step 2: Define a reference to the location where you want to store the user data
         val usersRef = database.getReference("users")
         // Step 3: Store the User object in the database
-                  // Generating a unique key for the user
+            // Generating a unique key for the user
             val userId = usersRef.push().key
             if (userId != null) {
                 // Store the user object at the generated key
@@ -149,8 +153,6 @@ class CommonProfile : AppCompatActivity() {
             } else {
                 pr("Failed to generate a unique key for the user.")
             }
-
-
     }
 
 
@@ -172,11 +174,44 @@ class CommonProfile : AppCompatActivity() {
         }
     }
 
+    private fun getNextId() : String {
+        val db = FirebaseDatabase.getInstance()
+        val usersRef = db.getReference("users")
+        val counterRef = db.getReference("usercounter")
+
+        // Retrieve the current counter value and generate a new user key
+        counterRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val userCounter = dataSnapshot.getValue(Int::class.java) ?: 0
+                val userId = generateUserKey(userCounter + 1)
+                // Increment counter and update it in the database
+                counterRef.setValue(userCounter + 1)
+                return userId
+//                // Example of storing a user with the generated key
+//                val user = User("John", "Doe", "New York", "123 Street", 25)
+//                usersRef.child(userId).setValue(user)
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle error
+            }
+        })
+
+
+
+
+    }
+
+    // Function to generate user keys with the format "u1", "u2", "u3", ...
+    fun generateUserKey(userCounter: Int): String {
+        return "u$userCounter"
+    }
+
     fun pr(msg: String) {
         Toast.makeText(this, "" + msg, Toast.LENGTH_LONG).show()
     }
 
 }//End- class CommonProfile : AppCompatActivity()
+
 
 /*
 val usersRef = database.getReference("users")

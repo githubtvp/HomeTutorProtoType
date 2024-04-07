@@ -23,11 +23,11 @@
         <activity
             android:name=".splashactivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                        <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                            <category android:name="android.intent.category.LAUNCHER" />
+                        </intent-filter>
         </activity>
         <activity
             android:name=".FbCrud"
@@ -46,13 +46,27 @@
             android:exported="false" />
         <activity
             android:name=".CommonProfile"
-            android:exported="false" />
+            android:exported="false"/>
+<!--        <intent-filter>-->
+<!--            <action android:name="android.intent.action.MAIN" />-->
+
+<!--            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--        </intent-filter>-->
+<!--        </activity>-->
+
         <activity
             android:name=".CreateProfile"
             android:exported="false" />
         <activity
             android:name=".Home_page"
-            android:exported="false" />
+            android:exported="false">
+<!--        <intent-filter>-->
+<!--&lt;!&ndash;            <action android:name="android.intent.action.MAIN" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <category android:name="android.intent.category.LAUNCHER" />&ndash;&gt;-->
+<!--        </intent-filter>-->
+        </activity>
+
         <activity
             android:name=".Login_page"
             android:exported="false" />
@@ -62,6 +76,7 @@
         <activity
             android:name=".Page1"
             android:exported="false">
+
         </activity>
     </application>
 
