@@ -45,7 +45,7 @@ public class Login_phno extends AppCompatActivity {
         username = prevIntent.getStringExtra("username");
         email = prevIntent.getStringExtra("email");
         password = prevIntent.getStringExtra("password");
-        ExtensionsKt.pr(this,"Login : password : " + password);
+      //  ExtensionsKt.pr(this,"Login : password : " + password);
 
         countryCodePicker = findViewById(R.id.login_countrycode);
         phoneInput=findViewById(R.id.login_mobilenumber);

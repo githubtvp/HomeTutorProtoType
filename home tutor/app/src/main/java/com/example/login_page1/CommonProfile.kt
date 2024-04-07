@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivityCommonProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-
+import java.io.Serializable;
 class CommonProfile : AppCompatActivity() {
 
     private lateinit var binding: ActivityCommonProfileBinding
@@ -112,6 +112,12 @@ class CommonProfile : AppCompatActivity() {
             pr("Student user!")
             nextPage = nextPage1
             addStudUser()
+            val nextIntent = Intent(this, nextPage)
+            nextIntent.putExtra("user", user)
+            startActivity(nextIntent)
+
+//val user1 = intent.getSerializableExtra("user") as? User
+
         } else if (2 == userTypeVal) {
             pr("Tutor user!")
             nextPage = nextPage2
@@ -140,7 +146,7 @@ class CommonProfile : AppCompatActivity() {
                 usersRef.child(userId).setValue(user)
                     .addOnSuccessListener {
                         // User data has been saved successfully
-                        pr("User data saved successfully!")
+                       // pr("User data saved successfully!")
                     }
                     .addOnFailureListener { e ->
                         // An error occurred while saving user data
