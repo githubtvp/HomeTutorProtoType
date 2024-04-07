@@ -66,7 +66,7 @@ fun chkPassword(pwd: String): Boolean {
 
 fun chkName(theName : String) : Boolean
 {
-   val nameRegEx = NAME_REGEX
+    val nameRegEx = NAME_REGEX
     return (theName.matches((Regex(nameRegEx))))
 }
 

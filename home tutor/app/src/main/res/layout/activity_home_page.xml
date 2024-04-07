@@ -102,11 +102,12 @@
                 android:id="@+id/profile"
                 android:layout_width="87dp"
                 android:layout_height="28dp"
-                android:layout_marginBottom="148dp"
+                android:layout_marginBottom="172dp"
                 android:text="PROFIE"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.299"
+                app:layout_constraintHorizontal_bias="0.268"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
@@ -115,10 +116,10 @@
                 android:layout_height="54dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.271"
+                app:layout_constraintHorizontal_bias="0.235"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.677"
+                app:layout_constraintVertical_bias="0.62"
                 app:srcCompat="@drawable/baseline_edit_note_24" />
 
             <ImageView
@@ -127,20 +128,20 @@
                 android:layout_height="48dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.724"
+                app:layout_constraintHorizontal_bias="0.718"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.683"
+                app:layout_constraintVertical_bias="0.637"
                 app:srcCompat="@drawable/baseline_search_24" />
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="51dp"
                 android:layout_height="49dp"
-                android:layout_marginBottom="60dp"
+                android:layout_marginBottom="108dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.297"
+                app:layout_constraintHorizontal_bias="0.269"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/baseline_speaker_notes_24" />
 
@@ -153,29 +154,33 @@
                 app:layout_constraintHorizontal_bias="0.742"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.881"
+                app:layout_constraintVertical_bias="0.806"
                 app:srcCompat="@drawable/baseline_notifications_24" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="95dp"
                 android:layout_height="24dp"
-                android:layout_marginBottom="36dp"
+                android:layout_marginBottom="84dp"
                 android:text="FEEDBACK"
+                android:textColor="@color/black"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.306"
+                app:layout_constraintHorizontal_bias="0.246"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/search"
-                android:layout_width="65dp"
-                android:layout_height="23dp"
-                android:layout_marginBottom="148dp"
+                android:layout_width="84dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="176dp"
                 android:text="SEARCH"
+                android:textColor="@color/black"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.745"
+                app:layout_constraintHorizontal_bias="0.795"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
@@ -183,12 +188,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NOTIFICATION"
+                android:textColor="@color/black"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.745"
+                app:layout_constraintHorizontal_bias="0.789"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.938" />
+                app:layout_constraintVertical_bias="0.855" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

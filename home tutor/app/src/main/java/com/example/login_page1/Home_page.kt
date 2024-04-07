@@ -46,7 +46,6 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
             replaceFragment(HomeFragment())
             binding.navigationDrawer.setCheckedItem(androidx.appcompat.R.id.home) // Set default checked item in navigation drawer
         }
-
         initUI()
     }
 

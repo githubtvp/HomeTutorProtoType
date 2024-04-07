@@ -1,7 +1,14 @@
 package com.example.login_page1
 
-class User (var fName: String, var lName: String, var city: String, var address: String, var age: Int)
-{
+import java.io.Serializable
+
+class User(
+    var fName: String,
+    var lName: String,
+    var city: String,
+    var address: String,
+    var age: Int
+) : Serializable {
     constructor() : this("", "", "", "", 0)
 
     var email: String = ""
