@@ -1,5 +1,6 @@
 package com.example.login_page1
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -10,14 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivityCommonProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-<<<<<<< HEAD
-import java.io.Serializable;
-=======
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
-import java.io.Serializable
->>>>>>> 5556a7f6ce4a22028e1a3e0e9967ef214eb99332
+
 class CommonProfile : AppCompatActivity() {
 
     private lateinit var binding: ActivityCommonProfileBinding
@@ -26,7 +23,7 @@ class CommonProfile : AppCompatActivity() {
     private var nextPage2: Class<*> = TutorProfile::class.java
     private var userTypeVal = 0
     private lateinit var user: User
-    private lateinit var currentUserEmail : String
+    private lateinit var currentUserEmail: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCommonProfileBinding.inflate(layoutInflater)
@@ -38,14 +35,13 @@ class CommonProfile : AppCompatActivity() {
         } else {
             // Handle the case where "userTypeVal" is not set in the intent extras
         }
-       // val userTypeVal : Int = uType.toInt()
+        // val userTypeVal : Int = uType.toInt()
         setUpListenerWatchers()
         Ininui()
     }
 
-    private fun Ininui()
-    {
-        binding.profBack.setOnClickListener{
+    private fun Ininui() {
+        binding.profBack.setOnClickListener {
             val intent = Intent(this, CreateProfile::class.java)
             startActivity(intent)
         }
@@ -73,7 +69,7 @@ class CommonProfile : AppCompatActivity() {
         }
 
         override fun afterTextChanged(s: Editable?) {
-          //  pr("Here 13")
+            //  pr("Here 13")
             // Validate all EditText fields
             val isValid = validateEntries()
             // Enable or disable the forward arrow button based on validation result
@@ -87,7 +83,7 @@ class CommonProfile : AppCompatActivity() {
     }
 
     private fun validateEntries(): Boolean {
-      //  pr("Here 14")
+        //  pr("Here 14")
         val fName = binding.firstname.text.toString().trim()
         val lName = binding.lastname.text.toString().trim()
         val ageTxt = binding.age.text.toString().trim()
@@ -97,14 +93,13 @@ class CommonProfile : AppCompatActivity() {
         val address = binding.Address.text.toString().trim()
 
         // Perform validation for each EditText field
-        val isValidFName = ( fName.isNotEmpty() && chkName(fName) )// Example validation logic
-        val isValidLName = ( lName.isNotEmpty() && chkName(lName) )// Example validation logic
+        val isValidFName = (fName.isNotEmpty() && chkName(fName))// Example validation logic
+        val isValidLName = (lName.isNotEmpty() && chkName(lName))// Example validation logic
         val isValidAge = (age != null && isValidStudentAge(age))  //
         val isValidCity = city.isNotEmpty() // Example validation logic
         val isValidAddress = address.isNotEmpty() // Example validation logic
 
-        if(isValidFName && isValidLName && isValidAge && isValidCity && isValidAddress)
-        {
+        if (isValidFName && isValidLName && isValidAge && isValidCity && isValidAddress) {
             user = User(fName, lName, city, address, age!!)
         }
         // Return true if all EditText fields are valid, otherwise false
@@ -112,112 +107,186 @@ class CommonProfile : AppCompatActivity() {
     }
 
     private fun onFwdArrClickNextPage() {
-   //pr("Here 12")
+        //pr("Here 12")
         if (1 == userTypeVal) {
             pr("Student user!")
             nextPage = nextPage1
             addStudUser()
-<<<<<<< HEAD
-            val nextIntent = Intent(this, nextPage)
-            nextIntent.putExtra("user", user)
-            startActivity(nextIntent)
-
 //val user1 = intent.getSerializableExtra("user") as? User
-
-=======
             var intent = Intent(this, nextPage)
             intent.putExtra("user", user)
-            startActivity(intent)
->>>>>>> 5556a7f6ce4a22028e1a3e0e9967ef214eb99332
+           startActivity(intent)
+
         } else if (2 == userTypeVal) {
             pr("Tutor user!")
             nextPage = nextPage2
         }
-      //  pr("All text boxes validated!")
+        //  pr("All text boxes validated!")
         val nextPg = Intent(this, nextPage)
-        startActivity(nextPg)
+      //  startActivity(nextPg)
         finish()
     }
 
-    private fun addStudUser()
-    {
+    private fun addStudUser() {
         // Assuming you have already initialized FirebaseApp and FirebaseDatabase in your application
         // Step 1: Get a reference to your Firebase Realtime Database
         val database = FirebaseDatabase.getInstance()
         // Step 2: Define a reference to the location where you want to store the user data
         val usersRef = database.getReference("users")
-        // Step 3: Store the User object in the database
-            // Generating a unique key for the user
-            val userId = usersRef.push().key
+        pr("addStudUser A1 !!")
+        // Generate a unique key for the user
+        getNextId { userId ->
+            // If userId is null, then something went wrong, handle it
             if (userId != null) {
                 // Store the user object at the generated key
+                pr("here addStudUser A2 !!")
                 setCurUserEmail()
                 user.setTheEmail(currentUserEmail)
                 user.setUserCat(userTypeVal)
+
                 usersRef.child(userId).setValue(user)
                     .addOnSuccessListener {
                         // User data has been saved successfully
-                       // pr("User data saved successfully!")
+                        pr("User data saved successfully!")
+                        // Here you can navigate to the next activity or perform any other action
                     }
                     .addOnFailureListener { e ->
                         // An error occurred while saving user data
                         pr("Error saving user data: ${e.message}")
                     }
+
             } else {
                 pr("Failed to generate a unique key for the user.")
             }
+        }
     }
 
+    private fun getNextId(callback: (String?) -> Unit) {
+        val db = FirebaseDatabase.getInstance()
+        val usersRef = db.getReference("users")
+      //  pr("$usersRef - getNextId B1 : ")
+        val counterRef = db.getReference("user-count")
+     //   pr("$counterRef - getNextId B1 : ")
+        // Retrieve the current counter value and generate a new user key
+        val cnt = "count"
+        counterRef.child(cnt).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val userCounter = dataSnapshot.getValue(Int::class.java) ?: 0
+                val userId = generateUserKey(userCounter + 1)
+                // Increment counter and update it in the database
+                pr("here getNextId B2 : increment counter!!")
+                counterRef.setValue(userCounter + 1).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Call the callback function with the generated userId
+                        callback(userId)
+                    } else {
+                        // Handle error
+                        callback(null) // Pass null to indicate failure
+                    }
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                pr("Database error: ${databaseError.message}")
+                callback(null) // Pass null to indicate failure
+            }
+        })
+    }
 
-    private fun setCurUserEmail()
-    {
+//    private fun getNextId(callback: (String?) -> Unit) {
+//        val db = FirebaseDatabase.getInstance()
+//      //  val usersRef = db.getReference("users")
+//        val counterRef = db.getReference("usercounter")
+//        pr("getNextId 1 : increment counter!!")
+//        // Retrieve the current counter value and generate a new user key
+//        val counterRefListener = object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                val userCounter = dataSnapshot.getValue(Int::class.java) ?: 0
+//                val userId = generateUserKey(userCounter + 1)
+//                // Increment counter and update it in the database
+//                pr("here getNextId 2 : increment counter!!")
+//                counterRef.setValue(userCounter + 1).addOnCompleteListener { task ->
+//                    if (task.isSuccessful) {
+//                        // Call the callback function with the generated userId
+//                        callback(userId)
+//                    } else {
+//                        // Handle error
+//                        callback(null) // Pass null to indicate failure
+//                    }
+//                }
+//            }
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                pr("Database error: ${databaseError.message}")
+//               // callback(null) // Pass null to indicate failure
+//            }
+//        }
+//        counterRef.addValueEventListener(counterRefListener)
+//    }
+//    private fun addPostEventListener(postReference: DatabaseReference) {
+//        // [START post_value_event_listener]
+//        val postListener = object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                // Get Post object and use the values to update the UI
+//                val post = dataSnapshot.getValue<Post>()
+//                // ...
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Getting Post failed, log a message
+//                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+//            }
+//        }
+//        postReference.addValueEventListener(postListener)
+//        // [END post_value_event_listener]
+//    }
+    fun generateUserKey(userCounter: Int): String {
+        return "u$userCounter"
+    }
+
+    private fun setCurUserEmail() {
         // Step 1: Get the current user object from FirebaseAuth
         val currentUser = FirebaseAuth.getInstance().currentUser
         // Step 2: Check if the current user is not null, then get the email
         currentUser?.let { user ->
             currentUserEmail = user.email.toString()
-            if (currentUserEmail != null) {
-              //  println("Current user's email: $currentUserEmail")
-                // You can use the email here as needed, such as displaying it in your UI or storing it in a variable.
-            } else {
-              //  println("Current user's email is null")
-            }
-        } ?: run {
-          //  println("No user is currently signed in")
         }
     }
 
-    private fun getNextId() : String {
-        val db = FirebaseDatabase.getInstance()
-        val usersRef = db.getReference("users")
-        val counterRef = db.getReference("usercounter")
+    /*
+    private fun getNextId(callback: (String) -> Unit) {
+    val db = FirebaseDatabase.getInstance()
+    val usersRef = db.getReference("users")
+    val counterRef = db.getReference("usercounter")
 
-        // Retrieve the current counter value and generate a new user key
-        counterRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val userCounter = dataSnapshot.getValue(Int::class.java) ?: 0
-                val userId = generateUserKey(userCounter + 1)
-                // Increment counter and update it in the database
-                counterRef.setValue(userCounter + 1)
-                return userId
-//                // Example of storing a user with the generated key
-//                val user = User("John", "Doe", "New York", "123 Street", 25)
-//                usersRef.child(userId).setValue(user)
+    counterRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            val userCounter = dataSnapshot.getValue(Int::class.java) ?: 0
+            val userId = generateUserKey(userCounter + 1)
+
+            // Increment counter and update it in the database
+            counterRef.setValue(userCounter + 1).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Call the callback function with the generated userId
+                    callback(userId)
+                } else {
+                    // Handle error
+                }
             }
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Handle error
-            }
-        })
+        }
+
+        override fun onCancelled(databaseError: DatabaseError) {
+            // Handle error
+        }
+    })
+}
 
 
 
 
-    }
+     */
+
 
     // Function to generate user keys with the format "u1", "u2", "u3", ...
-    fun generateUserKey(userCounter: Int): String {
-        return "u$userCounter"
-    }
+
 
     fun pr(msg: String) {
         Toast.makeText(this, "" + msg, Toast.LENGTH_LONG).show()

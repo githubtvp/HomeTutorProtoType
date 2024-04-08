@@ -3,9 +3,13 @@ package com.example.login_page1
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+
 
 class Category : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,6 +22,7 @@ class Category : AppCompatActivity() {
 //            insets
 //        }
         val buttonNext = findViewById<Button>(R.id.buttonNext)
+
         buttonNext.setOnClickListener {
             // Retrieve checked subjects
             val checkedSubjects = mutableListOf<String>()
@@ -70,9 +75,44 @@ class Category : AppCompatActivity() {
             }
 
             // Display checked subjects and classes
-            val message = "Checked subjects: $checkedSubjects\nChecked classes: $checkedClasses"
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+          //  val message = "Checked subjects: $checkedSubjects\nChecked classes: $checkedClasses"
+           // Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            readUser("u1")
         }
+
     }
+
+    fun readUser(userId: String) {
+        val database = FirebaseDatabase.getInstance()
+        val usersRef = database.getReference("users")
+
+        // Create a listener to fetch the user data
+        usersRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Check if the dataSnapshot exists and contains data
+                if (dataSnapshot.exists()) {
+                    // Retrieve user data as a Map
+                    val userData = dataSnapshot.value as? Map<String, Any?>
+
+                    // Do something with the user data
+                    if (userData != null) {
+                        // Iterate through the map entries to access all attributes
+                        for ((key, value) in userData) {
+                            pr("$key: $value")
+                        }
+                    } else {
+                        pr("User data is null")
+                    }
+                } else {
+                    pr("User not found")
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                pr("Error fetching user data: ${databaseError.message}")
+            }
+        })
+    }
+
 }
 
