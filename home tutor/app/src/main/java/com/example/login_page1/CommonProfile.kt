@@ -164,33 +164,65 @@ class CommonProfile : AppCompatActivity() {
     private fun getNextId(callback: (String?) -> Unit) {
         val db = FirebaseDatabase.getInstance()
         val usersRef = db.getReference("users")
-      //  pr("$usersRef - getNextId B1 : ")
+        //  pr("$usersRef - getNextId B1 : ")
         val counterRef = db.getReference("user-count")
-     //   pr("$counterRef - getNextId B1 : ")
+        //   pr("$counterRef - getNextId B1 : ")
         // Retrieve the current counter value and generate a new user key
         val cnt = "count"
         counterRef.child(cnt).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val userCounter = dataSnapshot.getValue(Int::class.java) ?: 0
-                val userId = generateUserKey(userCounter + 1)
-                // Increment counter and update it in the database
-                pr("here getNextId B2 : increment counter!!")
-                counterRef.setValue(userCounter + 1).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        // Call the callback function with the generated userId
-                        callback(userId)
+                if (dataSnapshot.exists()) {
+                  val userCount = dataSnapshot.value as? Map<String, Any?>
+                    // Do something with the user data
+                    if (userCount != null) {
+                        // Iterate through the map entries to access all attributes
+                        for ((key, value) in userCount) {
+                            pr("$key: $value")
+                        }
                     } else {
-                        // Handle error
-                        callback(null) // Pass null to indicate failure
+                        pr("User data is null")
                     }
+                } else {
+                    pr("User not found")
                 }
             }
+
             override fun onCancelled(databaseError: DatabaseError) {
-                pr("Database error: ${databaseError.message}")
-                callback(null) // Pass null to indicate failure
+                pr("Error fetching user data: ${databaseError.message}")
             }
         })
     }
+
+//    private fun getNextId(callback: (String?) -> Unit) {
+//        val db = FirebaseDatabase.getInstance()
+//        val usersRef = db.getReference("users")
+//      //  pr("$usersRef - getNextId B1 : ")
+//        val counterRef = db.getReference("user-count")
+//     //   pr("$counterRef - getNextId B1 : ")
+//        // Retrieve the current counter value and generate a new user key
+//        val cnt = "count"
+//        counterRef.child(cnt).addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                val userCounter = dataSnapshot.getValue(Int::class.java) ?: 0
+//                val userId = generateUserKey(userCounter + 1)
+//                // Increment counter and update it in the database
+//                pr("here getNextId B2 : increment counter!!")
+//                counterRef.setValue(userCounter + 1).addOnCompleteListener { task ->
+//                    if (task.isSuccessful) {
+//                        // Call the callback function with the generated userId
+//                        callback(userId)
+//                    } else {
+//                        // Handle error
+//                        callback(null) // Pass null to indicate failure
+//                    }
+//                }
+//            }
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                pr("Database error: ${databaseError.message}")
+//                callback(null) // Pass null to indicate failure
+//            }
+//        })
+//    }
 
 //    private fun getNextId(callback: (String?) -> Unit) {
 //        val db = FirebaseDatabase.getInstance()
@@ -221,23 +253,7 @@ class CommonProfile : AppCompatActivity() {
 //        }
 //        counterRef.addValueEventListener(counterRefListener)
 //    }
-//    private fun addPostEventListener(postReference: DatabaseReference) {
-//        // [START post_value_event_listener]
-//        val postListener = object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                // Get Post object and use the values to update the UI
-//                val post = dataSnapshot.getValue<Post>()
-//                // ...
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // Getting Post failed, log a message
-//                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-//            }
-//        }
-//        postReference.addValueEventListener(postListener)
-//        // [END post_value_event_listener]
-//    }
+
     fun generateUserKey(userCounter: Int): String {
         return "u$userCounter"
     }
