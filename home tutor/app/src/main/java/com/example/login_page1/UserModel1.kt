@@ -7,9 +7,17 @@ class UserModel1(
     var lName: String = "",
     var city: String = "",
     var address: String = "",
-    var age: Int = 0
+    var email: String = "",
+    var age: Int = 0,
+    var id: Int = 0
 ) : Serializable {
-    constructor() : this("", "", "", "", 0)
-
-
+    constructor() : this(
+        "",
+        "",
+        "",
+        "",
+        "",
+        0,
+        0
+    )
 }

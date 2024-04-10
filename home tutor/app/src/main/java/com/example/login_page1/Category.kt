@@ -77,7 +77,8 @@ class Category : AppCompatActivity() {
             // Display checked subjects and classes
             //  val message = "Checked subjects: $checkedSubjects\nChecked classes: $checkedClasses"
             // Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-            readUser("u1")
+           // readUser("u1")
+            getUserData()
         }
 
     }
@@ -124,18 +125,32 @@ class Category : AppCompatActivity() {
         // Create a list to hold your data
         val myDataList = mutableListOf<UserModel1>()
 
+        // Query the "students" collection and retrieve the last record
+        val userQuery = usersRef.orderByChild("id").limitToLast(1)
+
+
 // Read data from the "users" node
-        usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        userQuery.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (snapshot in dataSnapshot.children) {
-                    // Convert each snapshot to your data class
-                    val user = snapshot.getValue(UserModel1::class.java)
-                    // Add the user to the list
-                    user?.let {
-                        myDataList.add(it)
-                    }
+                if (dataSnapshot.exists()) {
+                    // Retrieve the last student record
+                    val lastStudentRecord = dataSnapshot.children.last().getValue(UserModel1::class.java)
+                    pr("Id : " + lastStudentRecord?.id)
+                } else {
+                    pr("No student data available")
                 }
-                // Now myDataList contains instances of UserAttribute retrieved from Realtime Database
+
+
+
+//                for (snapshot in dataSnapshot.children) {
+//                    // Convert each snapshot to your data class
+//                    val user = snapshot.getValue(UserModel1::class.java)
+//                    // Add the user to the list
+//                    user?.let {
+//                        myDataList.add(it)
+//                    }
+//                }
+//                // Now myDataList contains instances of UserAttribute retrieved from Realtime Database
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -145,19 +160,14 @@ class Category : AppCompatActivity() {
 
         // Print each item retrieved
         myDataList.forEach { user ->
-            println("First Name: ${user.fName}")
-            println("Last Name: ${user.lName}")
-            println("City: ${user.city}")
-            println("Address: ${user.address}")
-            println("Age: ${user.age}")
-            println("-------------------------------")
+            pr("First Name: ${user.fName}")
+            pr("Last Name: ${user.lName}")
+            pr("City: ${user.city}")
+            pr("Address: ${user.address}")
+            pr("Age: ${user.age}")
+            pr("Id: ${user.id}")
         }
-
     }
 }
-
-
-
-// Step 3: Retrieve data from Firestore
 
 
