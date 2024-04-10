@@ -75,8 +75,8 @@ class Category : AppCompatActivity() {
             }
 
             // Display checked subjects and classes
-          //  val message = "Checked subjects: $checkedSubjects\nChecked classes: $checkedClasses"
-           // Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            //  val message = "Checked subjects: $checkedSubjects\nChecked classes: $checkedClasses"
+            // Toast.makeText(this, message, Toast.LENGTH_LONG).show()
             readUser("u1")
         }
 
@@ -114,5 +114,50 @@ class Category : AppCompatActivity() {
         })
     }
 
+    private fun getUserData() {
+        // Initialize Firebase Realtime Database
+        val database = FirebaseDatabase.getInstance()
+
+        // Get a reference to the "users" node in the database
+        val usersRef = database.getReference("users")
+
+        // Create a list to hold your data
+        val myDataList = mutableListOf<UserModel1>()
+
+// Read data from the "users" node
+        usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) {
+                    // Convert each snapshot to your data class
+                    val user = snapshot.getValue(UserModel1::class.java)
+                    // Add the user to the list
+                    user?.let {
+                        myDataList.add(it)
+                    }
+                }
+                // Now myDataList contains instances of UserAttribute retrieved from Realtime Database
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle errors
+            }
+        })
+
+        // Print each item retrieved
+        myDataList.forEach { user ->
+            println("First Name: ${user.fName}")
+            println("Last Name: ${user.lName}")
+            println("City: ${user.city}")
+            println("Address: ${user.address}")
+            println("Age: ${user.age}")
+            println("-------------------------------")
+        }
+
+    }
 }
+
+
+
+// Step 3: Retrieve data from Firestore
+
 

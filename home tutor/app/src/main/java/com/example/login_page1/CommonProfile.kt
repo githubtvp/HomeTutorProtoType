@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivityCommonProfileBinding
 import com.google.firebase.auth.FirebaseAuth
+//import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -115,7 +116,7 @@ class CommonProfile : AppCompatActivity() {
 //val user1 = intent.getSerializableExtra("user") as? User
             var intent = Intent(this, nextPage)
             intent.putExtra("user", user)
-           startActivity(intent)
+            startActivity(intent)
 
         } else if (2 == userTypeVal) {
             pr("Tutor user!")
@@ -123,7 +124,7 @@ class CommonProfile : AppCompatActivity() {
         }
         //  pr("All text boxes validated!")
         val nextPg = Intent(this, nextPage)
-      //  startActivity(nextPg)
+        //  startActivity(nextPg)
         finish()
     }
 
@@ -172,7 +173,7 @@ class CommonProfile : AppCompatActivity() {
         counterRef.child(cnt).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                  val userCount = dataSnapshot.value as? Map<String, Any?>
+                    val userCount = dataSnapshot.value as? Map<String, Any?>
                     // Do something with the user data
                     if (userCount != null) {
                         // Iterate through the map entries to access all attributes
