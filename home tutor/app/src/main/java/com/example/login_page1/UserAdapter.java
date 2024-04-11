@@ -14,13 +14,13 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserAdapter extends FirebaseRecyclerAdapter<UserModel, UserAdapter.myViewHolder> {
-    public UserAdapter(@NonNull FirebaseRecyclerOptions<UserModel> options) {
+public class UserAdapter extends FirebaseRecyclerAdapter<UserModelJV, UserAdapter.myViewHolder> {
+    public UserAdapter(@NonNull FirebaseRecyclerOptions<UserModelJV> options) {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull myViewHolder holder, int i, @NonNull UserModel uModel) {
+    protected void onBindViewHolder(@NonNull myViewHolder holder, int i, @NonNull UserModelJV uModel) {
         holder.userid.setText(uModel.getUserid());
         holder.password.setText(uModel.getPassword());
         holder.email.setText(uModel.getEmail());

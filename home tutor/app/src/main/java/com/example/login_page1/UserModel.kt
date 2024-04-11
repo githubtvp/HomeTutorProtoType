@@ -2,12 +2,13 @@ package com.example.login_page1
 
 import java.io.Serializable
 
-class UserModel1(
+class UserModel(
     var fName: String = "",
     var lName: String = "",
     var city: String = "",
     var address: String = "",
     var email: String = "",
+    var type: Int =0,
     var age: Int = 0,
     var id: Int = 0
 ) : Serializable {
@@ -18,6 +19,7 @@ class UserModel1(
         "",
         "",
         0,
-        0
+        0,
+          0
     )
 }

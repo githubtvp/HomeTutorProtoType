@@ -1,13 +1,13 @@
 package com.example.login_page1;
 
-public class UserModel {
+public class UserModelJV {
     String userid, password, imgUrl, email;
 
-    public UserModel()
+    public UserModelJV()
     {
 
     }
-    public UserModel(String userid, String password, String imgUrl, String email) {
+    public UserModelJV(String userid, String password, String imgUrl, String email) {
         this.userid = userid;
         this.password = password;
         this.imgUrl = imgUrl;

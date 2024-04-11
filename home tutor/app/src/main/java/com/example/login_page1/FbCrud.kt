@@ -18,10 +18,10 @@ class FbCrud : AppCompatActivity() {
         rv = findViewById(R.id.rv)
         rv.layoutManager = LinearLayoutManager(this)
 
-        val options = FirebaseRecyclerOptions.Builder<UserModel>()
+        val options = FirebaseRecyclerOptions.Builder<UserModelJV>()
             .setQuery(
                 FirebaseDatabase.getInstance().reference.child("users"),
-                UserModel::class.java
+                UserModelJV::class.java
             )
             .build()
         ua = UserAdapter(options)

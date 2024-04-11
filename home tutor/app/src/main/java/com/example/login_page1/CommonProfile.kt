@@ -10,11 +10,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivityCommonProfileBinding
 import com.google.firebase.auth.FirebaseAuth
-//import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
+
 
 class CommonProfile : AppCompatActivity() {
 
@@ -24,7 +26,20 @@ class CommonProfile : AppCompatActivity() {
     private var nextPage2: Class<*> = TutorProfile::class.java
     private var userTypeVal = 0
     private lateinit var user: User
+    private lateinit var EmailExists: Boolean
+
     private lateinit var currentUserEmail: String
+
+    // Define the callback interface
+    interface StringResultCallback {
+        fun onResult(result: String)
+    }
+
+    // Define the callback interface
+    interface BooleanResultCallback {
+        fun onResult(result: Boolean)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCommonProfileBinding.inflate(layoutInflater)
@@ -36,6 +51,13 @@ class CommonProfile : AppCompatActivity() {
         } else {
             // Handle the case where "userTypeVal" is not set in the intent extras
         }
+        /*
+        Check email and type exists alreay?
+        if exists ... go to edit profile else
+        proceed to add new student/tutor
+         */
+        setCurUserEmail()
+        checkProfileExists()
         // val userTypeVal : Int = uType.toInt()
         setUpListenerWatchers()
         Ininui()
@@ -76,10 +98,11 @@ class CommonProfile : AppCompatActivity() {
             // Enable or disable the forward arrow button based on validation result
             binding.btnnext.isEnabled = isValid
             if (isValid) {
-                //pr("Valid chked")
+                // pr("Valid chked")
                 binding.btnnext.isEnabled = true
                 binding.btnnext.setOnClickListener { onFwdArrClickNextPage() }
             }
+
         }
     }
 
@@ -134,7 +157,7 @@ class CommonProfile : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance()
         // Step 2: Define a reference to the location where you want to store the user data
         val usersRef = database.getReference("users")
-        pr("addStudUser A1 !!")
+        //    pr("addStudUser A1 !!")
         // Generate a unique key for the user
         getNextId { userId ->
             // If userId is null, then something went wrong, handle it
@@ -164,35 +187,146 @@ class CommonProfile : AppCompatActivity() {
 
     private fun getNextId(callback: (String?) -> Unit) {
         val db = FirebaseDatabase.getInstance()
-        val usersRef = db.getReference("users")
-        //  pr("$usersRef - getNextId B1 : ")
-        val counterRef = db.getReference("user-count")
-        //   pr("$counterRef - getNextId B1 : ")
-        // Retrieve the current counter value and generate a new user key
-        val cnt = "count"
-        counterRef.child(cnt).addListenerForSingleValueEvent(object : ValueEventListener {
+        val countRef = db.getReference("count")
+        // Add a ValueEventListener to retrieve the data from the "count" collection
+        countRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val userCount = dataSnapshot.value as? Map<String, Any?>
-                    // Do something with the user data
-                    if (userCount != null) {
-                        // Iterate through the map entries to access all attributes
-                        for ((key, value) in userCount) {
-                            pr("$key: $value")
-                        }
-                    } else {
-                        pr("User data is null")
+                    //   pr("dataSnapshot.exists()")
+                    // Retrieve the Count model from the data snapshot
+                    val countData = dataSnapshot.getValue(Count::class.java)
+                    // Check if countData is not null
+                    if (countData != null) {
+                        //  val userId = countData?.let { generateStudentKey(it.StudCnt) }
+                        val userId = generateStudentKey(countData.StudCnt)
+                        // Increment counter and update it in the database
+                        //  pr("here getNextId 2 : increment counter!!")
+                        countRef.child("StudCnt").setValue(countData.StudCnt + 1)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+//                        // Call the callback function with the generated userId
+                                    pr("Student count: ${countData.StudCnt}")
+                                    //  pr("Tutor count: ${countData.TutorCnt}")
+                                    callback(userId)
+                                } else {
+                                    pr("No count data available 1")
+                                    callback(null) // Pass null to indicate failure
+                                }
+                            }
                     }
-                } else {
-                    pr("User not found")
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                pr("Error fetching user data: ${databaseError.message}")
+                pr("Database error: ${databaseError.message}")
+            }
+        })
+    }//End - private fun getNextId(callback: (String?) -> Unit)
+
+        fun generateStudentKey(cnt: Int): String {
+            return "s$cnt"
+        }
+
+        fun generateTutorKey(cnt: Int): String {
+            return "t$cnt"
+        }
+        fun setCurUserEmail() {
+            // Step 1: Get the current user object from FirebaseAuth
+            val currentUser = FirebaseAuth.getInstance().currentUser
+            // Step 2: Check if the current user is not null, then get the email
+            currentUser?.let { user ->
+                currentUserEmail = user.email.toString()
+            }
+        }
+
+        fun pr(msg: String) {
+            Toast.makeText(this, "" + msg, Toast.LENGTH_LONG).show()
+        }
+
+    fun setEmailExists()
+    {
+        onResult(EmailExists: B
+    }
+    // Function to check for duplicates and create a new record if there are none
+    fun checkProfileExists() : Boolean {
+        // Get a reference to the "users" collection in the database
+        val studRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("Student")
+
+        // Create a query to search for records with matching email
+        val emailQuery: Query = studRef.orderByChild("email").equalTo(currentUserEmail)
+
+        // Create a query to search for records with matching type
+        val typeQuery: Query = studRef.orderByChild("type").equalTo(userTypeVal.toDouble())
+
+        // Listener to check for duplicates based on email
+        emailQuery.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // If there are matching records for the email
+                    pr("Duplicate record found based on email. Record not created.")
+                    return false
+                } else {
+                    // Proceed to check type duplication
+                    return checkTypeDuplicate(typeQuery)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle database error
+                pr("Database error: ${databaseError.message}")
             }
         })
     }
+
+    // Function to check for duplicates based on type
+    fun checkTypeDuplicate(typeQuery : Query) {
+        // Listener to check for duplicates based on type
+        typeQuery.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // If there are matching records for the type
+                    pr("Duplicate record found based on type. Record not created.")
+                } else {
+                    // No duplicates found, create the new record
+                  //  createNewRecord(userData)
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle database error
+                println("Database error: ${databaseError.message}")
+            }
+        })
+    }
+
+    // Function to create a new record in the database
+    fun createNewRecord(userData: UserModel) {
+        // Get a reference to the "users" collection in the database
+        val usersRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
+
+        // Generate a new key for the new record
+        val newRecordKey = usersRef.push().key
+
+        // Set the user data at the new record key
+        if (newRecordKey != null) {
+            usersRef.child(newRecordKey).setValue(userData)
+                .addOnSuccessListener {
+                    // Success handling
+                    println("New record created successfully.")
+                }
+                .addOnFailureListener { error ->
+                    // Failure handling
+                    println("Failed to create new record: ${error.message}")
+                }
+        }
+    }
+
+
+
+
+
+}//End- class CommonProfile : AppCompatActivity()
+
+
 
 //    private fun getNextId(callback: (String?) -> Unit) {
 //        val db = FirebaseDatabase.getInstance()
@@ -254,62 +388,38 @@ class CommonProfile : AppCompatActivity() {
 //        }
 //        counterRef.addValueEventListener(counterRefListener)
 //    }
+/*
+       private fun getNextId(callback: (String) -> Unit) {
+       val db = FirebaseDatabase.getInstance()
+       val usersRef = db.getReference("users")
+       val counterRef = db.getReference("usercounter")
 
-    fun generateUserKey(userCounter: Int): String {
-        return "u$userCounter"
-    }
+       counterRef.addListenerForSingleValueEvent(object : ValueEventListener {
+           override fun onDataChange(dataSnapshot: DataSnapshot) {
+               val userCounter = dataSnapshot.getValue(Int::class.java) ?: 0
+               val userId = generateUserKey(userCounter + 1)
 
-    private fun setCurUserEmail() {
-        // Step 1: Get the current user object from FirebaseAuth
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        // Step 2: Check if the current user is not null, then get the email
-        currentUser?.let { user ->
-            currentUserEmail = user.email.toString()
-        }
-    }
+               // Increment counter and update it in the database
+               counterRef.setValue(userCounter + 1).addOnCompleteListener { task ->
+                   if (task.isSuccessful) {
+                       // Call the callback function with the generated userId
+                       callback(userId)
+                   } else {
+                       // Handle error
+                   }
+               }
+           }
 
-    /*
-    private fun getNextId(callback: (String) -> Unit) {
-    val db = FirebaseDatabase.getInstance()
-    val usersRef = db.getReference("users")
-    val counterRef = db.getReference("usercounter")
-
-    counterRef.addListenerForSingleValueEvent(object : ValueEventListener {
-        override fun onDataChange(dataSnapshot: DataSnapshot) {
-            val userCounter = dataSnapshot.getValue(Int::class.java) ?: 0
-            val userId = generateUserKey(userCounter + 1)
-
-            // Increment counter and update it in the database
-            counterRef.setValue(userCounter + 1).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    // Call the callback function with the generated userId
-                    callback(userId)
-                } else {
-                    // Handle error
-                }
-            }
-        }
-
-        override fun onCancelled(databaseError: DatabaseError) {
-            // Handle error
-        }
-    })
-}
+           override fun onCancelled(databaseError: DatabaseError) {
+               // Handle error
+           }
+       })
+   }
 
 
 
 
-     */
-
-
-    // Function to generate user keys with the format "u1", "u2", "u3", ...
-
-
-    fun pr(msg: String) {
-        Toast.makeText(this, "" + msg, Toast.LENGTH_LONG).show()
-    }
-
-}//End- class CommonProfile : AppCompatActivity()
+        */
 
 
 /*

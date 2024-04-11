@@ -118,23 +118,18 @@ class Category : AppCompatActivity() {
     private fun getUserData() {
         // Initialize Firebase Realtime Database
         val database = FirebaseDatabase.getInstance()
-
         // Get a reference to the "users" node in the database
         val usersRef = database.getReference("users")
-
         // Create a list to hold your data
-        val myDataList = mutableListOf<UserModel1>()
-
+        val myDataList = mutableListOf<UserModel>()
         // Query the "students" collection and retrieve the last record
         val userQuery = usersRef.orderByChild("id").limitToLast(1)
-
-
 // Read data from the "users" node
         userQuery.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     // Retrieve the last student record
-                    val lastStudentRecord = dataSnapshot.children.last().getValue(UserModel1::class.java)
+                    val lastStudentRecord = dataSnapshot.children.last().getValue(UserModel::class.java)
                     pr("Id : " + lastStudentRecord?.id)
                 } else {
                     pr("No student data available")
