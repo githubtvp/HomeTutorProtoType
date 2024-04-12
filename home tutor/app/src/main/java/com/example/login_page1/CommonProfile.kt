@@ -22,8 +22,8 @@ class CommonProfile : AppCompatActivity() {
 
     private lateinit var binding: ActivityCommonProfileBinding
     private lateinit var nextPage: Class<*>
-    private var nextPage1: Class<*> = StudProfile::class.java
-    private var nextPage2: Class<*> = TutorProfile::class.java
+    private var npStudProf: Class<*> = StudProfile::class.java
+    private var npTutorProf: Class<*> = TutorProfile::class.java
     private var userTypeVal = 0
     private lateinit var user: User
     private var EmailExists = false
@@ -136,7 +136,13 @@ class CommonProfile : AppCompatActivity() {
         val isValidAddress = address.isNotEmpty() // Example validation logic
 
         if (isValidFName && isValidLName && isValidAge && isValidCity && isValidAddress) {
-            user = User(fName, lName, city, address, age!!)
+            if (1 == userTypeVal) {
+                user = StudModel(fName, lName, city, address, age!!)
+            }
+            else{
+               // user = TutorModel(fName, lName, city, address, age!!)
+            }
+
         }
         // Return true if all EditText fields are valid, otherwise false
         return isValidFName && isValidLName && isValidAge && isValidCity && isValidAddress
@@ -146,7 +152,7 @@ class CommonProfile : AppCompatActivity() {
         //pr("Here 12")
         if (1 == userTypeVal) {
             pr("Student user!")
-            nextPage = nextPage1
+            nextPage = npStudProf
             addStudUser()
 //val user1 = intent.getSerializableExtra("user") as? User
             var intent = Intent(this, nextPage)
@@ -155,7 +161,7 @@ class CommonProfile : AppCompatActivity() {
 
         } else if (2 == userTypeVal) {
             pr("Tutor user!")
-            nextPage = nextPage2
+            nextPage = npTutorProf
         }
         //  pr("All text boxes validated!")
         val nextPg = Intent(this, nextPage)
