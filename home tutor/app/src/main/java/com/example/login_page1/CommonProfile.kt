@@ -26,7 +26,8 @@ class CommonProfile : AppCompatActivity() {
     private var nextPage2: Class<*> = TutorProfile::class.java
     private var userTypeVal = 0
     private lateinit var user: User
-    private lateinit var EmailExists: Boolean
+    private var EmailExists = false
+    private var UserTypeMatches = false
 
     private lateinit var currentUserEmail: String
 
@@ -58,8 +59,19 @@ class CommonProfile : AppCompatActivity() {
          */
         setCurUserEmail()
         checkProfileExists()
+
+        if(EmailExists == false)
+        {
+            //proceed to Edit profile
+            pr("Email chkd Exists already")
+        }
+        else
+        {
+            //process create new profile
+            setUpListenerWatchers()
+        }
         // val userTypeVal : Int = uType.toInt()
-        setUpListenerWatchers()
+
         Ininui()
     }
 
@@ -245,10 +257,10 @@ class CommonProfile : AppCompatActivity() {
 
     fun setEmailExists()
     {
-        onResult(EmailExists: B
+       // onResult(EmailExists: Boolean)
     }
     // Function to check for duplicates and create a new record if there are none
-    fun checkProfileExists() : Boolean {
+    fun checkProfileExists() {
         // Get a reference to the "users" collection in the database
         val studRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("Student")
 
@@ -264,10 +276,10 @@ class CommonProfile : AppCompatActivity() {
                 if (dataSnapshot.exists()) {
                     // If there are matching records for the email
                     pr("Duplicate record found based on email. Record not created.")
-                    return false
+                    EmailExists = true
                 } else {
                     // Proceed to check type duplication
-                    return checkTypeDuplicate(typeQuery)
+                    EmailExists = false // return checkTypeDuplicate(typeQuery)
                 }
             }
 
