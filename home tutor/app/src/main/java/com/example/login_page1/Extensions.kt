@@ -19,10 +19,10 @@ const val USERNAME_ALLOWED_CHAR = "[a-zA-Z0-9_]+"
 //const val PWD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$"
 const val PWD_REGEX = "^\\d{6}$"
 const val NAME_REGEX = "^[a-zA-Z]+$"
+const val PHONE_REGEX = "^\\d{10}$"
 
-
-fun Context.pr(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+fun Context.pr(msg: String) {
+    Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
 }
 
 fun Context.passStrtoNextPg(name: String, str : String, nextPage: Class<*>)
@@ -79,3 +79,11 @@ fun isValidTutorAge(age: Int): Boolean {
     // You can define your validation rules here
     return age in MIN_TUTOR_AGE..MAX_TUTOR_AGE // Assuming a reasonable age range
 }
+
+fun isValidPhNo(phNo : Int) : Boolean{
+    //Context.pr("PhNo chk")
+    val regex = Regex(PHONE_REGEX)
+   // return true
+    return (regex.matches(phNo.toString()))
+}
+

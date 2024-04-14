@@ -1,20 +1,423 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".TutorProfile"
-    android:background="@drawable/hope">
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/constraintLayout"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/hope"
+tools:context=".TutorProfile">
 
-    <TextView
-        android:id="@+id/textView1"
+<!-- Title -->
+<TextView
+    android:id="@+id/textViewTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Tutor Profile"
+    android:textColor="@color/black"
+    android:textSize="24sp"
+    android:textStyle="bold"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="16dp"/>
+
+<!-- ScrollView for Content -->
+<ScrollView
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:fillViewport="true"
+    app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+    app:layout_constraintBottom_toTopOf="@id/guideline"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Tutor Profile"
-        android:textSize="36dp"
-        android:textColor="@color/blue"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <!-- Qualification -->
+        <EditText
+            android:id="@+id/qualification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edit_text_background"
+            android:drawableLeft="@drawable/baseline_post_add_24"
+            android:drawablePadding="8dp"
+            android:ems="10"
+            android:hint="Qualification"
+            android:inputType="text"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Years of Experience -->
+        <EditText
+            android:id="@+id/experience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edit_text_background"
+            android:drawableLeft="@drawable/baseline_explicit_24"
+            android:drawablePadding="8dp"
+            android:ems="10"
+            android:hint="Years of Experience"
+            android:inputType="number"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/qualification" />
+
+        <!-- Boards -->
+        <TextView
+            android:id="@+id/textViewBoards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Boards:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/experience" />
+
+        <CheckBox
+            android:id="@+id/checkbox_CBSE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CBSE"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewBoards"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_StateBoard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State Board"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/checkbox_CBSE"
+            app:layout_constraintTop_toTopOf="@+id/checkbox_CBSE"
+            android:layout_marginStart="16dp" />
+
+        <!-- Classes -->
+        <TextView
+            android:id="@+id/textViewClasses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Classes:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_StateBoard" />
+
+        <CheckBox
+            android:id="@+id/checkbox_PrePrimaryTo5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pre-Primary to 5th"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewClasses"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_6thTo8th"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6th to 8th"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/checkbox_PrePrimaryTo5"
+            app:layout_constraintTop_toTopOf="@+id/checkbox_PrePrimaryTo5"
+            android:layout_marginStart="16dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_9thTo10th"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9th to 10th"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_6thTo8th"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_11thTo12th"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11th to 12th"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_9thTo10th"
+            android:layout_marginTop="8dp" />
+
+        <!-- Subjects -->
+        <TextView
+            android:id="@+id/textViewSubjects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subjects:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_11thTo12th"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Maths"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Maths"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewSubjects"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_English"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="English"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_Maths"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_ComputerScience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Computer Science"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_English"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_SocialScience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Social Science"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_ComputerScience"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Physics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Physics"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_SocialScience"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Chemistry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chemistry"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_Physics"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Biology"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Biology"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_Chemistry"
+            android:layout_marginTop="8dp" />
+
+        <!-- Availability -->
+        <TextView
+            android:id="@+id/textViewAvailability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Availability:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkbox_Biology" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Monday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monday"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAvailability"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Tuesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tuesday"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/checkbox_Monday"
+            app:layout_constraintTop_toBottomOf="@id/checkbox_Monday"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Wednesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wednesday"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/checkbox_Tuesday"
+            app:layout_constraintTop_toBottomOf="@id/checkbox_Tuesday"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Thursday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thursday"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/checkbox_Wednesday"
+            app:layout_constraintTop_toBottomOf="@id/checkbox_Wednesday"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Friday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Friday"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/checkbox_Thursday"
+            app:layout_constraintTop_toBottomOf="@id/checkbox_Thursday"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Saturday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saturday"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/checkbox_Friday"
+            app:layout_constraintTop_toBottomOf="@id/checkbox_Friday"
+            android:layout_marginTop="8dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_Sunday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sunday"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/checkbox_Saturday"
+            app:layout_constraintTop_toBottomOf="@id/checkbox_Saturday"
+            android:layout_marginTop="8dp" />
+
+        <!-- Charges per Hour -->
+        <EditText
+            android:id="@+id/charges_per_hour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edit_text_background"
+            android:drawableLeft="@drawable/baseline_attach_money_24"
+            android:drawablePadding="8dp"
+            android:ems="10"
+            android:hint="Charges per Hour"
+            android:inputType="numberDecimal"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkbox_Saturday" />
+
+        <!-- Special Achievements -->
+        <EditText
+            android:id="@+id/special_achievements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edit_text_background"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="Special Achievements"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/charges_per_hour" />
+
+        <!-- About Yourself -->
+        <EditText
+            android:id="@+id/about_yourself"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edit_text_background"
+            android:ems="10"
+            android:gravity="top"
+            android:hint="About Yourself (Max 20 words)"
+            android:inputType="textMultiLine"
+            android:maxLength="20"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/special_achievements" />
+
+        <!-- Submit Button -->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+<!-- Guideline for positioning the Submit Button -->
+<androidx.constraintlayout.widget.Guideline
+    android:id="@+id/guideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.9" />
+
+<!-- Submit Button -->
+<Button
+    android:id="@+id/btnSubmitProfile"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="32dp"
+    android:backgroundTint="@color/app_theme"
+    android:text="SUBMIT PROFILE"
+    app:cornerRadius="16dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

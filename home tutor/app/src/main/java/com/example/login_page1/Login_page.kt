@@ -120,14 +120,25 @@ class Login_page : AppCompatActivity() {
         }
     }
 
-    private fun isValidUsername(username: String): Boolean {
-        val userNameChk = chkUserName(username)
-        if (!userNameChk) {
-         //   pr("Invalid Username entry!")
-            binding.email.requestFocus() // Keep focus on this EditText
-        }
-        return userNameChk
+    fun onClickBtnLogIn() //btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
+    {
+        val email = binding.email.text.toString()
+        val pwd = binding.password.text.toString()
+      // pr("Login Page : onClick")
+        Page1.auth.signInWithEmailAndPassword(email, pwd)
+            .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
+                // on below line we are checking if the task is success or not.
+                if (task.isSuccessful) {
+                    nextPg(nextPageSuc)
+                    finish()
+                } else {
+                    nextPg(nextPageFail)
+                    finish()
+                }
+            })
+        binding.btnSignin.isEnabled = false
     }
+
 
     private fun isValidEmail(email: String): Boolean {
         val pattern = Patterns.EMAIL_ADDRESS
@@ -148,22 +159,13 @@ class Login_page : AppCompatActivity() {
         return pwdChk
     }
 
-   fun onClickBtnLogIn() //btn: Button, edtTxtUserName: TextView, edtTxtPasswd: TextView) {
-    {
-        val email = binding.email.text.toString()
-        val pwd = binding.password.text.toString()
-
-        Page1.auth.signInWithEmailAndPassword(email, pwd)
-            .addOnCompleteListener(OnCompleteListener<AuthResult?> { task ->
-                // on below line we are checking if the task is success or not.
-                if (task.isSuccessful) {
-                    nextPg(nextPageSuc)
-                    finish()
-                } else {
-                    nextPg(nextPageFail)
-                    finish()
-                }
-            })
-        binding.btnSignin.isEnabled = false
+    private fun isValidUsername(username: String): Boolean {
+        val userNameChk = chkUserName(username)
+        if (!userNameChk) {
+            //   pr("Invalid Username entry!")
+            binding.email.requestFocus() // Keep focus on this EditText
+        }
+        return userNameChk
     }
+
 }

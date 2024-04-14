@@ -2,7 +2,6 @@ package com.example.login_page1
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivityCreateProfileBinding
@@ -43,9 +42,5 @@ class CreateProfile : AppCompatActivity() {
             e.printStackTrace()
             // Handle the exception appropriately, such as logging or displaying an error message
         }
-    }
-
-    fun pr(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 }

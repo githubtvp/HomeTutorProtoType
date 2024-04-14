@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   android:id="@+id/main"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -58,22 +59,40 @@
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="332dp"
+            android:layout_height="555dp"
             android:background="@color/app_theme_light"
             android:backgroundTint="@color/app_theme_light">
 
             <EditText
-                android:id="@+id/city"
+                android:id="@+id/mobileNo"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/edit_text_background"
                 android:drawableLeft="@drawable/baseline_location_on_24"
                 android:drawablePadding="8dp"
                 android:drawableTint="@color/app_theme"
                 android:ems="10"
-                android:hint="city"
+                android:hint="Phone number"
+                android:inputType="phone"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/age" />
+
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/edit_text_background"
+                android:drawableLeft="@drawable/baseline_location_on_24"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/app_theme"
+                android:ems="10"
+                android:hint="City"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="@color/black"
@@ -81,13 +100,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/age" />
+                app:layout_constraintTop_toBottomOf="@+id/mobileNo" />
 
             <EditText
-                android:id="@+id/Address"
+                android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="116dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/edit_text_background"
                 android:drawableLeft="@drawable/baseline_location_on_24"
                 android:drawablePadding="8dp"
@@ -99,41 +118,42 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/age" />
+                app:layout_constraintTop_toBottomOf="@+id/city" />
+
 
             <EditText
-                android:id="@+id/firstname"
+                android:id="@+id/firstName"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/edit_text_background"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
                 android:drawableTint="@color/app_theme"
                 android:ems="10"
-                android:hint="firstname"
+                android:hint="Firstname"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <EditText
-                android:id="@+id/lastname"
+                android:id="@+id/lastName"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/edit_text_background"
                 android:drawableLeft="@drawable/baseline_person_24"
                 android:drawablePadding="8dp"
                 android:drawableTint="@color/app_theme"
                 android:ems="10"
-                android:hint="lastname"
+                android:hint="Lastname"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="@color/black"
@@ -141,35 +161,36 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/firstname" />
+                app:layout_constraintTop_toBottomOf="@+id/firstName" />
 
             <EditText
                 android:id="@+id/age"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/edit_text_background"
                 android:drawableLeft="@drawable/baseline_face_6_24"
                 android:drawablePadding="8dp"
                 android:drawableTint="@color/app_theme"
                 android:ems="10"
-                android:hint="age"
-                android:inputType="text"
+                android:hint="Age"
+                android:inputType="number"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lastname" />
+                app:layout_constraintTop_toBottomOf="@+id/lastName" />
+
 
             <Button
-                android:id="@+id/btnnext"
+                android:id="@+id/btnNext"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="56dp"
+                android:layout_marginBottom="28dp"
                 android:backgroundTint="@color/app_theme"
                 android:text="NEXT >>"
                 app:cornerRadius="16dp"
@@ -179,6 +200,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
