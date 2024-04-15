@@ -147,7 +147,7 @@ class CommonProfile : AppCompatActivity() {
                 isValidAge = (age != null && isValidStudentAge(age)) // Example validation logic
                 //validateAllInputs()
                 if (isValidAge) {
-                    pr("here Mob")
+                    //pr("here Mob")
                     binding.mobileNo.isEnabled = true
                 }
                 else {
@@ -183,32 +183,6 @@ class CommonProfile : AppCompatActivity() {
                     binding.address.isEnabled = false
                     binding.btnNext.isEnabled = false
                 }
-
-             //   isValidPhoneNo = (binding.mobileNo != null && isValidPhNo(binding.mobileNo.toString().toInt()))
-
-//                if (isValidPhoneNo) {
-//                    pr("Mob verified")
-//                    binding.city.isEnabled = true
-//                } else {
-//                    binding.address.isEnabled = false
-//                    binding.btnNext.isEnabled = false
-//                }
-
-
-//               // var countryCodePicker = binding.countryCode
-//                var phoneInput = binding.mobileNo
-//            //    countryCodePicker.registerCarrierNumberEditText(phoneInput)
-//                if (!countryCodePicker.isValidFullNumber) {
-//                    phoneInput.error = "Phone is invalid"
-//                    binding.address.isEnabled = false
-//                    binding.btnNext.isEnabled = false
-//                    return
-//                }
-//                else
-//                {
-//                    binding.city.isEnabled = true
-//                }
-
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -261,7 +235,7 @@ class CommonProfile : AppCompatActivity() {
                     val age: Int? = ageTxt.toIntOrNull()
                     val phoneNoTxt = binding.mobileNo.text.toString().trim()
                     val phoneNo: Int? = phoneNoTxt.toIntOrNull()
-                    var phNo = 8296077914 //phoneNo
+                    var phNo = phoneNo
                     stud = StudModel(fName, lName, city, address, currentUserEmail, phNo!!,  userTypeVal, age!!)
                     binding.btnNext.setOnClickListener { goToFullStudProfilePage() }
                 }

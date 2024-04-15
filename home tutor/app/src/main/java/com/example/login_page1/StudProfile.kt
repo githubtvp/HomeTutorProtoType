@@ -24,6 +24,12 @@ class StudProfile : AppCompatActivity() {
     private lateinit var theStudent: Student
     private var npHomePage: Class<*> = Home_page::class.java
 
+    private var isValidClass = false;
+    private var isValidSchoolName = false;
+    private var isValidParentName = false;
+    private var isValidParentPhNo = false;
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStudProfileBinding.inflate(layoutInflater)
@@ -52,6 +58,118 @@ class StudProfile : AppCompatActivity() {
 //            pr("Error: Retrieved object is not of type StudModel or is null")
 //        }
     }//End - override fun onCreate(savedInstanceState: Bundle?)
+
+    private fun setUpListenerWatchers2() {
+        binding.classStd.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                // Handle first name field changes
+                val cls = s.toString().trim()
+                isValidClass = false
+                isValidClass = (cls.isNotEmpty())// Example validation logic
+                //  validateAllInputs()
+                if (isValidClass) {
+                    binding.schoolName.isEnabled = true
+                } else {
+                    binding.parentName.isEnabled = false
+                    binding.parentPhno.isEnabled = false
+                    binding.btnSubmitProfile.isEnabled = false
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No implementation needed
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // No implementation needed
+            }
+        })//End - binding.classStd.addTextChangedListener(object : TextWatcher
+
+        binding.schoolName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                TODO("Not yet implemented")
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Handle last name field changes
+                val schName = binding.schoolName.text.toString().trim()
+                isValidSchoolName = false
+                isValidSchoolName = (schName.isNotEmpty())// Example validation logic
+                if (isValidSchoolName) {
+                    binding.parentName.isEnabled = true
+                } else {
+                    binding.parentPhno.isEnabled = false
+                    binding.btnSubmitProfile.isEnabled = false
+                }
+
+
+            }
+        })///End - binding.schoolName.addTextChangedListener(object : TextWatcher
+
+        binding.parentName.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                // Handle first name field changes
+                val parName = binding.parentName.text.toString().trim()
+                isValidParentName = false
+                isValidParentName = (parName.isNotEmpty()) // Example validation logic
+                if (isValidParentName) {
+                    binding.parentPhno.isEnabled = true
+                } else {
+                    binding.btnSubmitProfile.isEnabled = false
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No implementation needed
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // No implementation needed
+            }
+        })//End - binding.parentName.addTextChangedListener(object : TextWatcher
+
+        binding.parentPhno.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                TODO("Not yet implemented")
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val phoneNoTxt = binding.parentPhno.text.toString().trim()
+                // Convert the phone number to integer safely
+                val phoneNo: Int? = phoneNoTxt.toIntOrNull()
+                isValidParentPhNo = false
+                // Check if the phone number is valid and not null
+                if (phoneNo != null) {
+                    //  isValidPhoneNo = isValidPhNo(phoneNo)
+                    binding.btnSubmitProfile.isEnabled = true
+                    val classStd = binding.classStd.text.toString().trim()
+                    val schName = binding.schoolName.text.toString().trim()
+                    val parName = binding.parentName.text.toString().trim()
+                    val parPhoneNoTxt = binding.parentPhno.text.toString().trim()
+                    val parPhoneNo: Int = parPhoneNoTxt.toInt()
+
+                    theStudent = Student(
+                        stud = studRecd,
+                        studId = "",
+                        classStd = classStd,
+                        schoolName = schName,
+                        parentName = parName,
+                        parentPhno = parPhoneNo
+                    )
+                    binding.btnSubmitProfile.setOnClickListener { addStudUser() }
+                }
+            }
+        })//End - binding.parentPhno.addTextChangedListener(object : TextWatcher
+    }//End - private fun setUpListenerWatchers2()
+
 
     private fun setUpListenerWatchers() {
         // Add text change listeners to all EditText fields
@@ -120,12 +238,13 @@ class StudProfile : AppCompatActivity() {
             }
         }
     }
+
     private fun goToHomePage() {
         pr("goToHomePage")
-            nextPage = npHomePage
-            var intent = Intent(this, nextPage)
-            startActivity(intent)
-            finish()
+        nextPage = npHomePage
+        var intent = Intent(this, nextPage)
+        startActivity(intent)
+        finish()
     }
 
 
