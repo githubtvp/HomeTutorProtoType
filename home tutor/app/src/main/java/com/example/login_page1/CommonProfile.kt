@@ -1,10 +1,12 @@
 package com.example.login_page1
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.login_page1.databinding.ActivityCommonProfileBinding
@@ -318,10 +320,17 @@ class CommonProfile : AppCompatActivity() {
         } else if (2 == userTypeVal) {
             pr("Tutor user ttt!")
           //  nextPage = npTutorProf
-            var intent = Intent(this, TutorProfile::class.java)
-        //    intent.putExtra("tutor", com)
-         //   startActivity(intent)
-            finish()
+            if (this is Context) {
+                pr("Tutor user vvv")
+                // The `this` variable is an instance of Context, so you can use it.
+                var intent = Intent(this, TutorProfile::class.java)
+                startActivity(intent)
+            } else {
+
+                pr("Tutor user 333")
+                // `this` is not a context, you might need to use another context source.
+                Log.e("IntentError", "`this` is not an instance of Context.")
+            }
         }
     }
 
