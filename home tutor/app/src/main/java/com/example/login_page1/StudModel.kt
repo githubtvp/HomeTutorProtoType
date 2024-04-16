@@ -8,7 +8,7 @@ open class StudModel(
     var city: String = "",
     var address: String = "",
     var email: String = "",
-    var phoneNo: Int = 0,
+    var phoneNo: Long = 0,
     var type: Int = 0,
     var age: Int = 0
 

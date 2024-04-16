@@ -194,7 +194,6 @@ class CommonProfile : AppCompatActivity() {
             }
         })
 
-
         binding.city.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // Handle last name field changes
@@ -234,13 +233,12 @@ class CommonProfile : AppCompatActivity() {
                     val ageTxt = binding.age.text.toString().trim()
                     val age: Int? = ageTxt.toIntOrNull()
                     val phoneNoTxt = binding.mobileNo.text.toString().trim()
-                    val phoneNo: Int? = phoneNoTxt.toIntOrNull()
-                    var phNo = phoneNo
+                    val phoneNo: Long? = phoneNoTxt.toLongOrNull()
+                    var phNo = 8296077914//phoneNo
                     stud = StudModel(fName, lName, city, address, currentUserEmail, phNo!!,  userTypeVal, age!!)
                     binding.btnNext.setOnClickListener { goToFullStudProfilePage() }
                 }
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // No implementation needed
             }
@@ -252,131 +250,89 @@ class CommonProfile : AppCompatActivity() {
        // setFocusLost()
     }
 
-    private fun setFocusLost() {
-        binding.btnNext.isEnabled = false
-        // Assuming editTexts is a list of EditText instances
-        val messages = listOf(
-            "Invalid First Name",
-            "Invalid Last Name",
-            "Invalid Age",
-            "Invalid City Name",
-            "Invalid Address"
-            // Add more messages for each EditText as needed
-        )
-        // Initialize the list of EditTexts
-        val editTexts =
-            listOf(binding.firstName, binding.lastName, binding.age, binding.city, binding.address)
-        for ((index, editText) in editTexts.withIndex()) {
-            val message = messages.getOrNull(index) ?: "Default message"
-            editText.setOnFocusChangeListener { view, hasFocus ->
-                if (!hasFocus) {
-                    // This block will be executed when the EditText loses focus
-                    val text = editText.text.toString()
-                    // Perform validation based on the type of EditText
-                    val isValid = when (editText) {
-                        // Add cases for each EditText requiring different validation
-                        binding.firstName ->(text.isNotEmpty() && chkName(text))
-                        binding.lastName -> (text.isNotEmpty() && chkName(text))
-                        binding.age -> (text.toIntOrNull() != null && isValidStudentAge(text.trim().toInt()))
-                        binding.city -> (text.isNotEmpty())
-                        binding.address -> (text.isNotEmpty())
-                        // Add more cases as needed
-                        else -> true // Default to true if no specific validation is needed
-                    }
-                    // Perform action based on validation result
-                    if (!isValid) {
-                        // Show a toast message or perform any other action to notify the user
-                        pr(message)
-                        editText.requestFocus()
-                    }
-                    binding.btnNext.isEnabled = isValid
-                    if (isValid) {
-                        binding.btnNext.isEnabled = true
-                        val fName = binding.firstName.text.toString().trim()
-                        val lName = binding.lastName.text.toString().trim()
-                        val city = binding.city.text.toString().trim()
-                        val address = binding.address.text.toString().trim()
-                        val ageTxt = binding.age.text.toString().trim()
-                        val age: Int? = ageTxt.toIntOrNull()
-                        // val phoneNoTxt = binding.phoneNo.text.toString().trim()
-                        //  val phoneNo: Int? = phoneNoTxt.toIntOrNull()
-                        var phNo = 8296077914 //phoneNo
-                        stud = StudModel(fName, lName, city, address, currentUserEmail, phNo!!,  userTypeVal, age!!)
-                        binding.btnNext.setOnClickListener { goToFullStudProfilePage() }
-                    }
-                }
-            }
-        }
+    private fun goToFullStudProfilePage() {
+      //  nextPage = npStudProf
+        pr("goToHomePage + \n$nextPage")
+        var intent = Intent(this, StudProfile::class.java)
+        intent.putExtra("stud", stud)
+        startActivity(intent)
+        //finish()
     }
 
-    private fun setUpListenerWatchers3() {
-//        binding.age.addTextChangedListener(object : TextWatcher {
-//            override fun afterTextChanged(s: Editable?) {
-//                // Handle first name field changes
-//                val ageTxt = binding.age.text.toString().trim()
-//                val age: Int? = ageTxt.toIntOrNull()
-//                isValidAge = false
-//                isValidAge = (age != null && isValidStudentAge(age)) // Example validation logic
-//                validateAllInputs()
+//    private fun setFocusLost() {
+//        binding.btnNext.isEnabled = false
+//        // Assuming editTexts is a list of EditText instances
+//        val messages = listOf(
+//            "Invalid First Name",
+//            "Invalid Last Name",
+//            "Invalid Age",
+//            "Invalid City Name",
+//            "Invalid Address"
+//            // Add more messages for each EditText as needed
+//        )
+//        // Initialize the list of EditTexts
+//        val editTexts =
+//            listOf(binding.firstName, binding.lastName, binding.age, binding.city, binding.address)
+//        for ((index, editText) in editTexts.withIndex()) {
+//            val message = messages.getOrNull(index) ?: "Default message"
+//            editText.setOnFocusChangeListener { view, hasFocus ->
+//                if (!hasFocus) {
+//                    // This block will be executed when the EditText loses focus
+//                    val text = editText.text.toString()
+//                    // Perform validation based on the type of EditText
+//                    val isValid = when (editText) {
+//                        // Add cases for each EditText requiring different validation
+//                        binding.firstName ->(text.isNotEmpty() && chkName(text))
+//                        binding.lastName -> (text.isNotEmpty() && chkName(text))
+//                        binding.age -> (text.toIntOrNull() != null && isValidStudentAge(text.trim().toInt()))
+//                        binding.city -> (text.isNotEmpty())
+//                        binding.address -> (text.isNotEmpty())
+//                        // Add more cases as needed
+//                        else -> true // Default to true if no specific validation is needed
+//                    }
+//                    // Perform action based on validation result
+//                    if (!isValid) {
+//                        // Show a toast message or perform any other action to notify the user
+//                        pr(message)
+//                        editText.requestFocus()
+//                    }
+//                    binding.btnNext.isEnabled = isValid
+//                    if (isValid) {
+//                        binding.btnNext.isEnabled = true
+//                        val fName = binding.firstName.text.toString().trim()
+//                        val lName = binding.lastName.text.toString().trim()
+//                        val city = binding.city.text.toString().trim()
+//                        val address = binding.address.text.toString().trim()
+//                        val ageTxt = binding.age.text.toString().trim()
+//                        val age: Int? = ageTxt.toIntOrNull()
+//                        // val phoneNoTxt = binding.phoneNo.text.toString().trim()
+//                        //  val phoneNo: Int? = phoneNoTxt.toIntOrNull()
+//                        var phNo = 8296077914 //phoneNo
+//                      //  stud = StudModel(fName, lName, city, address, currentUserEmail, phNo!!,  userTypeVal, age!!)
+//                        binding.btnNext.setOnClickListener { goToFullStudProfilePage() }
+//                    }
+//                }
 //            }
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                // No implementation needed
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                // No implementation needed
-//            }
-//        })
-
-//        binding.phoneNo.addTextChangedListener(object : TextWatcher {
-//            override fun afterTextChanged(s: Editable?) {
-//                // Handle last name field changes
-//                val phoneNoTxt = binding.phoneNo.text.toString().trim()
-//                val phoneNo: Int? = phoneNoTxt.toIntOrNull()
-//                isValidPhoneNo = false
-//                isValidPhoneNo = (phoneNo != null)// Example validation logic
-//                validateAllInputs()
-//            }
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                // No implementation needed
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                // No implementation needed
-//            }
-//        })
-    }
+//        }
+//    }
 
     // Callback function that will be invoked when all validations pass
-    private fun onValidationSuccess() {
-        binding.btnNext.isEnabled = true
-        val fName = binding.firstName.text.toString().trim()
-        val lName = binding.lastName.text.toString().trim()
-        val city = binding.city.text.toString().trim()
-        val address = binding.address.text.toString().trim()
-        val ageTxt = binding.age.text.toString().trim()
-        val age: Int? = ageTxt.toIntOrNull()
-       // val phoneNoTxt = binding.phoneNo.text.toString().trim()
-      //  val phoneNo: Int? = phoneNoTxt.toIntOrNull()
-        var phNo = 8296077914 //phoneNo
-        binding.btnNext.isEnabled = true
-        stud = StudModel(fName, lName, city, address, currentUserEmail, phNo!!,  userTypeVal, age!!)
-
-        binding.btnNext.setOnClickListener { goToFullStudProfilePage() }
-    }
-
-    // General function to validate all input fields
-    private fun validateAllInputs() {
-        // Check if all fields are valid
-        if (isValidFName && isValidLName && isValidAge && isValidCity && isValidAddress && isValidPhoneNo) {
-            onValidationSuccess() // Invoke the callback function if all validations pass
-        } else {
-            binding.btnNext.isEnabled = false // Disable the button if any validation fails
-        }
-    }
-
+//    private fun onValidationSuccess() {
+//        binding.btnNext.isEnabled = true
+//        val fName = binding.firstName.text.toString().trim()
+//        val lName = binding.lastName.text.toString().trim()
+//        val city = binding.city.text.toString().trim()
+//        val address = binding.address.text.toString().trim()
+//        val ageTxt = binding.age.text.toString().trim()
+//        val age: Int? = ageTxt.toIntOrNull()
+//       // val phoneNoTxt = binding.phoneNo.text.toString().trim()
+//      //  val phoneNo: Int? = phoneNoTxt.toIntOrNull()
+//        var phNo = 8296077914 //phoneNo
+//        binding.btnNext.isEnabled = true
+//      //  stud = StudModel(fName, lName, city, address, currentUserEmail, phNo!!,  userTypeVal, age!!)
+//
+//        binding.btnNext.setOnClickListener { goToFullStudProfilePage() }
+//    }
 
     private fun setUpListenerWatchers() {
         // Add text change listeners to all EditText fields
@@ -451,7 +407,7 @@ class CommonProfile : AppCompatActivity() {
             pr("here in if")
             var phNo = 8296077914 //phoneNo
             binding.btnNext.isEnabled = true
-            stud = StudModel(fName, lName, city, address, currentUserEmail, phNo!!,  userTypeVal, age!!)
+        //    stud = StudModel(fName, lName, city, address, currentUserEmail, phNo!!,  userTypeVal, age!!)
 
 //            if (1 == userTypeVal) {
 //                pr("here in if")
@@ -473,19 +429,6 @@ class CommonProfile : AppCompatActivity() {
         pr("isValidPhoneNo : $isValidPhoneNo")
         return (isValidFName && isValidLName && isValidAge   && isValidCity && isValidAddress && isValidPhoneNo)
     }
-
-    private fun goToFullStudProfilePage() {
-        pr("goToHomePage")
-        nextPage = npStudProf
-        var intent = Intent(this, nextPage)
-        intent.putExtra("stud", stud)
-        startActivity(intent)
-        finish()
-    }
-
-
-
-
 
 
     private fun onFwdArrClickNextPage() {
@@ -592,7 +535,6 @@ class CommonProfile : AppCompatActivity() {
         }
     }
 
-
     private fun getNextId(callback: (String?) -> Unit) {
         //  pr("getNextId")
         val db = FirebaseDatabase.getInstance()
@@ -689,7 +631,6 @@ class CommonProfile : AppCompatActivity() {
                     // Process create new profile
                     // setUpListenerWatchers()
                     setUpListenerWatchers2()
-                  //  setUpListenerWatchers3()
 //                    pr("isValidFName : $isValidFName")
 //                    pr("isValidLName : $isValidLName")
 //                    pr("isValidCity : $isValidCity")
@@ -726,7 +667,7 @@ class CommonProfile : AppCompatActivity() {
                     EmailExists = false
                     //  pr("Email does not exist.")
                     // Process create new profile
-                    setUpListenerWatchers()
+                   // setUpListenerWatchers()
                 }
             }
 
