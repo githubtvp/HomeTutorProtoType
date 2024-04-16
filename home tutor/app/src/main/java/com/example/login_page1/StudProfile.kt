@@ -20,7 +20,7 @@ class StudProfile : AppCompatActivity() {
 
     private lateinit var binding: ActivityStudProfileBinding
     private lateinit var nextPage: Class<*>
-    private lateinit var studRecd: StudModel
+    private lateinit var studRecd: ComModel
     private lateinit var theStudent: Student
     private var npHomePage: Class<*> = Home_page::class.java
 
@@ -48,21 +48,11 @@ class StudProfile : AppCompatActivity() {
         // Retrieve the serializable extra from the intent
         //val stud = intent.getSerializableExtra("stud")
         studRecd =
-            intent.getSerializableExtra("stud") as StudModel // Assuming User is the class type
-//// Check if the retrieved object is not null and can be cast to the expected type
-//        if (studRecd is StudModel) {
-//            // Now you can safely use the stud object
-//            pr("Stud email: ${studRecd.email}")
-//            pr("Stud age: ${studRecd.age}")
-//            pr("Stud addre: ${studRecd.address}")
-//        } else {
-//            // Handle the case where the retrieved object is not of the expected type or is null
-//            pr("Error: Retrieved object is not of type StudModel or is null")
-//        }
-        setUpListenerWatchers2()
+            intent.getSerializableExtra("stud") as ComModel // Assuming User is the class type
+        setUpListenerWatchers()
     }//End - override fun onCreate(savedInstanceState: Bundle?)
 
-    private fun setUpListenerWatchers2() {
+    private fun setUpListenerWatchers() {
         binding.classStd.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // Handle first name field changes

@@ -22,7 +22,6 @@ open class ComModel(
         0,
         0,
         0
-
     )
 
     // Setter method for email
