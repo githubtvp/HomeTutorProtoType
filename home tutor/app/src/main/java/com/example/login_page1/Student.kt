@@ -2,13 +2,13 @@ import com.example.login_page1.StudModel
 import java.io.Serializable
 
 class Student(
-    stud: StudModel,
+    com: ComModel,
     var studId: String = "",
     var classStd: String = "",
     var schoolName: String = "",
     var parentName: String = "",
-    var parentPhno: Int = 0
-) : StudModel(
+    var parentPhno: Long = 0
+) : ComModel(
     stud.fName, stud.lName, stud.city, stud.address,
     stud.email, stud.phoneNo, stud.type, stud.age
 ), Serializable {

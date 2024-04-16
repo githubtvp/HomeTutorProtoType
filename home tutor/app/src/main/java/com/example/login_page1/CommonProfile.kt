@@ -234,7 +234,7 @@ class CommonProfile : AppCompatActivity() {
                     val ageTxt = binding.age.text.toString().trim()
                     val age: Int? = ageTxt.toIntOrNull()
                     val phoneNoTxt = binding.mobileNo.text.toString().trim()
-                    val phoneNo: Int? = phoneNoTxt.toIntOrNull()
+                    val phoneNo: Long = phoneNoTxt.toLong()
                     var phNo = phoneNo
                     stud = StudModel(fName, lName, city, address, currentUserEmail, phNo!!,  userTypeVal, age!!)
                     binding.btnNext.setOnClickListener { goToFullStudProfilePage() }
@@ -309,45 +309,6 @@ class CommonProfile : AppCompatActivity() {
         }
     }
 
-    private fun setUpListenerWatchers3() {
-//        binding.age.addTextChangedListener(object : TextWatcher {
-//            override fun afterTextChanged(s: Editable?) {
-//                // Handle first name field changes
-//                val ageTxt = binding.age.text.toString().trim()
-//                val age: Int? = ageTxt.toIntOrNull()
-//                isValidAge = false
-//                isValidAge = (age != null && isValidStudentAge(age)) // Example validation logic
-//                validateAllInputs()
-//            }
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                // No implementation needed
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                // No implementation needed
-//            }
-//        })
-
-//        binding.phoneNo.addTextChangedListener(object : TextWatcher {
-//            override fun afterTextChanged(s: Editable?) {
-//                // Handle last name field changes
-//                val phoneNoTxt = binding.phoneNo.text.toString().trim()
-//                val phoneNo: Int? = phoneNoTxt.toIntOrNull()
-//                isValidPhoneNo = false
-//                isValidPhoneNo = (phoneNo != null)// Example validation logic
-//                validateAllInputs()
-//            }
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                // No implementation needed
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                // No implementation needed
-//            }
-//        })
-    }
 
     // Callback function that will be invoked when all validations pass
     private fun onValidationSuccess() {

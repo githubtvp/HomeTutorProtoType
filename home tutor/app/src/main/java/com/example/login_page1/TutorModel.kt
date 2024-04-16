@@ -9,7 +9,7 @@ class TutorModel(
     var address: String = "",
     var email: String = "",
     var tutorId: String = "",
-    var phoneno: Int = 0,
+    var phoneno: Long = 0,
     var type: Int = 0,
     var age: Int = 0
 

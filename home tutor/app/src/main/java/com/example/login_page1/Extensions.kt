@@ -80,7 +80,7 @@ fun isValidTutorAge(age: Int): Boolean {
     return age in MIN_TUTOR_AGE..MAX_TUTOR_AGE // Assuming a reasonable age range
 }
 
-fun isValidPhNo(phNo : Int) : Boolean{
+fun isValidPhNo(phNo : Long) : Boolean{
     //Context.pr("PhNo chk")
     val regex = Regex(PHONE_REGEX)
    // return true

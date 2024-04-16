@@ -2,7 +2,7 @@ package com.example.login_page1
 
 import java.io.Serializable
 
-open class StudModel(
+open class ComModel(
     var fName: String = "",
     var lName: String = "",
     var city: String = "",
