@@ -290,7 +290,7 @@ class CommonProfile : AppCompatActivity() {
                     val phoneNoTxt = binding.mobileNo.text.toString().trim()
                     val phoneNo: Long = phoneNoTxt.toLong()
                     var phNo = phoneNo
-                    pr("here 2")
+                  //  pr("here 2")
                     com = ComModel(fName, lName, city, address, currentUserEmail, phNo!!,  userTypeVal, age!!)
                     binding.btnNext.setOnClickListener { goToFullProfile() }
                 }
@@ -310,27 +310,19 @@ class CommonProfile : AppCompatActivity() {
         if (1 == userTypeVal) {
             pr("Student user!")
             nextPage = npStudProf
-            //val user1 = intent.getSerializableExtra("user") as? User
-            // val stud = intent.getSerializableExtra("Student")
-            //  val stud = intent.getSerializableExtra("Student") as? stud
-            var intent = Intent(this, nextPage)
+           var intent = Intent(this, nextPage)
             intent.putExtra("stud", com)
             startActivity(intent)
             finish()
         } else if (2 == userTypeVal) {
             pr("Tutor user ttt!")
-          //  nextPage = npTutorProf
-            if (this is Context) {
-                pr("Tutor user vvv")
+            nextPage = npTutorProf
+              //  pr("Tutor user vvv")
+              //  Log.d("tutor user","working")
                 // The `this` variable is an instance of Context, so you can use it.
                 var intent = Intent(this, TutorProfile::class.java)
+                 intent.putExtra("tutor", com)
                 startActivity(intent)
-            } else {
-
-                pr("Tutor user 333")
-                // `this` is not a context, you might need to use another context source.
-                Log.e("IntentError", "`this` is not an instance of Context.")
-            }
         }
     }
 
