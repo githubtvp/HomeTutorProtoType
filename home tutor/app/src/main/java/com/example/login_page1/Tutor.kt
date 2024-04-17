@@ -7,15 +7,39 @@ class Tutor(
     var tutorId: String = "",
     var qualification: String = "",
     var experience: String = "",
-    var stateBd: Boolean = true,
-    var centralBd: Boolean = false,
-    var classes: Long = 0
+    var boards: MutableList<String> = mutableListOf(),
+    var classes: MutableList<String> = mutableListOf(),
+    var subjects: MutableList<String> = mutableListOf(),
+    var daysAvail: MutableList<String> = mutableListOf(),
+    var charges: Double = 0.0,
+    var splAchieve: String = "",
+    var abtYourself: String = ""
 ) : ComModel(
     tutor.fName, tutor.lName, tutor.city, tutor.address,
     tutor.email, tutor.phoneNo, tutor.type, tutor.age
 ), Serializable {
-    // Setter method for userType
-    fun setId (id: String) {
+
+    // Setter method for tutorId
+    fun setId(id: String) {
         this.tutorId = id
     }
+
+    fun addBoard(aBd : String)
+    {
+        this.boards.add(aBd)
+    }
+
+    fun addClasses(aClass : String)
+    {
+        this.classes.add(aClass)
+    }
+    fun addSubjects(aSubj : String)
+    {
+        this.subjects.add(aSubj)
+    }
+    fun addDaysAvail(aDay : String)
+    {
+        this.daysAvail.add(aDay)
+    }
+    // Consider adding additional methods for manipulating the properties if needed.
 }

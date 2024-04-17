@@ -42,11 +42,13 @@ tools:context=".TutorProfile">
         android:layout_marginTop="50dp">
 
         <!-- Qualification -->
+
+        <!-- Years of Experience -->
         <EditText
             android:id="@+id/qualification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="48dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/edit_text_background"
             android:drawableLeft="@drawable/baseline_post_add_24"
@@ -58,10 +60,10 @@ tools:context=".TutorProfile">
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Years of Experience -->
         <EditText
             android:id="@+id/experience"
             android:layout_width="match_parent"
