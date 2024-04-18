@@ -245,67 +245,6 @@ class StudProfile : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-//    private fun setUpListenerWatchers() {
-//        // Add text change listeners to all EditText fields
-//        // pr("LisWatcher")
-//        binding.classStd.addTextChangedListener(getTextWatcher)
-//        binding.schoolName.addTextChangedListener(getTextWatcher)
-//        binding.parentName.addTextChangedListener(getTextWatcher)
-//        binding.parentPhno.addTextChangedListener(getTextWatcher)
-//        // Disable forward arrow button initially
-//        binding.btnSubmitProfile.isEnabled = false
-//    }
-//
-//    //create a TextWatcher object to attach to each EditText object
-//    private val getTextWatcher = object : TextWatcher {
-//        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//            // No implementation needed
-//        }
-//
-//        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//            // No implementation needed
-//        }
-//
-//        override fun afterTextChanged(s: Editable?) {
-//            //  pr("Here 13")
-//            // Validate all EditText fields
-//            val isValid = validateEntries()
-//            // Enable or disable the forward arrow button based on validation result
-//            binding.btnSubmitProfile.isEnabled = isValid
-//            if (isValid) {
-//                // pr("Valid chked")
-//                binding.btnSubmitProfile.isEnabled = true
-//                binding.btnSubmitProfile.setOnClickListener { addStudUser() }
-//            }
-//        }
-//    }//
-//    private fun validateEntries(): Boolean {
-//        //  pr("Here 14")
-//        val classStud = binding.classStd.text.toString().trim()
-//        val schName = binding.schoolName.text.toString().trim()
-//        val parName = binding.parentName.text.toString().trim()
-//        val parPhoneNoTxt = binding.parentPhno.text.toString().trim()
-//        val parPhoneNo: Long = parPhoneNoTxt.toLong()
-//
-//        // Perform validation for each EditText field
-//        val isValidClass = (classStud.isNotEmpty())// Example validation logic
-//        val isValidschName = (schName.isNotEmpty())// Example validation logic
-//        val isValidparName = (parName.isNotEmpty() && chkName(parName))  //
-//        val isValidPhoneNo = (parPhoneNo != null && isValidPhNo(parPhoneNo))
-//        if (isValidClass && isValidschName && isValidparName && isValidPhoneNo) {
-//            theStudent = Student(
-//                stud = studRecd,
-//                studId = "",
-//                classStd = classStud,
-//                schoolName = schName,
-//                parentName = parName,
-//                parentPhno = parPhoneNo
-//            )
-//        }
-//        // Return true if all EditText fields are valid, otherwise false
-//        return isValidClass && isValidschName && isValidparName && isValidPhoneNo
-//    }//End - private fun validateEntries(): Boolean
-
 
 }//End - class StudProfile : AppCompatActivity()
 
