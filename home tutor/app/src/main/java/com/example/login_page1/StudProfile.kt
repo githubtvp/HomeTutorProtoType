@@ -50,6 +50,14 @@ class StudProfile : AppCompatActivity() {
         studRecd =
             intent.getSerializableExtra("stud") as ComModel // Assuming User is the class type
         setUpListenerWatchers()
+        theStudent = Student(
+            stud = studRecd,
+            studId = "",
+            classStd = "",
+            schoolName = "",
+            parentName = "",
+            parentPhno = 0
+        )
 
     }//End - override fun onCreate(savedInstanceState: Bundle?)
 
@@ -57,12 +65,12 @@ class StudProfile : AppCompatActivity() {
         binding.classStd.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // Handle first name field changes
-                val clasTxt = binding.classStd.text.toString().trim()
-                val cls: Int? = clasTxt.toIntOrNull()
+                val cls = binding.classStd.text.toString().trim()
+                //val cls: Int? = clasTxt.toIntOrNull()
                 isValidClass = false
                 isValidClass = (cls !=null)// Example validation logic
-                //  validateAllInputs()
                 if (isValidClass) {
+                    theStudent.classStd = cls
                     binding.schoolName.isEnabled = true
                 } else {
                     binding.parentName.isEnabled = false
@@ -87,6 +95,7 @@ class StudProfile : AppCompatActivity() {
                 isValidSchoolName = false
                 isValidSchoolName = (schoolName.isNotEmpty())// Example validation logic
                 if (isValidSchoolName) {
+                    theStudent.schoolName = schoolName
                     binding.parentName.isEnabled = true
                 } else {
                     binding.parentPhno.isEnabled = false
@@ -109,6 +118,7 @@ class StudProfile : AppCompatActivity() {
                 isValidParentName = false
                 isValidParentName = (parName.isNotEmpty()) // Example validation logic
                 if (isValidParentName) {
+                    theStudent.parentName = parName
                     binding.parentPhno.isEnabled = true
                 } else {
                     binding.btnSubmitProfile.isEnabled = false
@@ -133,23 +143,10 @@ class StudProfile : AppCompatActivity() {
                 isValidParentPhNo = false
                 // Check if the phone number is valid and not null
                 if (parPhoneNo != null) {
-                    pr("Here : StudProf")
+                   // pr("Here : StudProf")
                     //  isValidPhoneNo = isValidPhNo(phoneNo)
+                    theStudent.parentPhno = parPhoneNo
                     binding.btnSubmitProfile.isEnabled = true
-                    val classStd = binding.classStd.text.toString().trim()
-                    val schName = binding.schoolName.text.toString().trim()
-                    val parName = binding.parentName.text.toString().trim()
-                  //  val parPhoneNoTxt = binding.parentPhno.text.toString().trim()
-                  //  val parPhoneNo: Long = parPhoneNoTxt.toLong()
-
-                    theStudent = Student(
-                        stud = studRecd,
-                        studId = "",
-                        classStd = classStd,
-                        schoolName = schName,
-                        parentName = parName,
-                        parentPhno = parPhoneNo
-                    )
                     binding.btnSubmitProfile.setOnClickListener { addStudUser() }
                 }
             }

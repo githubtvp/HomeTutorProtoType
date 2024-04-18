@@ -3,6 +3,7 @@ package com.example.login_page1
 // Extensions.kt
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -25,8 +26,12 @@ const val MONEY_REGEXP = "^\\d+\\.\\d{2}$"
 
 fun Context.pr(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+   // Log.d("TutProfile", "AfterTextChanged - fName: " + theTutor.fName)
 }
 
+fun prl(tag : String, msg: String, curVal : String) {
+    Log.d(tag, msg + " : " + curVal)
+}
 fun Context.passStrtoNextPg(name: String, str : String, nextPage: Class<*>)
 {
     val nextPg = Intent(this, nextPage)

@@ -1,6 +1,5 @@
 package com.example.login_page1
 
-import Student
 import Tutor
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +12,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.math.BigDecimal
 
 class TutorProfile : AppCompatActivity() {
 
@@ -42,134 +40,24 @@ class TutorProfile : AppCompatActivity() {
         //val stud = intent.getSerializableExtra("stud")
         tutorRecd =
             intent.getSerializableExtra("tutor") as ComModel // Assuming User is the class type
-
-// Check if the retrieved object is not null and can be cast to the expected type
-//        if (tutorRecd is ComModel) {
-//            // Now you can safely use the stud object
-//            pr("Tutor email: ${tutorRecd.email}")
-//            pr("Tutor age: ${tutorRecd.age}")
-//            pr("Tutor addre: ${tutorRecd.address}")
-//        } else {
-//            // Handle the case where the retrieved object is not of the expected type or is null
-//            pr("Error: Retrieved object is not of type StudModel or is null")
-//        }
-
-
         theTutor = Tutor(
             tutor = tutorRecd,
             tutorId = "",
             qualification = "",
             experience = "",
-            charges =  BigDecimal.ZERO,
-           splAchieve = "",
+            charges =  0.0,
+            splAchieve = "",
             abtYourself = ""
         )
 
         binding.qualification.isEnabled = true
-
+        binding.experience.isEnabled = false
+        binding.chargesPerHour.isEnabled = false
+        binding.specialAchievements.isEnabled = true
+        binding.aboutYourself.isEnabled = true
         // Set up OnCheckedChangeListener for each checkbox inside onCreate
-        binding.checkboxCBSE.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.boards.add("CBSE")
-            pr("CBSE checked status: $isChecked")
-        }
-
-        binding.checkboxStateBoard.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.boards.add("State")
-           // pr("CBSE checked status: $isChecked")
-        }
-
-        binding.checkboxPrePrimaryTo5.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.classes.add("1to5")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkbox6thTo8th.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.classes.add("6to8")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkbox9thTo10th.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.classes.add("9to10")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkbox11thTo12th.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.classes.add("11to12")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxMaths.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.subjects.add("Math")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxEnglish.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.subjects.add("English")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxComputerScience.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.subjects.add("CS")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxSocialScience.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.subjects.add("SocialScience")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxPhysics.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.subjects.add("Physics")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxChemistry.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.subjects.add("Chemistry")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxBiology.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.subjects.add("Biology")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxMonday.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.daysAvail.add("Monday")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxTuesday.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.daysAvail.add("Tuesday")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxWednesday.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.daysAvail.add("Wednesday")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxThursday.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.daysAvail.add("Thursday")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxFriday.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.daysAvail.add("Friday")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxSaturday.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.daysAvail.add("Saturday")
-            // pr("CBSE checked status: $isChecked")
-        }
-        binding.checkboxSunday.setOnCheckedChangeListener { _, isChecked ->
-            // Handle state change of checkbox1
-            theTutor.daysAvail.add("Sunday")
-            // pr("CBSE checked status: $isChecked")
-        }
+        activateCheckBoxes()
+        setUpListenerWatchers()
 
     }//End - override fun onCreate(savedInstanceState: Bundle?)
 
@@ -177,10 +65,12 @@ class TutorProfile : AppCompatActivity() {
         binding.qualification.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // Handle first name field changes
+             //   pr("1 Qualification pressed 1")
                 val qual = binding.qualification.text.toString().trim()
                 isValidQual = (qual !=null && chkQual(qual))// Example validation logic
                 //  validateAllInputs()
                 if (isValidQual) {
+                  //  pr("2 Qualification pressed 1")
                     theTutor.qualification = qual
                     binding.experience.isEnabled = true
                 } else {
@@ -202,9 +92,11 @@ class TutorProfile : AppCompatActivity() {
         binding.experience.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // Handle last name field changes
+              //  pr("1 Experience pressed 1")
                 val exper = binding.experience.text.toString().trim()
                 isValidExperience = (exper.isNotEmpty())// Example validation logic
                 if (isValidExperience) {
+                 //   pr("2 Experience pressed 1")
                     theTutor.experience = exper
                     binding.chargesPerHour.isEnabled = true
                 } else {
@@ -221,18 +113,19 @@ class TutorProfile : AppCompatActivity() {
 
         binding.chargesPerHour.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                pr("1 Submit Btn pressed 1")
+              //  pr("1 Submit Btn pressed 1")
                 // Handle first name field changes
                 val chgs = binding.chargesPerHour.text.toString().trim()
                 isValidCharges = (chgs.isNotEmpty() && chkRate(chgs)) // Example validation logic
                 if (isValidCharges) {
-                    pr("2 Submit Btn pressed 2")
-                    val rate = chgs.toBigDecimal()
+                    val rate = chgs.toDouble()
                     theTutor.charges = rate
-                    theTutor.splAchieve = ""
-                    theTutor.abtYourself = ""
+                    theTutor.splAchieve = binding.specialAchievements.text.toString().trim()
+                    theTutor.abtYourself =binding.aboutYourself.text.toString().trim()
                     binding.btnSubmitProfile.isEnabled = true
-
+//                    prl("TutProfile", "fName: ", theTutor.fName)
+//                    prl("TutProfile", "lName: ", theTutor.lName)
+//                    prl("TutProfile", "City : ", theTutor.city)
                     binding.btnSubmitProfile.setOnClickListener { addStudUser() }
                 }
             }
@@ -259,9 +152,9 @@ class TutorProfile : AppCompatActivity() {
             // If userId is null, then something went wrong, handle it
             if (tutorId != null) {
                 // Store the user object at the generated key
-                //   pr("here addStudUser A2 !!")
-                // setCurUserEmail()
+              //  pr("addTutor A2 : " + tutorId)
                 theTutor.setId(tutorId)
+              //  pr("Tutor Id : " + theTutor.tutorId)
                 tutorRef.child(tutorId).setValue(theTutor)
                     .addOnSuccessListener {
                         // User data has been saved successfully
@@ -271,7 +164,7 @@ class TutorProfile : AppCompatActivity() {
                     }
                     .addOnFailureListener { e ->
                         // An error occurred while saving user data
-                        pr("Error saving Student data: ${e.message}")
+                        pr("Error saving Tutor data: ${e.message}")
                     }
 
             } else {
@@ -293,7 +186,7 @@ class TutorProfile : AppCompatActivity() {
                     val countData = dataSnapshot.getValue(Count::class.java)
                     // Check if countData is not null
                     if (countData != null) {
-                        //    pr("Student user!")
+                         pr("Tutor GetNextId!")
                         val tutorId = generateTutorKey(countData.TutorCnt + 1)
                         // Increment counter and update it in the database
                         //    pr("here getNextId 2 : increment counter!!")
@@ -312,7 +205,6 @@ class TutorProfile : AppCompatActivity() {
                     }
                 }
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
                 pr("Database error: ${databaseError.message}")
             }
@@ -332,5 +224,138 @@ class TutorProfile : AppCompatActivity() {
         finish()
     }
 
+    fun handleCheckboxChange(list: MutableList<String>, toAddVal: String, isChecked: Boolean) {
+        if (isChecked) {
+            // Add the toAddVal to the list if not already present
+            if (!list.contains(toAddVal)) {
+                list.add(toAddVal)
+            }
+        } else {
+            // Remove the toAddVal from the list if present
+            list.remove(toAddVal)
+        }
+    }
+
+    fun activateCheckBoxes()
+    {
+        binding.checkboxCBSE.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox
+            handleCheckboxChange(theTutor.boards, "CBSE", isChecked)
+        }
+
+        binding.checkboxStateBoard.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+          //  theTutor.boards.add("State")
+            handleCheckboxChange(theTutor.boards, "State", isChecked)
+        }
+
+        binding.checkboxPrePrimaryTo5.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+           // theTutor.classes.add("1to5")
+            handleCheckboxChange(theTutor.classes, "1to5", isChecked)
+        }
+
+        binding.checkbox6thTo8th.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+           // theTutor.classes.add("6to8")
+            handleCheckboxChange(theTutor.classes, "6to8", isChecked)
+        }
+
+        binding.checkbox9thTo10th.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+           // theTutor.classes.add("9to10")
+            handleCheckboxChange(theTutor.classes, "9to10", isChecked)
+        }
+
+        binding.checkbox11thTo12th.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+           // theTutor.classes.add("11to12")
+            handleCheckboxChange(theTutor.classes, "11to12", isChecked)
+        }
+
+        binding.checkboxMaths.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.subjects.add("Math")
+            handleCheckboxChange(theTutor.subjects, "Math", isChecked)
+        }
+
+        binding.checkboxEnglish.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            //theTutor.subjects.add("English")
+            handleCheckboxChange(theTutor.subjects, "English", isChecked)
+        }
+
+        binding.checkboxComputerScience.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+           // theTutor.subjects.add("CS")
+            handleCheckboxChange(theTutor.subjects, "CS", isChecked)
+        }
+
+        binding.checkboxSocialScience.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+           // theTutor.subjects.add("SocialScience")
+            handleCheckboxChange(theTutor.subjects, "SocialScience", isChecked)
+        }
+
+        binding.checkboxPhysics.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            //theTutor.subjects.add("Physics")
+            handleCheckboxChange(theTutor.subjects, "Physics", isChecked)
+        }
+
+        binding.checkboxChemistry.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            //theTutor.subjects.add("Chemistry")
+            handleCheckboxChange(theTutor.subjects, "Chemistry", isChecked)
+        }
+
+        binding.checkboxBiology.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            //theTutor.subjects.add("Biology")
+            handleCheckboxChange(theTutor.subjects, "Biology", isChecked)
+        }
+
+        binding.checkboxMonday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            //theTutor.daysAvail.add("Monday")
+            handleCheckboxChange(theTutor.daysAvail, "Monday", isChecked)
+        }
+
+        binding.checkboxTuesday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            //theTutor.daysAvail.add("Tuesday")
+            handleCheckboxChange(theTutor.daysAvail, "Tuesday", isChecked)
+        }
+
+        binding.checkboxWednesday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+           // theTutor.daysAvail.add("Wednesday")
+            handleCheckboxChange(theTutor.daysAvail, "Wednesday", isChecked)
+        }
+
+        binding.checkboxThursday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+           // theTutor.daysAvail.add("Thursday")
+            handleCheckboxChange(theTutor.daysAvail, "Thursday", isChecked)
+        }
+
+        binding.checkboxFriday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            //theTutor.daysAvail.add("Friday")
+            handleCheckboxChange(theTutor.daysAvail, "Friday", isChecked)
+        }
+
+        binding.checkboxSaturday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            //theTutor.daysAvail.add("Saturday")
+            handleCheckboxChange(theTutor.daysAvail, "Saturday", isChecked)
+        }
+
+        binding.checkboxSunday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            //theTutor.daysAvail.add("Sunday")
+            handleCheckboxChange(theTutor.daysAvail, "Sunday", isChecked)
+        }
+    }
 
 }///End - class TutorProfile : AppCompatActivity(
