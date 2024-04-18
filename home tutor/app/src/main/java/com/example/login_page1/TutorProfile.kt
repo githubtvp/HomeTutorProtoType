@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.math.BigDecimal
 
 class TutorProfile : AppCompatActivity() {
 
@@ -21,6 +22,15 @@ class TutorProfile : AppCompatActivity() {
     private lateinit var tutorRecd: ComModel
     private lateinit var theTutor: Tutor
     private var npHomePage: Class<*> = Home_page::class.java
+
+    private var isValidQual = false;
+    private var isValidExperience = false;
+    private var isValidSplAchiev = false;
+    private var isValidCharges = false;
+    private var isValidAbtYou = false;
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setContentView(R.layout.activity_tutor_profile)
@@ -44,15 +54,19 @@ class TutorProfile : AppCompatActivity() {
 //            pr("Error: Retrieved object is not of type StudModel or is null")
 //        }
 
+
         theTutor = Tutor(
             tutor = tutorRecd,
             tutorId = "",
             qualification = "",
             experience = "",
-            charges = 0.0,
+            charges =  BigDecimal.ZERO,
            splAchieve = "",
             abtYourself = ""
         )
+
+        binding.qualification.isEnabled = true
+
         // Set up OnCheckedChangeListener for each checkbox inside onCreate
         binding.checkboxCBSE.setOnCheckedChangeListener { _, isChecked ->
             // Handle state change of checkbox1
@@ -60,23 +74,118 @@ class TutorProfile : AppCompatActivity() {
             pr("CBSE checked status: $isChecked")
         }
 
+        binding.checkboxStateBoard.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.boards.add("State")
+           // pr("CBSE checked status: $isChecked")
+        }
+
+        binding.checkboxPrePrimaryTo5.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.classes.add("1to5")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkbox6thTo8th.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.classes.add("6to8")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkbox9thTo10th.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.classes.add("9to10")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkbox11thTo12th.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.classes.add("11to12")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxMaths.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.subjects.add("Math")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxEnglish.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.subjects.add("English")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxComputerScience.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.subjects.add("CS")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxSocialScience.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.subjects.add("SocialScience")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxPhysics.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.subjects.add("Physics")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxChemistry.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.subjects.add("Chemistry")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxBiology.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.subjects.add("Biology")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxMonday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.daysAvail.add("Monday")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxTuesday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.daysAvail.add("Tuesday")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxWednesday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.daysAvail.add("Wednesday")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxThursday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.daysAvail.add("Thursday")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxFriday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.daysAvail.add("Friday")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxSaturday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.daysAvail.add("Saturday")
+            // pr("CBSE checked status: $isChecked")
+        }
+        binding.checkboxSunday.setOnCheckedChangeListener { _, isChecked ->
+            // Handle state change of checkbox1
+            theTutor.daysAvail.add("Sunday")
+            // pr("CBSE checked status: $isChecked")
+        }
+
     }//End - override fun onCreate(savedInstanceState: Bundle?)
 
-
     private fun setUpListenerWatchers() {
-        binding.classStd.addTextChangedListener(object : TextWatcher {
+        binding.qualification.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // Handle first name field changes
-                val clasTxt = binding.classStd.text.toString().trim()
-                val cls: Int? = clasTxt.toIntOrNull()
-                isValidClass = false
-                isValidClass = (cls !=null)// Example validation logic
+                val qual = binding.qualification.text.toString().trim()
+                isValidQual = (qual !=null && chkQual(qual))// Example validation logic
                 //  validateAllInputs()
-                if (isValidClass) {
-                    binding.schoolName.isEnabled = true
+                if (isValidQual) {
+                    theTutor.qualification = qual
+                    binding.experience.isEnabled = true
                 } else {
-                    binding.parentName.isEnabled = false
-                    binding.parentPhno.isEnabled = false
+                  //  binding.specialAchievements.isEnabled = false
+                    binding.chargesPerHour.isEnabled = false
                     binding.btnSubmitProfile.isEnabled = false
                 }
             }
@@ -88,88 +197,55 @@ class TutorProfile : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 // No implementation needed
             }
-        })//End - binding.classStd.addTextChangedListener(object : TextWatcher
+        })//End - binding.qualification.addTextChangedListener(object : TextWatcher
 
-        binding.schoolName.addTextChangedListener(object : TextWatcher {
+        binding.experience.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // Handle last name field changes
-                val schoolName = binding.schoolName.text.toString().trim()
-                isValidSchoolName = false
-                isValidSchoolName = (schoolName.isNotEmpty())// Example validation logic
-                if (isValidSchoolName) {
-                    binding.parentName.isEnabled = true
+                val exper = binding.experience.text.toString().trim()
+                isValidExperience = (exper.isNotEmpty())// Example validation logic
+                if (isValidExperience) {
+                    theTutor.experience = exper
+                    binding.chargesPerHour.isEnabled = true
                 } else {
-                    binding.parentPhno.isEnabled = false
                     binding.btnSubmitProfile.isEnabled = false
                 }
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
 
-        })///End - binding.schoolName.addTextChangedListener(object : TextWatcher
+        })///End - binding.experience.addTextChangedListener(object : TextWatcher
 
-        binding.parentName.addTextChangedListener(object : TextWatcher {
+        binding.chargesPerHour.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                pr("1 Submit Btn pressed 1")
                 // Handle first name field changes
-                val parName = binding.parentName.text.toString().trim()
-                isValidParentName = false
-                isValidParentName = (parName.isNotEmpty()) // Example validation logic
-                if (isValidParentName) {
-                    binding.parentPhno.isEnabled = true
-                } else {
-                    binding.btnSubmitProfile.isEnabled = false
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // No implementation needed
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // No implementation needed
-            }
-        })//End - binding.parentName.addTextChangedListener(object : TextWatcher
-
-        binding.parentPhno.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable?) {
-                val phoneNoTxt = binding.parentPhno.text.toString().trim()
-                // Convert the phone number to integer safely
-                val parPhoneNo: Long = phoneNoTxt.toLong()
-                isValidParentPhNo = false
-                // Check if the phone number is valid and not null
-                if (parPhoneNo != null) {
-                    pr("Here : StudProf")
-                    //  isValidPhoneNo = isValidPhNo(phoneNo)
+                val chgs = binding.chargesPerHour.text.toString().trim()
+                isValidCharges = (chgs.isNotEmpty() && chkRate(chgs)) // Example validation logic
+                if (isValidCharges) {
+                    pr("2 Submit Btn pressed 2")
+                    val rate = chgs.toBigDecimal()
+                    theTutor.charges = rate
+                    theTutor.splAchieve = ""
+                    theTutor.abtYourself = ""
                     binding.btnSubmitProfile.isEnabled = true
-                    val classStd = binding.classStd.text.toString().trim()
-                    val schName = binding.schoolName.text.toString().trim()
-                    val parName = binding.parentName.text.toString().trim()
-                    //  val parPhoneNoTxt = binding.parentPhno.text.toString().trim()
-                    //  val parPhoneNo: Long = parPhoneNoTxt.toLong()
 
-                    theStudent = Student(
-                        stud = studRecd,
-                        studId = "",
-                        classStd = classStd,
-                        schoolName = schName,
-                        parentName = parName,
-                        parentPhno = parPhoneNo
-                    )
                     binding.btnSubmitProfile.setOnClickListener { addStudUser() }
                 }
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // No implementation needed
             }
 
-        })//End - binding.parentPhno.addTextChangedListener(object : TextWatcher
-    }//End - private fun setUpListenerWatchers2()
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // No implementation needed
+            }
+        })//End - binding.chargesPerHour.addTextChangedListener(object : TextWatcher
+   }//End - private fun setUpListenerWatchers2()
 
     private fun addStudUser() {
         // Assuming you have already initialized FirebaseApp and FirebaseDatabase in your application
@@ -189,7 +265,7 @@ class TutorProfile : AppCompatActivity() {
                 tutorRef.child(tutorId).setValue(theTutor)
                     .addOnSuccessListener {
                         // User data has been saved successfully
-                        // pr("Student data saved successfully!")
+                        pr("Tutor record saved successfully!")
                         goToHomePage()
                         // Here you can navigate to the next activity or perform any other action
                     }

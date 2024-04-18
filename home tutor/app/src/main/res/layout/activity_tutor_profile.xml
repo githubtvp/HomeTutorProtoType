@@ -64,26 +64,27 @@ tools:context=".TutorProfile">
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Boards -->
         <EditText
             android:id="@+id/experience"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="68dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/edit_text_background"
             android:drawableLeft="@drawable/baseline_explicit_24"
             android:drawablePadding="8dp"
             android:ems="10"
             android:hint="Years of Experience"
-            android:inputType="number"
+            android:inputType="text"
             android:padding="8dp"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/qualification" />
 
-        <!-- Boards -->
         <TextView
             android:id="@+id/textViewBoards"
             android:layout_width="wrap_content"
@@ -394,6 +395,7 @@ tools:context=".TutorProfile">
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/special_achievements" />
+
 
         <!-- Submit Button -->
     </androidx.constraintlayout.widget.ConstraintLayout>

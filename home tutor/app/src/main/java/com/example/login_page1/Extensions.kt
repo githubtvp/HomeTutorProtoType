@@ -20,6 +20,8 @@ const val USERNAME_ALLOWED_CHAR = "[a-zA-Z0-9_]+"
 const val PWD_REGEX = "^\\d{6}$"
 const val NAME_REGEX = "^[a-zA-Z]+$"
 const val PHONE_REGEX = "^\\d{10}$"
+const val QUAL_REGEX = "^[a-zA-Z.,()]+$"
+const val MONEY_REGEXP = "^\\d+\\.\\d{2}$"
 
 fun Context.pr(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
@@ -69,6 +71,19 @@ fun chkName(theName : String) : Boolean
     val nameRegEx = NAME_REGEX
     return (theName.matches((Regex(nameRegEx))))
 }
+
+fun chkQual(theQual : String) : Boolean
+{
+    val qualRegEx = QUAL_REGEX
+    return (theQual.matches((Regex(qualRegEx))))
+}
+
+fun chkRate(theRate : String) : Boolean
+{
+    val moneyRegEx = MONEY_REGEXP
+    return (theRate.matches(Regex(moneyRegEx)))
+}
+
 
 fun isValidStudentAge(age: Int): Boolean {
     // You can define your validation rules here

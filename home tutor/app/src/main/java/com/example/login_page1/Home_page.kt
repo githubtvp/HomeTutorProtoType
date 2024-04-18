@@ -2,31 +2,25 @@ package com.example.login_page1
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.example.login_page1.databinding.ActivityHomePageBinding
-import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.navigation.NavigationView
 
-
-class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+@Suppress("DEPRECATION")
+class Home_page : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomePageBinding
-    private lateinit var nextPage: Class<*>
-    private var nextPageCreateProfile: Class<*> = CreateProfile::class.java
-    private var nextPageCategory: Class<*> = Category::class.java
-    private var nextPageTest: Class<*> = FbCrud::class.java
+
+    private val nextPageCreateProfile: Class<*> = CreateProfile::class.java
+    private val nextPageCategory: Class<*> = Category::class.java
+   // private val nextPageTest: Class<*> = FbCrud::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val bottomAppBar: BottomAppBar = findViewById(R.id.bottom_app_bar)
-        setSupportActionBar(bottomAppBar)
 
         setSupportActionBar(binding.toolbar)
 
@@ -40,61 +34,61 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        binding.navigationDrawer.setNavigationItemSelectedListener(this)
+        binding.navigationDrawer.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_acc -> replaceFragment(accountfragment())
+                R.id.nav_bookmark -> replaceFragment(savedfragment())
+                R.id.nav_Setting -> replaceFragment(settingsfragement())
+                R.id.nav_about -> replaceFragment(aboutfragment())
+            }
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.bot_home -> replaceFragment(Homefragement())
+                R.id.bot_search -> replaceFragment(Searchfragement())
+                R.id.bot_chat -> replaceFragment(chatfragment())
+            }
+            true
+        }
 
         if (savedInstanceState == null) {
-            replaceFragment(HomeFragment())
-            binding.navigationDrawer.setCheckedItem(androidx.appcompat.R.id.home) // Set default checked item in navigation drawer
+            replaceFragment(Homefragement())
+            binding.navigationDrawer.setCheckedItem(androidx.appcompat.R.id.home)
         }
-        initUI()
+
+        // initUI()
     }
 
-    private fun initUI() {
+//    private fun initUI() {
+//        binding.searchActivity.setOnClickListener {
+//            startNextPage(nextPageCategory)
+//        }
+//
+//        binding.search.setOnClickListener {
+//            startNextPage(nextPageCategory)
+//        }
+//
+//        binding.profile.setOnClickListener {
+//            startNextPage(nextPageCreateProfile)
+//        }
+//
+//        binding.editProfile.setOnClickListener {
+//            startNextPage(nextPageCreateProfile)
+//        }
+//    }
 
-        binding.searchActivity.setOnClickListener {
-            nextPage = nextPageCategory
-            startNextPage()
-        }
-
-        binding.search.setOnClickListener {
-            nextPage = nextPageCategory
-            startNextPage()
-    }
-
-        binding.profile.setOnClickListener {
-            nextPage = nextPageCreateProfile
-            startNextPage()
-        }
-        binding.editProfile.setOnClickListener {
-            nextPage = nextPageCreateProfile
-            startNextPage()
-        }
-    }
-
-    private fun startNextPage()
-    {
-        var nextPg = Intent(this, nextPage)
-        startActivity(nextPg)
+    private fun startNextPage(nextPage: Class<*>) {
+        val intent = Intent(this, nextPage)
+        startActivity(intent)
     }
 
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.bottom_home -> replaceFragment(HomeFragment())
-            R.id.bottom_chat -> replaceFragment(SearchFragment())
-            R.id.bottom_search -> replaceFragment(ChatFragment())
-            R.id.nav_acc -> replaceFragment(AccountFragment())
-            R.id.nav_Setting -> replaceFragment(SettingsFragment())
-            R.id.nav_bookmark -> replaceFragment(SavedFragment())
-            R.id.nav_about -> replaceFragment(AboutFragment())
-        }
-        binding.drawerLayout.closeDrawer(GravityCompat.START)
-        return true
     }
 
     override fun onBackPressed() {
@@ -105,35 +99,33 @@ class Home_page : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
         }
     }
 
-
     // Define your fragment classes here
 
-    class HomeFragment : Fragment() {
-        // Your fragment implementation
-    }
-
-    class SearchFragment : Fragment() {
-        // Your fragment implementation
-    }
-
-    class ChatFragment : Fragment() {
-        // Your fragment implementation
-    }
-
-    class AccountFragment : Fragment() {
-        // Your fragment implementation
-    }
-
-    class SettingsFragment : Fragment() {
-        // Your fragment implementation
-    }
-
-    class SavedFragment : Fragment() {
-        // Your fragment implementation
-    }
-
-    class AboutFragment : Fragment() {
-        // Your fragment implementation
-    }
-
+//    class HomeFragment : Fragment() {
+//        // Your fragment implementation
+//    }
+//
+//    class SearchFragment : Fragment() {
+//        // Your fragment implementation
+//    }
+//
+//    class ChatFragment : Fragment() {
+//        // Your fragment implementation
+//    }
+//
+//    class AccountFragment : Fragment() {
+//        // Your fragment implementation
+//    }
+//
+//    class SettingsFragment : Fragment() {
+//        // Your fragment implementation
+//    }
+//
+//    class SavedFragment : Fragment() {
+//        // Your fragment implementation
+//    }
+//
+//    class AboutFragment : Fragment() {
+//        // Your fragment implementation
+//    }
 }

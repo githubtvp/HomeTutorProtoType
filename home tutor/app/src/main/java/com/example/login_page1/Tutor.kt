@@ -1,6 +1,7 @@
 
 import com.example.login_page1.ComModel
 import java.io.Serializable
+import java.math.BigDecimal
 
 class Tutor(
     tutor: ComModel,
@@ -11,7 +12,7 @@ class Tutor(
     var classes: MutableList<String> = mutableListOf(),
     var subjects: MutableList<String> = mutableListOf(),
     var daysAvail: MutableList<String> = mutableListOf(),
-    var charges: Double = 0.0,
+    var charges: BigDecimal = BigDecimal.ZERO,
     var splAchieve: String = "",
     var abtYourself: String = ""
 ) : ComModel(

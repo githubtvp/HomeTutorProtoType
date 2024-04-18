@@ -199,7 +199,15 @@ class CommonProfile : AppCompatActivity() {
                 val ageTxt = binding.age.text.toString().trim()
                 val age: Int? = ageTxt.toIntOrNull()
                 isValidAge = false
-                isValidAge = (age != null && isValidStudentAge(age)) // Example validation logic
+                if(1==userTypeVal)
+                {
+                    isValidAge = (age != null && isValidStudentAge(age)) // Example validation logic
+                }
+                else if(2 == userTypeVal)
+                {
+                    isValidAge = (age != null && isValidTutorAge(age)) // Example validation logic
+                }
+
                 //validateAllInputs()
                 if (isValidAge) {
                     //pr("here Mob")
