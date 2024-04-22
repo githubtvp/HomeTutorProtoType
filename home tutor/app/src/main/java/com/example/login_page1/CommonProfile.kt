@@ -232,7 +232,6 @@ class CommonProfile : AppCompatActivity() {
                     isValidAge = (age != null && isValidTutorAge(age)) // Example validation logic
                 }
 
-                //validateAllInputs()
                 if (isValidAge) {
                     //pr("here Mob")
                     if (age != null) {
