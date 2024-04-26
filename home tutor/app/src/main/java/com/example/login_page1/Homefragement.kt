@@ -13,8 +13,8 @@ class Homefragement : Fragment() {
     private var _binding: FragmentHomefragementBinding? = null
     private val binding get() = _binding!!
 
-    private val nextPageCreateProfile: Class<*> = CreateProfile::class.java
-    private val nextPageCategory: Class<*> = Category::class.java
+    private val npCreateProfile: Class<*> = CreateProfile::class.java
+    private val npCategory: Class<*> = getRecords::class.java
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,19 +33,19 @@ class Homefragement : Fragment() {
 
     private fun initUI() {
         binding.searchActivity.setOnClickListener {
-            startNextPage(nextPageCategory)
+            startNextPage(npCategory)
         }
 
         binding.search.setOnClickListener {
-            startNextPage(nextPageCategory)
+            startNextPage(npCategory)
         }
 
         binding.profile.setOnClickListener {
-            startNextPage(nextPageCreateProfile)
+            startNextPage(npCreateProfile)
         }
 
         binding.editProfile.setOnClickListener {
-            startNextPage(nextPageCreateProfile)
+            startNextPage(npCreateProfile)
         }
     }
 

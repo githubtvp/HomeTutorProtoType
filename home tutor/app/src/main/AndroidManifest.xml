@@ -15,6 +15,12 @@
         android:theme="@style/Theme.home_tutor"
         tools:targetApi="31">
         <activity
+            android:name=".item_tutor"
+            android:exported="false" />
+        <activity
+            android:name=".getRecords"
+            android:exported="false" />
+        <activity
             android:name=".Loginotp"
             android:exported="false" />
         <activity
@@ -25,6 +31,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -60,8 +67,7 @@
             android:exported="false" />
         <activity
             android:name=".Page1"
-            android:exported="false"/>
-
+            android:exported="false" />
     </application>
 
 </manifest>

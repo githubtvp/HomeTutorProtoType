@@ -329,37 +329,8 @@ class CommonProfile : AppCompatActivity() {
                 if (isValidAddress) {
                     com.address = address
                     binding.btnNext.isEnabled = true
-//                    val fName = binding.firstName.text.toString().trim()
-//                    val lName = binding.lastName.text.toString().trim()
-//                    val city = binding.city.text.toString().trim()
-//                    val address = binding.address.text.toString().trim()
-//                    val ageTxt = binding.age.text.toString().trim()
-//                    val age: Int? = ageTxt.toIntOrNull()
-//                    val phoneNoTxt = binding.mobileNo.text.toString().trim()
-//                    val phoneNo: Long = phoneNoTxt.toLong()
-//                    var phNo = phoneNo
-//                    //  pr("here 2")
-//                    com = ComModel(
-//                        fName,
-//                        lName,
-//                        city,
-//                        address,
-//                        currentUserEmail,
-//                        phNo!!,
-//                        userTypeVal,
-//                        age!!
-//                    )
                     com.email = currentUserEmail
                     com.type = userTypeVal
-
-                  //  pr("Com2-type : " + com.type)
-                  //  pr("Com2-age : " + com.age)
-                 //   pr("Com2-Phone : " + com.phoneNo)
-                //    pr("Com-email : " + com.email)
-                //    pr("Com-fname : " + com.fName)
-                //    pr("Com-lname : " + com.lName)
-                 //   pr("Com-City : " + com.city)
-                //    pr("Com-addr : " + com.address)
                     binding.btnNext.setOnClickListener { goToFullProfile() }
                 }
             }
