@@ -1,24 +1,18 @@
 package com.example.login_page1.adapter
 
+//import com.example.login_page1.Chatfragment
+
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.example.login_page1.ComModel
+import com.example.login_page1.R
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-//import com.example.login_page1.Chatfragment
-import com.example.login_page1.utils.FirebaseUtil
-
-import com.example.login_page1.ComModel
-
-import com.example.login_page1.R
-import com.example.login_page1.utils.AndroidUtil
 
 class SearchUserRecyclerAdapter(options: FirestoreRecyclerOptions<ComModel>, private val context: Context) :
     FirestoreRecyclerAdapter<ComModel, SearchUserRecyclerAdapter.UserModelViewHolder>(options) {
@@ -26,9 +20,9 @@ class SearchUserRecyclerAdapter(options: FirestoreRecyclerOptions<ComModel>, pri
     override fun onBindViewHolder(holder: UserModelViewHolder, position: Int, model: ComModel) {
         holder.usernameText.text = model.fName
         holder.phoneText.text = model.phoneNo.toString()
-        if (model.userId == FirebaseUtil.currentUserId()) {
-            holder.usernameText.text = model.fName + " (Me)"
-        }
+//        if (model.userId == FirebaseUtil.currentUserId()) {
+//            holder.usernameText.text = model.fName + " (Me)"
+//        }
 
 //        FirebaseUtil.getOtherProfilePicStorageRef(model.userId).downloadUrl.addOnCompleteListener { task ->
 //            if (task.isSuccessful) {

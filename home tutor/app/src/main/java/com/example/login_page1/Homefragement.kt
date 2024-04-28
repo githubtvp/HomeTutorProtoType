@@ -14,7 +14,7 @@ class Homefragement : Fragment() {
     private val binding get() = _binding!!
 
     private val npCreateProfile: Class<*> = CreateProfile::class.java
-    private val npCategory: Class<*> = getRecords::class.java
+    private val npCategory: Class<*> = ShowTutors::class.java
 
     override fun onCreateView(
         inflater: LayoutInflater,
